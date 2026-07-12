@@ -97,6 +97,7 @@ export default function Home() {
         <h1>Radem <span>&amp;</span> Laras</h1>
         <p className="hero-copy">Kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberi doa restu pada hari bahagia kami.</p>
         <a href="#acara" className="primary-link">Lihat detail acara <span>↓</span></a>
+        <a href="/jawa" className="template-switch">Jelajahi template Jawa <span>→</span></a>
         <p className="hero-date">Ahad, 14 Desember 2026 &nbsp;·&nbsp; Bandung</p>
         <div className="hero-leaves hero-leaves--left" aria-hidden="true"><i /><i /><i /><i /></div>
         <div className="hero-leaves hero-leaves--right" aria-hidden="true"><i /><i /><i /><i /></div>
