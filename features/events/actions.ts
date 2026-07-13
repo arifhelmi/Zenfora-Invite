@@ -23,7 +23,20 @@ export async function updateEventAction(eventId: string, _: { error?: string; ok
   const user = await requireUser(); await assertEventOwner(eventId, user.id);
   const title = String(formData.get("title") ?? "").trim();
   if (title.length < 3) return { error: "Judul harus minimal 3 karakter." };
-  await prisma.event.update({ where: { id: eventId }, data: { title, description: String(formData.get("description") ?? "") || null, startsAt: formData.get("startsAt") ? new Date(String(formData.get("startsAt"))) : null, locationName: String(formData.get("locationName") ?? "") || null, locationAddress: String(formData.get("locationAddress") ?? "") || null } });
+  const musicUrl = String(formData.get("musicUrl") ?? "").trim();
+  const musicTitle = String(formData.get("musicTitle") ?? "").trim();
+  if (musicTitle.length > 100) return { error: "Judul lagu maksimal 100 karakter." };
+  if (musicUrl) {
+    try {
+      const url = new URL(musicUrl);
+      if (!['http:', 'https:'].includes(url.protocol)) return { error: "URL lagu harus menggunakan http atau https." };
+    } catch {
+      return { error: "URL lagu tidak valid." };
+    }
+  }
+  const current = await prisma.event.findUniqueOrThrow({ where: { id: eventId }, select: { details: true } });
+  const details = current.details && typeof current.details === "object" && !Array.isArray(current.details) ? current.details as Record<string, unknown> : {};
+  await prisma.event.update({ where: { id: eventId }, data: { title, description: String(formData.get("description") ?? "") || null, startsAt: formData.get("startsAt") ? new Date(String(formData.get("startsAt"))) : null, locationName: String(formData.get("locationName") ?? "") || null, locationAddress: String(formData.get("locationAddress") ?? "") || null, details: { ...details, music: musicUrl ? { url: musicUrl, title: musicTitle || null } : null } } });
   revalidatePath(`/dashboard/events/${eventId}`); revalidatePath(`/i/[eventSlug]`, "page");
   return { ok: "Perubahan disimpan." };
 }

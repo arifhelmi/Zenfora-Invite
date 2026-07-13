@@ -18,6 +18,8 @@ export default async function EventOverview({ params }: { params: Promise<{ even
       _count: { select: { guests: true, rsvps: true, wishes: true, checkIns: true } }
     }
   });
+  const details = event.details && typeof event.details === "object" && !Array.isArray(event.details) ? event.details as Record<string, unknown> : {};
+  const music = details.music && typeof details.music === "object" && !Array.isArray(details.music) ? details.music as Record<string, unknown> : {};
 
   return <>
     <div className="flex flex-wrap items-start justify-between gap-5">
@@ -26,7 +28,7 @@ export default async function EventOverview({ params }: { params: Promise<{ even
     </div>
     {!event.package && <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">Pilih paket dan lakukan pembayaran mock untuk menerbitkan undangan. <Link className="font-bold underline" href={`/dashboard/events/${eventId}/design`}>Pilih desain/paket</Link></div>}
     <div className="mt-7 grid gap-4 sm:grid-cols-4">{[["Tamu", event._count.guests], ["RSVP", event._count.rsvps], ["Ucapan", event._count.wishes], ["Check-in", event._count.checkIns]].map(([label, value]) => <div className="card p-4" key={label as string}><p className="text-sm text-slate-500">{label as string}</p><p className="text-2xl font-bold">{value as number}</p></div>)}</div>
-    <h2 className="mt-8 text-lg font-bold">Informasi inti</h2><div className="mt-3 max-w-2xl"><EventDetailsForm event={event} /></div>
+    <h2 className="mt-8 text-lg font-bold">Informasi inti</h2><div className="mt-3 max-w-2xl"><EventDetailsForm event={{ ...event, musicUrl: typeof music.url === "string" ? music.url : undefined, musicTitle: typeof music.title === "string" ? music.title : undefined }} /></div>
     <section className="mt-10 max-w-3xl"><p className="eyebrow">Mempelai</p><h2 className="mt-1 text-2xl font-bold">Foto dan profil mempelai</h2><div className="card mt-4 p-5 sm:p-6"><CoupleEditor eventId={event.id} people={event.people} /></div></section>
   </>;
 }
