@@ -9,5 +9,5 @@ export function resolveManifest(theme: Theme & { versions: ThemeVersion[] }): Th
 }
 
 export const themeStyles: Record<string, string> = {
-  "jawa-wayang-heritage": "heritage", "sunda-parahyangan": "sunda", "royal-batik": "royal", "floral-romance": "floral", "modern-minimal": "minimal", "islamic-emerald": "emerald", "birthday-playful": "playful", "khitan-celebration": "khitan", "corporate-elegant": "corporate"
+  "jawa-wayang-heritage": "heritage", "sunda-parahyangan": "sunda", "serambi-meukuta": "nusantara aceh", "ulos-toba": "nusantara toba", "rangkiang-minang": "nusantara minang", "melayu-lancang": "nusantara riau", "selat-melayu": "nusantara kepri", "royal-batik": "royal", "floral-romance": "floral", "modern-minimal": "minimal", "islamic-emerald": "emerald", "birthday-playful": "playful", "khitan-celebration": "khitan", "corporate-elegant": "corporate"
 };

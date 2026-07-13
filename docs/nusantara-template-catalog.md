@@ -36,18 +36,18 @@ Perbedaan tiap provinsi terjadi pada palet, ritme ruang, motif, framing foto, se
 
 ## Sumatra dan Kepulauan
 
-| Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
-| --- | --- | --- | --- |
-| Aceh | `serambi-meukuta` | Hijau tua, gading, emas lembut; lengkung Pintu Aceh, ukiran Gayo sebagai tekstur tipis. | Bingkai foto lengkung simetris; garis emas perlahan menyala pada cover. |
-| Sumatera Utara | `ulos-toba` | Merah ulos, hitam arang, krem; ritme tenun dan siluet Rumah Bolon. | Panel jadwal seperti pita tenun horizontal, tanpa kartu tebal. |
-| Sumatera Barat | `rangkiang-minang` | Marawa merah–kuning–hitam yang ditenangkan dengan latar batu andesit; atap gonjong sebagai garis hero. | Foto dalam frame gonjong minimal; transisi section seperti lipatan songket. |
-| Riau | `melayu-lancang` | Hijau zamrud, kuning diraja, putih tulang; sulur Melayu dan siluet Lancang Kuning. | Ornamen sulur bergerak perlahan dari sudut, CTA seperti plakat kuningan tipis. |
-| Kepulauan Riau | `selat-melayu` | Biru laut, pasir, emas kusam; gelombang Selat dan detail tanjak Melayu. | Timeline acara memakai garis pasang-surut, bukan kotak. |
-| Jambi | `angso-duo` | Cokelat tanah, emas, nila; batik Jambi dan siluet Angso Duo yang sangat kecil. | Frame foto oval berlapis motif batik; galeri seperti lembar kain. |
-| Sumatera Selatan | `songket-limas` | Marun, hitam, emas; pola songket dan geometri Rumah Limas. | Border foto bertingkat seperti limas; counter tampil sebagai ukiran angka emas. |
-| Kepulauan Bangka Belitung | `cual-timah` | Biru granit, putih pasir, tembaga; tenun cual dan tekstur batu pesisir. | Galeri berbingkai mineral; dekorasi titik timah beranimasi sangat pelan. |
-| Bengkulu | `besurek-rafflesia` | Indigo gelap, krem, terakota; tekstur kain besurek abstrak dan Rafflesia sebagai aksen tunggal. | Bunga hanya muncul sebagai emboss di pembuka/penutup, tidak di setiap section. |
-| Lampung | `siger-saibatin` | Merah bata, emas, hitam; bentuk mahkota Siger dan garis tapis. | Bingkai foto menyerupai lengkung Siger sederhana; RSVP memakai label tapis. |
+| Status | Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
+| --- | --- | --- | --- | --- |
+| [x] | Aceh | `serambi-meukuta` | Hijau tua, gading, emas lembut; lengkung Pintu Aceh, ukiran Gayo sebagai tekstur tipis. | Bingkai foto lengkung simetris; garis emas perlahan menyala pada cover. |
+| [x] | Sumatera Utara | `ulos-toba` | Merah ulos, hitam arang, krem; ritme tenun dan siluet Rumah Bolon. | Panel jadwal seperti pita tenun horizontal, tanpa kartu tebal. |
+| [x] | Sumatera Barat | `rangkiang-minang` | Marawa merah–kuning–hitam yang ditenangkan dengan latar batu andesit; atap gonjong sebagai garis hero. | Foto dalam frame gonjong minimal; transisi section seperti lipatan songket. |
+| [x] | Riau | `melayu-lancang` | Hijau zamrud, kuning diraja, putih tulang; sulur Melayu dan siluet Lancang Kuning. | Ornamen sulur bergerak perlahan dari sudut, CTA seperti plakat kuningan tipis. |
+| [x] | Kepulauan Riau | `selat-melayu` | Biru laut, pasir, emas kusam; gelombang Selat dan detail tanjak Melayu. | Timeline acara memakai garis pasang-surut, bukan kotak. |
+| [ ] | Jambi | `angso-duo` | Cokelat tanah, emas, nila; batik Jambi dan siluet Angso Duo yang sangat kecil. | Frame foto oval berlapis motif batik; galeri seperti lembar kain. |
+| [ ] | Sumatera Selatan | `songket-limas` | Marun, hitam, emas; pola songket dan geometri Rumah Limas. | Border foto bertingkat seperti limas; counter tampil sebagai ukiran angka emas. |
+| [ ] | Kepulauan Bangka Belitung | `cual-timah` | Biru granit, putih pasir, tembaga; tenun cual dan tekstur batu pesisir. | Galeri berbingkai mineral; dekorasi titik timah beranimasi sangat pelan. |
+| [ ] | Bengkulu | `besurek-rafflesia` | Indigo gelap, krem, terakota; tekstur kain besurek abstrak dan Rafflesia sebagai aksen tunggal. | Bunga hanya muncul sebagai emboss di pembuka/penutup, tidak di setiap section. |
+| [ ] | Lampung | `siger-saibatin` | Merah bata, emas, hitam; bentuk mahkota Siger dan garis tapis. | Bingkai foto menyerupai lengkung Siger sederhana; RSVP memakai label tapis. |
 
 ## Jawa, Bali, dan Nusa Tenggara
 
