@@ -1,0 +1,4 @@
+import { ModerateWish } from "@/components/admin/buttons";
+import { prisma } from "@/lib/prisma";
+export const dynamic = "force-dynamic";
+export default async function AdminWishes() { const wishes = await prisma.wish.findMany({ include: { event: true }, orderBy: { createdAt: "desc" }, take: 100 }); return <><h2 className="text-2xl font-bold">Moderasi ucapan</h2><div className="mt-5 grid gap-3">{wishes.map(wish => <article className="card flex flex-wrap items-center justify-between gap-4 p-5" key={wish.id}><div><h3 className="font-bold">{wish.author} <span className="status">{wish.status}</span></h3><p className="mt-1 text-sm text-slate-500">{wish.event.title}</p><p className="mt-2 text-slate-700">{wish.message}</p></div>{wish.status === "PENDING" && <ModerateWish id={wish.id} />}</article>)}</div></>; }

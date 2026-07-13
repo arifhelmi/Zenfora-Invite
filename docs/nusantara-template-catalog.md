@@ -1,0 +1,121 @@
+# Katalog Template Nusantara
+
+## Tujuan
+
+Dokumen ini adalah arahan desain untuk koleksi undangan digital bertema Nusantara. Setiap template memakai identitas visual provinsi secara terukur: satu motif utama, satu bentuk arsitektur/alam, dan satu aksen gerak. Tujuannya terasa lokal serta modern, bukan menjadi kolase ornamen.
+
+> Catatan cakupan: permintaan awal menyebut 34 provinsi. Administrasi Indonesia saat ini terdiri dari 38 provinsi; katalog ini mencakup 34 provinsi terdahulu beserta empat provinsi baru di Tanah Papua agar roadmap tidak perlu diulang. Rujukan jumlah provinsi: [Indonesia.go.id](https://indonesia.go.id/kategori/editorial/9053/ajang-menguatkan-sinergi-pusat-dan-daerah-di-lembah-tidar?lang=1).
+
+## Prinsip UI/UX lintas template
+
+1. Mobile-first, portrait, dan setiap section menjadi satu bab cerita saat pengguna scroll.
+2. Motif budaya dipakai sebagai tekstur 8–18% opacity atau bingkai; jangan ditempatkan di setiap komponen.
+3. Maksimal tiga warna utama ditambah warna netral. Kontras teks minimum mengikuti WCAG AA.
+4. Cover memuat satu hero visual; section lain cukup memakai motif, garis, atau siluet agar tetap bernapas.
+5. Animasi hanya untuk hero/ornamen: masuk saat halaman dibuka, kemudian idle sangat ringan. Selalu sediakan `prefers-reduced-motion`.
+6. Foto mempelai hadir pada section penyelenggara dengan bingkai khas template, tanpa filter wajah atau potongan yang agresif.
+7. Ikon sakral, aksara, motif adat, dan objek ritual wajib divalidasi bersama kurator/mitra lokal sebelum rilis publik.
+8. Semua aset wajib memiliki sumber, lisensi, teks alternatif, dan fallback warna jika gambar gagal dimuat.
+
+## Struktur section bersama
+
+Setiap template memakai data yang sama agar pengguna dapat berganti desain tanpa mengisi ulang:
+
+1. Sampul
+2. Salam hangat
+3. Penyelenggara dan foto mempelai
+4. Hitung mundur
+5. Rangkaian acara
+6. Lokasi
+7. Galeri
+8. RSVP
+9. Ucapan dan doa
+10. Penutup
+
+Perbedaan tiap provinsi terjadi pada palet, ritme ruang, motif, framing foto, serta micro-motion—bukan pada struktur atau aksesibilitas form.
+
+## Sumatra dan Kepulauan
+
+| Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
+| --- | --- | --- | --- |
+| Aceh | `serambi-meukuta` | Hijau tua, gading, emas lembut; lengkung Pintu Aceh, ukiran Gayo sebagai tekstur tipis. | Bingkai foto lengkung simetris; garis emas perlahan menyala pada cover. |
+| Sumatera Utara | `ulos-toba` | Merah ulos, hitam arang, krem; ritme tenun dan siluet Rumah Bolon. | Panel jadwal seperti pita tenun horizontal, tanpa kartu tebal. |
+| Sumatera Barat | `rangkiang-minang` | Marawa merah–kuning–hitam yang ditenangkan dengan latar batu andesit; atap gonjong sebagai garis hero. | Foto dalam frame gonjong minimal; transisi section seperti lipatan songket. |
+| Riau | `melayu-lancang` | Hijau zamrud, kuning diraja, putih tulang; sulur Melayu dan siluet Lancang Kuning. | Ornamen sulur bergerak perlahan dari sudut, CTA seperti plakat kuningan tipis. |
+| Kepulauan Riau | `selat-melayu` | Biru laut, pasir, emas kusam; gelombang Selat dan detail tanjak Melayu. | Timeline acara memakai garis pasang-surut, bukan kotak. |
+| Jambi | `angso-duo` | Cokelat tanah, emas, nila; batik Jambi dan siluet Angso Duo yang sangat kecil. | Frame foto oval berlapis motif batik; galeri seperti lembar kain. |
+| Sumatera Selatan | `songket-limas` | Marun, hitam, emas; pola songket dan geometri Rumah Limas. | Border foto bertingkat seperti limas; counter tampil sebagai ukiran angka emas. |
+| Kepulauan Bangka Belitung | `cual-timah` | Biru granit, putih pasir, tembaga; tenun cual dan tekstur batu pesisir. | Galeri berbingkai mineral; dekorasi titik timah beranimasi sangat pelan. |
+| Bengkulu | `besurek-rafflesia` | Indigo gelap, krem, terakota; tekstur kain besurek abstrak dan Rafflesia sebagai aksen tunggal. | Bunga hanya muncul sebagai emboss di pembuka/penutup, tidak di setiap section. |
+| Lampung | `siger-saibatin` | Merah bata, emas, hitam; bentuk mahkota Siger dan garis tapis. | Bingkai foto menyerupai lengkung Siger sederhana; RSVP memakai label tapis. |
+
+## Jawa, Bali, dan Nusa Tenggara
+
+| Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
+| --- | --- | --- | --- |
+| DKI Jakarta | `betawi-gigi-balang` | Hijau tua, jingga bata, krem; pola gigi balang, arsitektur rumah Betawi. | Header dan divider bergerigi halus; ondel-ondel hanya dipakai sebagai ilustrasi opsional. |
+| Jawa Barat | `sunda-parahyangan` | Nila, sage, emas; Julang Ngapak, kujang, dan wayang golek. | Wayang masuk dari sisi lalu bergoyang idle; frame foto organik emas–nila. |
+| Jawa Tengah | `jawa-wayang-heritage` | Soga, nila gelap, emas; batik parang, gunungan, dan wayang Jawa. | Wayang saling menghadap pada cover; frame foto berbentuk lengkung klasik; latar batik subtil. |
+| DI Yogyakarta | `jogja-kawung` | Indigo, putih kapur, emas tua; kawung, Tugu Jogja, dan ritme keraton. | Cover punya komposisi ruang kosong; foto dalam frame kawung empat-lobus yang minimal. |
+| Jawa Timur | `majapahit-terra` | Terakota, batu candi, hijau gelap; relief Majapahit dan bata merah. | Timeline muncul seperti relief bertingkat; section lokasi memakai siluet gapura. |
+| Banten | `baduy-sederhana` | Hitam, putih gading, biru indigo; tenun Baduy dengan ruang yang sangat sederhana. | Tanpa efek berlebihan, border tenun tipis dan foto dalam frame persegi lembut. |
+| Bali | `bali-candi-bentar` | Batu vulkanik, putih, emas, hijau palem; Candi Bentar dan endek. | Cover terbuka seperti gerbang; foto dalam frame candi yang sangat tipis, bukan ukiran padat. |
+| Nusa Tenggara Barat | `sasak-lumbung` | Cokelat jerami, merah tenun, hitam; lumbung Sasak dan songket. | Atap lumbung menjadi curve hero; jadwal dibaca seperti jalur tenun. |
+| Nusa Tenggara Timur | `tenun-flobamora` | Tanah liat, nila, gading; tenun ikat dan kontur pulau. | Galeri menggunakan blok tenun vertikal; foto dibingkai ikat tipis, bukan pola penuh. |
+
+## Kalimantan
+
+| Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
+| --- | --- | --- | --- |
+| Kalimantan Barat | `kapuas-rumah-panjang` | Hijau hutan, arang, kuning rotan; Rumah Panjang dan aliran Kapuas. | Scroll indicator seperti aliran sungai; frame foto anyaman rotan minimal. |
+| Kalimantan Tengah | `betang-borneo` | Hijau lumut, tanah merah, krem; Rumah Betang dan tekstur kayu. | Section berganti lewat garis vertikal seperti tiang rumah; motif adat hanya setelah validasi kurator. |
+| Kalimantan Selatan | `sasirangan-banjar` | Ungu tua, emas, merah marun; Sasirangan dan atap Bubungan Tinggi. | Latar memiliki gelombang sasirangan transparan; angka countdown memakai aksen kuningan. |
+| Kalimantan Timur | `lamin-mahakam` | Biru Mahakam, hitam kayu, emas madu; Rumah Lamin dan sungai. | Hero memakai garis arus; frame foto berstruktur panel kayu modern. |
+| Kalimantan Utara | `tidung-perbatasan` | Biru malam, hijau rimba, pasir; tenun/ornamen Tidung dan lanskap pesisir. | Divider seperti jalinan serat; animasi daun tipis sebagai ambience. |
+
+## Sulawesi
+
+| Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
+| --- | --- | --- | --- |
+| Sulawesi Utara | `minahasa-wale` | Biru danau, putih, emas; Rumah Walewangko dan bunga lokal sebagai aksen. | Foto dalam frame atap tinggi sederhana; lokasi memakai kontur danau. |
+| Gorontalo | `karawo-hulondalo` | Biru langit, emas, putih; sulaman Karawo yang ringan. | Detail Karawo dipakai hanya pada sudut dan button outline. |
+| Sulawesi Tengah | `tambi-donggala` | Cokelat kopi, nila, gading; Rumah Tambi dan tenun Donggala. | Cover berkomposisi segitiga atap; jadwal memakai jalur tenun tenang. |
+| Sulawesi Barat | `mandar-sandeq` | Biru laut, putih layar, merah tenun; perahu Sandeq dan tenun Mandar. | Garis layar menjadi progress scroll; photo frame seperti layar melengkung. |
+| Sulawesi Selatan | `pinisi-tongkonan` | Nila laut, soga, emas; Pinisi dan siluet Tongkonan. | Hero perahu hanya sebagai garis; section foto memakai lengkung atap Tongkonan minimal. |
+| Sulawesi Tenggara | `buton-malige` | Kuning kunyit, nila, abu batu; tenun Buton dan Rumah Malige. | Layout location berlapis seperti rumah panggung; galeri memakai border tenun halus. |
+
+## Maluku dan Tanah Papua
+
+| Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
+| --- | --- | --- | --- |
+| Maluku | `baileo-rempah` | Biru laut, pala, krem; Rumah Baileo dan rempah. | Aksen daun pala tipis pada cover; RSVP seperti kartu pelayaran sederhana. |
+| Maluku Utara | `kie-hibualamo` | Oranye senja, arang, emas; Gunung Kie dan rumah Hibualamo. | Latar memakai gradien gunung tenang; divider berupa garis horizon. |
+| Papua Barat | `cenderawasih-pesisir` | Biru laguna, hijau hutan, pasir; burung cenderawasih hanya sebagai siluet ringan. | Foto dalam frame organik terinspirasi pesisir; hindari menyalin motif adat tanpa izin. |
+| Papua | `sentani-danau` | Biru danau, abu batu, kuning tanah; ritme air Danau Sentani. | Section bergerak dengan pola riak lembut; galeri memakai layout panorama. |
+| Papua Selatan | `asmat-selatan` | Merah tanah, hitam kayu, gading; tekstur kayu Asmat dengan izin dan kurasi. | Hindari objek ritual sebagai dekorasi; gunakan garis ukir abstrak yang disetujui. |
+| Papua Tengah | `kamoro-pegunungan` | Kabut abu-biru, hijau gelap, tembaga; kontur pegunungan dan pesisir. | Hero memakai lapisan kontur, tanpa menyederhanakan seni adat menjadi pola generik. |
+| Papua Pegunungan | `lembah-honai` | Batu hangat, kabut, cokelat rumput; siluet honai dan lereng. | Frame foto bundar rendah dengan tekstur batu lembut; motion kabut sangat pelan. |
+| Papua Barat Daya | `raja-ampat` | Biru safir, karst, pasir putih; kontur pulau Raja Ampat. | Cover menggunakan siluet karst minimal dan transisi seperti arus laut. |
+
+## Aturan produksi aset
+
+- Buat satu `theme manifest` per template, tetapi pakai registry section yang sama.
+- Siapkan paling sedikit: `cover-desktop`, `cover-mobile`, `portrait-frame`, `motif-tile`, dan `ornament-cutout` bila diperlukan.
+- Motif tile harus seamless dan diuji pada opacity 5%, 10%, dan 15%.
+- Ornamen bergerak hanya boleh memakai aset transparan; tidak boleh membawa background persegi.
+- Gunakan gambar buatan sendiri, aset berlisensi, atau aset dengan persetujuan pemegang hak/kontak budaya lokal.
+
+## Urutan implementasi yang disarankan
+
+1. Selesaikan Jawa Barat dan Jawa Tengah sebagai standar perilaku template budaya.
+2. Bangun enam template prioritas dengan variasi visual kuat: Aceh, Sumatera Barat, Bali, Kalimantan Selatan, Sulawesi Selatan, dan Papua Barat Daya.
+3. Lakukan review accessibility dan kurasi budaya sebelum memperluas ke seluruh katalog.
+4. Tambahkan sisanya per pulau, selalu melalui checklist lisensi, mobile QA, dan review pemangku budaya.
+
+## Definition of done untuk setiap template
+
+- Tampak berbeda pada cover, section penyelenggara, jadwal, galeri, dan penutup.
+- Foto mempelai dapat diunggah dan tampil proporsional pada desktop maupun ponsel.
+- Tidak ada teks di atas motif yang gagal kontras.
+- Tidak ada animasi yang wajib untuk memahami informasi.
+- Tidak ada aset atau simbol budaya yang dipakai tanpa sumber/lisensi dan validasi yang sesuai.

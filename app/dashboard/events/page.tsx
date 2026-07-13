@@ -1,0 +1,5 @@
+import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { requireUser } from "@/lib/permissions";
+export const dynamic = "force-dynamic";
+export default async function EventsPage() { const user = await requireUser(); const events = await prisma.event.findMany({ where: { ownerId: user.id, deletedAt: null }, include: { eventType: true, theme: true }, orderBy: { updatedAt: "desc" } }); return <><div className="flex justify-between gap-4"><div><p className="eyebrow">Undangan</p><h1 className="mt-1 text-3xl font-bold">Semua acara Anda</h1></div><Link className="button" href="/dashboard/events/new">+ Buat undangan</Link></div><div className="mt-7 grid gap-4 md:grid-cols-2">{events.map(event => <article className="card p-5" key={event.id}><span className="status">{event.status}</span><h2 className="mt-3 text-xl font-bold">{event.title}</h2><p className="mt-1 text-sm text-slate-600">{event.eventType.name} · {event.theme?.name ?? "Tema belum dipilih"}</p><Link className="button secondary mt-5" href={`/dashboard/events/${event.id}`}>Kelola undangan</Link></article>)}</div></>; }

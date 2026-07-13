@@ -1,0 +1,6 @@
+"use client";
+import { useState } from "react";
+import { moderateWishAction, togglePackageAction, toggleThemeAction } from "@/features/admin/actions";
+export function ToggleTheme({ id, active }: { id: string; active: boolean }) { const [busy, setBusy] = useState(false); return <button className="button secondary text-sm" disabled={busy} onClick={async () => { setBusy(true); await toggleThemeAction(id, !active); setBusy(false); }}>{active ? "Nonaktifkan" : "Aktifkan"}</button>; }
+export function TogglePackage({ id, active }: { id: string; active: boolean }) { const [busy, setBusy] = useState(false); return <button className="button secondary text-sm" disabled={busy} onClick={async () => { setBusy(true); await togglePackageAction(id, !active); setBusy(false); }}>{active ? "Nonaktifkan" : "Aktifkan"}</button>; }
+export function ModerateWish({ id }: { id: string }) { const [busy, setBusy] = useState(false); return <div className="flex gap-2"><button className="button text-sm" disabled={busy} onClick={async () => { setBusy(true); await moderateWishAction(id, "APPROVED"); setBusy(false); }}>Setujui</button><button className="button secondary text-sm" disabled={busy} onClick={async () => { setBusy(true); await moderateWishAction(id, "REJECTED"); setBusy(false); }}>Tolak</button></div>; }

@@ -1,0 +1,5 @@
+import { TogglePackage } from "@/components/admin/buttons";
+import { prisma } from "@/lib/prisma";
+import { formatCurrency } from "@/lib/utils";
+export const dynamic = "force-dynamic";
+export default async function AdminPackages() { const packages = await prisma.package.findMany({ orderBy: { price: "asc" } }); return <><h2 className="text-2xl font-bold">Paket</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{packages.map(pkg => <article className="card p-5" key={pkg.id}><h3 className="font-bold">{pkg.name}</h3><p className="mt-2 text-sm text-slate-600">{pkg.description}</p><p className="mt-4 text-xl font-bold">{pkg.price ? formatCurrency(pkg.price, pkg.currency) : "Gratis"}</p><p className="mt-1 text-sm text-slate-600">{pkg.guestLimit} tamu · {pkg.activeDays} hari</p><div className="mt-5"><TogglePackage id={pkg.id} active={pkg.isActive} /></div></article>)}</div></>; }

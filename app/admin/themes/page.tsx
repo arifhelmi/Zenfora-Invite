@@ -1,0 +1,4 @@
+import { ToggleTheme } from "@/components/admin/buttons";
+import { prisma } from "@/lib/prisma";
+export const dynamic = "force-dynamic";
+export default async function AdminThemes() { const themes = await prisma.theme.findMany({ include: { category: true, _count: { select: { versions: true } } }, orderBy: { name: "asc" } }); return <><h2 className="text-2xl font-bold">Tema</h2><div className="mt-5 grid gap-3">{themes.map(theme => <article className="card flex flex-wrap items-center justify-between gap-4 p-5" key={theme.id}><div><h3 className="font-bold">{theme.name} {theme.isPremium && <span className="status">Premium</span>}</h3><p className="mt-1 text-sm text-slate-600">{theme.category?.name ?? "Tanpa kategori"} · {theme._count.versions} versi</p></div><ToggleTheme id={theme.id} active={theme.isActive} /></article>)}</div></>; }

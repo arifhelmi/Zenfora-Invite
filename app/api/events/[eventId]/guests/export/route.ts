@@ -1,0 +1,5 @@
+import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+import { assertEventOwner } from "@/lib/permissions";
+import { prisma } from "@/lib/prisma";
+export async function GET(_: Request, { params }: { params: Promise<{ eventId: string }> }) { const { eventId } = await params; const session = await auth(); if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 }); try { await assertEventOwner(eventId, session.user.id); const guests = await prisma.guest.findMany({ where: { eventId, deletedAt: null }, include: { rsvp: true, checkIn: true }, orderBy: { name: "asc" } }); const csv = ["name,phone,seats,vip,rsvp,checkin,token", ...guests.map(guest => [guest.name, guest.phone ?? "", guest.seats, guest.isVip, guest.rsvp?.status ?? "", Boolean(guest.checkIn), guest.token].map(value => `"${String(value).replaceAll('"', '""')}"`).join(","))].join("\n"); return new NextResponse(csv, { headers: { "Content-Type": "text/csv; charset=utf-8", "Content-Disposition": "attachment; filename=guests.csv" } }); } catch { return NextResponse.json({ error: "Forbidden" }, { status: 403 }); } }
