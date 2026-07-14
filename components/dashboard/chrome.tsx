@@ -65,6 +65,6 @@ export function DashboardShell({
 }
 
 export function EventTabs({ eventId }: { eventId: string }) {
-  const tabs = [["", "Ringkasan"], ["/content", "Konten"], ["/design", "Desain"], ["/guests", "Tamu"], ["/rsvp", "RSVP"], ["/wishes", "Ucapan"], ["/gifts", "Kado"], ["/checkin", "Check-in"], ["/analytics", "Analitik"]];
+  const tabs = [["", "Ringkasan"], ["/builder", "AI Page Builder"], ["/content", "Konten"], ["/design", "Desain"], ["/guests", "Tamu"], ["/rsvp", "RSVP"], ["/wishes", "Ucapan"], ["/gifts", "Kado"], ["/checkin", "Check-in"], ["/analytics", "Analitik"]];
   return <nav className="dashboard-event-tabs">{tabs.map(([suffix, label]) => <Link href={`/dashboard/events/${eventId}${suffix}`} key={suffix}>{label}</Link>)}</nav>;
 }

@@ -16,7 +16,8 @@ const envSchema = z.object({
   S3_ACCESS_KEY_ID: z.string().optional(),
   S3_SECRET_ACCESS_KEY: z.string().optional(),
   S3_PUBLIC_BASE_URL: z.string().url().optional().or(z.literal("")),
-  PAYMENT_PROVIDER: z.enum(["mock", "midtrans", "xendit"]).default("mock")
+  PAYMENT_PROVIDER: z.enum(["mock", "midtrans", "xendit"]).default("mock"),
+  AI_IMAGE_PROVIDER: z.enum(["mock"]).default("mock")
 });
 
 export const env = envSchema.parse({
@@ -35,5 +36,6 @@ export const env = envSchema.parse({
   S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
   S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
   S3_PUBLIC_BASE_URL: process.env.S3_PUBLIC_BASE_URL,
-  PAYMENT_PROVIDER: process.env.PAYMENT_PROVIDER
+  PAYMENT_PROVIDER: process.env.PAYMENT_PROVIDER,
+  AI_IMAGE_PROVIDER: process.env.AI_IMAGE_PROVIDER
 });
