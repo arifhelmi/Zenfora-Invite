@@ -1,0 +1,2 @@
+import { RegisterForm } from "@/components/auth-forms";
+export default function RegisterPage() { return <main className="shell grid min-h-[70vh] place-items-center py-12"><section className="card w-full max-w-md p-7"><p className="eyebrow">Mulai gratis</p><h1 className="mt-2 text-3xl font-bold">Buat undangan pertama Anda</h1><p className="mt-3 text-sm leading-6 text-slate-600">Buat akun, pilih tema, lalu simpan draf acara Anda kapan saja.</p><RegisterForm /></section></main>; }

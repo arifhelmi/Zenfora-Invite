@@ -1,0 +1,9 @@
+"use client";
+import Link from "next/link";
+import { useActionState } from "react";
+import { registerAction } from "@/features/auth/actions";
+import { loginAction } from "@/features/auth/login-action";
+
+const initial = {} as { error?: string };
+export function LoginForm() { const [state, formAction, pending] = useActionState(loginAction, initial); return <form action={formAction} className="mt-7 grid gap-4"><label className="label">Email<input name="email" type="email" autoComplete="email" required className="input" /></label><label className="label">Kata sandi<input name="password" type="password" autoComplete="current-password" required className="input" /></label>{state.error && <p className="text-sm text-red-700">{state.error}</p>}<button className="button" disabled={pending}>{pending ? "Memeriksa…" : "Masuk"}</button><p className="text-center text-sm text-slate-600">Belum punya akun? <Link href="/register" className="font-bold text-indigo-700">Daftar sekarang</Link></p></form>; }
+export function RegisterForm() { const [state, formAction, pending] = useActionState(registerAction, initial); return <form action={formAction} className="mt-7 grid gap-4"><label className="label">Nama lengkap<input name="name" autoComplete="name" required className="input" /></label><label className="label">Email<input name="email" type="email" autoComplete="email" required className="input" /></label><label className="label">Kata sandi <span className="font-normal text-slate-500">(minimal 8 karakter)</span><input name="password" type="password" autoComplete="new-password" minLength={8} required className="input" /></label>{state.error && <p className="text-sm text-red-700">{state.error}</p>}<button className="button" disabled={pending}>{pending ? "Membuat akun…" : "Buat akun"}</button><p className="text-center text-sm text-slate-600">Sudah punya akun? <Link href="/login" className="font-bold text-indigo-700">Masuk</Link></p></form>; }

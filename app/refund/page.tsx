@@ -1,0 +1,1 @@
+export default function RefundPage() { return <main className="shell max-w-3xl py-14"><h1 className="text-4xl font-bold">Kebijakan refund</h1><p className="mt-5 leading-7 text-slate-600">Kebijakan refund final perlu disetujui secara legal dan operasional sebelum produksi. Pembayaran mock di lingkungan pengembangan tidak memindahkan uang.</p></main>; }

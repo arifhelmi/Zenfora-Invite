@@ -1,176 +1,19 @@
-"use client";
+import Link from "next/link";
+import { ArrowRight, CalendarCheck, QrCode, Sparkles, Users } from "lucide-react";
+import { SectionHeading } from "@/components/section-heading";
+import { ThemeCard } from "@/components/theme-card";
+import { prisma } from "@/lib/prisma";
 
-import { ChangeEvent, useEffect, useRef, useState } from "react";
-
-const weddingDate = new Date("2026-12-14T14:14:00+07:00").getTime();
-
-type TimeLeft = {
-  days: string;
-  hours: string;
-  minutes: string;
-  seconds: string;
-};
-
-const pad = (value: number) => String(Math.max(0, value)).padStart(2, "0");
-
-function getTimeLeft(): TimeLeft {
-  const distance = Math.max(0, weddingDate - Date.now());
-  return {
-    days: pad(Math.floor(distance / (1000 * 60 * 60 * 24))),
-    hours: pad(Math.floor((distance / (1000 * 60 * 60)) % 24)),
-    minutes: pad(Math.floor((distance / (1000 * 60)) % 60)),
-    seconds: pad(Math.floor((distance / 1000) % 60)),
-  };
-}
-
-function UploadPortrait({
-  name,
-  role,
-  initial,
-  frame,
-}: {
-  name: string;
-  role: string;
-  initial: string;
-  frame: "left" | "right";
-}) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [image, setImage] = useState<string | null>(null);
-
-  function handleUpload(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file || !file.type.startsWith("image/")) return;
-
-    const reader = new FileReader();
-    reader.onload = () => setImage(String(reader.result));
-    reader.readAsDataURL(file);
-  }
-
-  return (
-    <div className={`portrait-column portrait-column--${frame}`}>
-      <button
-        className={`portrait-frame portrait-frame--${frame}`}
-        type="button"
-        onClick={() => inputRef.current?.click()}
-        aria-label={`Unggah foto ${role} ${name}`}
-      >
-        <span className="frame-spark frame-spark--one" aria-hidden="true">✦</span>
-        <span className="frame-spark frame-spark--two" aria-hidden="true">✿</span>
-        <span className="frame-spark frame-spark--three" aria-hidden="true">✦</span>
-        {image ? (
-          <img src={image} alt={`Foto ${role} ${name}`} className="portrait-image" />
-        ) : (
-          <span className="portrait-placeholder" aria-hidden="true">
-            <span>{initial}</span>
-          </span>
-        )}
-        <span className="portrait-upload">{image ? "Ganti foto" : "Unggah foto"}</span>
-      </button>
-      <input
-        ref={inputRef}
-        className="sr-only"
-        type="file"
-        accept="image/png,image/jpeg,image/webp"
-        onChange={handleUpload}
-      />
-      <p className="portrait-role">{role}</p>
-      <h2>{name}</h2>
-    </div>
-  );
-}
-
-export default function Home() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => getTimeLeft());
-  const [rsvpSent, setRsvpSent] = useState(false);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setTimeLeft(getTimeLeft()), 1000);
-    return () => window.clearInterval(timer);
-  }, []);
-
-  return (
-    <main>
-      <section className="hero" id="beranda">
-        <div className="topline" aria-hidden="true" />
-        <p className="eyebrow">Dengan penuh rasa syukur</p>
-        <p className="kawung-mark" aria-label="Ornamen Sunda">✦ &nbsp; ᮅ ᮇ ᮞ &nbsp; ✦</p>
-        <h1>Radem <span>&amp;</span> Laras</h1>
-        <p className="hero-copy">Kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberi doa restu pada hari bahagia kami.</p>
-        <a href="#acara" className="primary-link">Lihat detail acara <span>↓</span></a>
-        <a href="/jawa" className="template-switch">Jelajahi template Jawa <span>→</span></a>
-        <p className="hero-date">Ahad, 14 Desember 2026 &nbsp;·&nbsp; Bandung</p>
-        <div className="hero-leaves hero-leaves--left" aria-hidden="true"><i /><i /><i /><i /></div>
-        <div className="hero-leaves hero-leaves--right" aria-hidden="true"><i /><i /><i /><i /></div>
-      </section>
-
-      <section className="couple-section" id="mempelai">
-        <p className="section-kicker">Dua insan, satu tujuan</p>
-        <p className="section-intro">Ketuk salah satu bingkai untuk mengunggah foto mempelai. Foto tampil sebagai pratinjau langsung di undangan.</p>
-        <div className="portrait-layout">
-          <UploadPortrait name="Radem" role="Putra" initial="R" frame="left" />
-          <div className="ampersand" aria-hidden="true">&amp;</div>
-          <UploadPortrait name="Laras" role="Putri" initial="L" frame="right" />
-        </div>
-        <p className="parent-note">Putra dari Bapak H. Ahmad &amp; Ibu Hj. Ratna &nbsp; · &nbsp; Putri dari Bapak H. Budi &amp; Ibu Hj. Sari</p>
-      </section>
-
-      <section className="countdown-section" aria-label="Hitung mundur acara">
-        <p className="section-kicker">Menuju hari bahagia</p>
-        <div className="countdown">
-          {Object.entries(timeLeft).map(([label, value]) => (
-            <div key={label} className="countdown-unit">
-              <strong>{value}</strong>
-              <span>{label === "days" ? "hari" : label === "hours" ? "jam" : label === "minutes" ? "menit" : "detik"}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="event-section" id="acara">
-        <p className="section-kicker">Rangkaian acara</p>
-        <div className="event-headline">
-          <span>14</span>
-          <div><p>Desember</p><small>2026</small></div>
-        </div>
-        <div className="event-list">
-          <article className="event-item">
-            <p className="event-number">01</p>
-            <div><h2>Akad Nikah</h2><p>08.00 WIB · Masjid Raya Bandung</p></div>
-          </article>
-          <article className="event-item">
-            <p className="event-number">02</p>
-            <div><h2>Resepsi</h2><p>11.00–14.00 WIB · Pendopo Saung Angklung Udjo</p></div>
-          </article>
-        </div>
-        <a className="text-link" href="https://maps.google.com/?q=Saung+Angklung+Udjo" target="_blank" rel="noreferrer">Buka petunjuk lokasi <span>↗</span></a>
-      </section>
-
-      <section className="quote-section">
-        <span className="quote-star" aria-hidden="true">✦</span>
-        <blockquote>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri.”</blockquote>
-        <cite>QS. Ar-Rum: 21</cite>
-      </section>
-
-      <section className="rsvp-section" id="rsvp">
-        <p className="section-kicker">Konfirmasi kehadiran</p>
-        <h2>Doa dan kehadiran Anda sangat berarti bagi kami.</h2>
-        {rsvpSent ? (
-          <p className="rsvp-success">Terima kasih, konfirmasi Anda telah kami terima. Sampai jumpa di hari bahagia kami.</p>
-        ) : (
-          <form onSubmit={(event) => { event.preventDefault(); setRsvpSent(true); }}>
-            <label>Nama lengkap<input required name="nama" placeholder="Tulis nama Anda" /></label>
-            <label>Kehadiran<select required name="kehadiran" defaultValue=""><option value="" disabled>Pilih konfirmasi</option><option>InsyaAllah hadir</option><option>Maaf, belum bisa hadir</option></select></label>
-            <label>Ucapan <textarea name="ucapan" rows={3} placeholder="Tulis doa dan ucapan terbaik" /></label>
-            <button type="submit" className="primary-link">Kirim konfirmasi <span>→</span></button>
-          </form>
-        )}
-      </section>
-
-      <footer>
-        <p>Terima kasih atas doa dan perhatian Anda.</p>
-        <h2>Radem &amp; Laras</h2>
-        <p className="footer-mark">ᮃ ᮚ ᮥ ᮔ ᮪ ᮓ ᮥ ᮀ ᮔ ᮪</p>
-      </footer>
-    </main>
-  );
+export const dynamic = "force-dynamic";
+export default async function Home() {
+  const [themes, types, packages] = await Promise.all([prisma.theme.findMany({ where: { isActive: true, isFeatured: true }, take: 3, orderBy: { name: "asc" } }), prisma.eventType.findMany({ where: { isActive: true }, take: 8 }), prisma.package.findMany({ where: { isActive: true }, orderBy: { price: "asc" } })]);
+  return <main>
+    <section className="overflow-hidden bg-slate-950 py-18 text-white"><div className="shell grid items-center gap-12 py-16 lg:grid-cols-[1.15fr_.85fr] lg:py-24"><div><p className="eyebrow text-indigo-300">Untuk setiap momen yang berarti</p><h1 className="mt-4 max-w-3xl text-5xl font-bold tracking-tight sm:text-6xl">Undangan digital yang terasa seperti Anda.</h1><p className="mt-6 max-w-xl text-lg leading-8 text-slate-300">Rancang, bagikan, dan kelola undangan pernikahan, ulang tahun, acara kantor, hingga syukuran dalam satu ruang yang tenang dan rapi.</p><div className="mt-8 flex flex-wrap gap-3"><Link className="button" href="/register">Buat undangan <ArrowRight size={17} /></Link><Link className="button secondary" href="/templates">Lihat template</Link></div><p className="mt-5 text-sm text-slate-400">Mulai dengan Free Demo. Tidak perlu kartu kredit.</p></div><div className="relative mx-auto w-full max-w-sm rounded-[2rem] border border-white/20 bg-white p-3 text-slate-900 shadow-2xl"><div className="rounded-[1.5rem] bg-[#f5ede1] px-6 py-10 text-center"><p className="text-[#8a6330]">Dengan penuh sukacita</p><p className="mt-8 text-3xl font-serif">Arif & Siti</p><p className="mt-3 text-sm">Sabtu, 20 Desember 2026</p><div className="my-8 text-3xl text-[#ad803c]">◇ ◈ ◇</div><button className="button" type="button">Buka undangan</button></div></div></div></section>
+    <section className="shell py-16"><SectionHeading eyebrow="Satu tempat, banyak cerita" title="Pilih jenis acara Anda" body="Mulai dari alur yang sesuai, lalu personalisasikan setiap detailnya." /><div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">{types.map(type => <Link key={type.id} href={`/templates?event=${type.slug}`} className="card p-4 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-indigo-300">{type.name}</Link>)}</div></section>
+    <section className="bg-white py-16"><div className="shell"><div className="flex flex-wrap items-end justify-between gap-5"><SectionHeading eyebrow="Koleksi perdana" title="Rancang dengan karakter" body="Delapan tema orisinal yang dibuat agar data acara Anda tetap utuh ketika desain diganti." /><Link className="button secondary" href="/templates">Semua template</Link></div><div className="mt-8 grid gap-5 md:grid-cols-3">{themes.map(theme => <ThemeCard key={theme.id} theme={theme} />)}</div></div></section>
+    <section className="shell py-16"><SectionHeading eyebrow="Alur yang sederhana" title="Dari ide sampai tamu hadir" /><div className="mt-8 grid gap-6 md:grid-cols-3">{[["01", "Pilih dan isi", "Tentukan acara, tema, lalu isi informasi utama dalam wizard yang tersimpan otomatis."], ["02", "Atur tamu", "Buat tautan pribadi, RSVP, QR check-in, dan pesan WhatsApp yang siap disalin."], ["03", "Publikasikan", "Aktifkan paket, terbitkan, dan ikuti kunjungan serta kehadiran secara seperlunya."]].map(([number, title, body]) => <div className="card p-6" key={number}><p className="text-3xl font-bold text-indigo-300">{number}</p><h3 className="mt-5 font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{body}</p></div>)}</div></section>
+    <section className="bg-indigo-50 py-16"><div className="shell"><SectionHeading eyebrow="Siap saat diperlukan" title="Lebih dari sebuah halaman undangan" /><div className="mt-8 grid gap-5 sm:grid-cols-3">{[[Sparkles, "Tema fleksibel", "Ganti template tanpa memindahkan ulang data acara."], [Users, "Tamu personal", "RSVP, grup keluarga, kursi, dan tautan unik per tamu."], [QrCode, "Hari-H yang lancar", "QR tamu dan check-in untuk panitia dari layar ponsel."], [CalendarCheck, "Data yang berguna", "Pantau respons dan kunjungan tanpa mengumpulkan data berlebihan."]].map(([Icon, title, body]) => { const C = Icon as typeof Sparkles; return <div key={title as string} className="flex gap-3 rounded-xl bg-white p-5"><C className="mt-1 text-indigo-700" size={22}/><div><h3 className="font-bold">{title as string}</h3><p className="mt-1 text-sm leading-5 text-slate-600">{body as string}</p></div></div>; })}</div></div></section>
+    <section className="shell py-16"><SectionHeading eyebrow="Paket transparan" title="Mulai sesuai kebutuhan acara" /><div className="mt-8 grid gap-5 md:grid-cols-3">{packages.map(pkg => <article className="card p-6" key={pkg.id}><h3 className="text-xl font-bold">{pkg.name}</h3><p className="mt-2 text-sm text-slate-600">{pkg.description}</p><p className="mt-5 text-2xl font-bold">{pkg.price === 0 ? "Gratis" : new Intl.NumberFormat("id-ID", { style: "currency", currency: pkg.currency, maximumFractionDigits: 0 }).format(pkg.price)}</p><Link className="button mt-5 w-full" href="/pricing">Pilih paket</Link></article>)}</div></section>
+    <section className="bg-slate-950 py-16 text-white"><div className="shell grid gap-8 md:grid-cols-2"><div><p className="eyebrow text-indigo-300">Siap memulai?</p><h2 className="mt-3 text-4xl font-bold">Buat momen pertama Anda dengan Zenvora.</h2></div><div className="md:text-right"><Link className="button" href="/register">Buat undangan gratis <ArrowRight size={17}/></Link></div></div></section>
+  </main>;
 }

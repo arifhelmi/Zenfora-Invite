@@ -1,0 +1,3 @@
+import { prisma } from "@/lib/prisma";
+export const dynamic = "force-dynamic";
+export default async function AdminEvents() { const events = await prisma.event.findMany({ include: { owner: true, eventType: true, theme: true }, orderBy: { updatedAt: "desc" }, take: 100 }); return <><h2 className="text-2xl font-bold">Semua undangan</h2><div className="mt-5 grid gap-3">{events.map(event => <article className="card flex flex-wrap items-center justify-between gap-4 p-5" key={event.id}><div><h3 className="font-bold">{event.title}</h3><p className="mt-1 text-sm text-slate-600">{event.owner.email} · {event.eventType.name} · {event.theme?.name ?? "Tanpa tema"}</p></div><span className="status">{event.status}</span></article>)}</div></>; }

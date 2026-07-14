@@ -1,0 +1,4 @@
+import { prisma } from "@/lib/prisma";
+import { formatDate } from "@/lib/utils";
+export const dynamic = "force-dynamic";
+export default async function AuditLogs() { const logs = await prisma.auditLog.findMany({ include: { actor: true, event: true }, orderBy: { createdAt: "desc" }, take: 200 }); return <><h2 className="text-2xl font-bold">Audit log</h2><div className="card mt-5 overflow-x-auto"><table className="w-full min-w-150 text-left text-sm"><thead className="border-b bg-slate-50"><tr><th className="p-3">Waktu</th><th className="p-3">Aktor</th><th className="p-3">Aksi</th><th className="p-3">Acara</th></tr></thead><tbody>{logs.map(log => <tr className="border-b" key={log.id}><td className="p-3">{formatDate(log.createdAt)}</td><td className="p-3">{log.actor?.email ?? "Sistem"}</td><td className="p-3">{log.action}</td><td className="p-3">{log.event?.title ?? "—"}</td></tr>)}</tbody></table></div></>; }

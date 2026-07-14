@@ -1,0 +1,720 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+  DISABLED
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+}
+
+enum RsvpStatus {
+  ATTENDING
+  DECLINED
+  MAYBE
+}
+
+enum WishStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum OrderStatus {
+  DRAFT
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  EXPIRED
+  REFUNDED
+}
+
+enum CheckInMethod {
+  QR
+  MANUAL
+}
+
+model Role {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model User {
+  id               String            @id @default(cuid())
+  name             String?
+  email            String            @unique
+  emailVerified    DateTime?
+  image            String?
+  passwordHash     String?
+  roleId           String
+  role             Role              @relation(fields: [roleId], references: [id])
+  deletedAt        DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  accounts         Account[]
+  sessions         Session[]
+  events           Event[]
+  orders           Order[]
+  media            MediaAsset[]
+  auditLogs        AuditLog[]        @relation("AuditActor")
+  pageVersions     PageVersion[]
+  aiGenerationJobs AIGenerationJob[]
+  aiUsages         AIUsage[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model EventType {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  events      Event[]
+
+  @@index([slug])
+}
+
+model Event {
+  id               String            @id @default(cuid())
+  ownerId          String
+  eventTypeId      String
+  themeId          String?
+  title            String
+  slug             String            @unique
+  description      String?
+  status           EventStatus       @default(DRAFT)
+  visibility       Visibility        @default(PUBLIC)
+  startsAt         DateTime?
+  endsAt           DateTime?
+  locationName     String?
+  locationAddress  String?
+  locationUrl      String?
+  coverImageUrl    String?
+  packageId        String?
+  packageExpiresAt DateTime?
+  rsvpDeadline     DateTime?
+  maxGuests        Int?
+  details          Json              @default("{}")
+  deletedAt        DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  owner            User              @relation(fields: [ownerId], references: [id])
+  eventType        EventType         @relation(fields: [eventTypeId], references: [id])
+  theme            Theme?            @relation(fields: [themeId], references: [id])
+  package          Package?          @relation(fields: [packageId], references: [id])
+  people           EventPerson[]
+  schedules        EventSchedule[]
+  stories          EventStory[]
+  sections         EventSection[]
+  media            MediaAsset[]
+  guestGroups      GuestGroup[]
+  guests           Guest[]
+  rsvps            RSVP[]
+  wishes           Wish[]
+  gifts            GiftMethod[]
+  orders           Order[]
+  visits           InvitationVisit[]
+  checkIns         CheckIn[]
+  auditLogs        AuditLog[]
+  invitation       Invitation?
+  aiGenerationJobs AIGenerationJob[]
+  aiUsages         AIUsage[]
+
+  @@index([slug])
+  @@index([ownerId])
+  @@index([startsAt])
+  @@index([status])
+}
+
+model EventPerson {
+  id        String   @id @default(cuid())
+  eventId   String
+  name      String
+  role      String
+  relation  String?
+  photoUrl  String?
+  bio       String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model EventSchedule {
+  id        String    @id @default(cuid())
+  eventId   String
+  title     String
+  startsAt  DateTime
+  endsAt    DateTime?
+  location  String?
+  details   String?
+  position  Int       @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  event     Event     @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model EventStory {
+  id        String   @id @default(cuid())
+  eventId   String
+  title     String
+  content   String
+  dateLabel String?
+  imageUrl  String?
+  position  Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model EventSection {
+  id        String   @id @default(cuid())
+  eventId   String
+  key       String
+  enabled   Boolean  @default(true)
+  position  Int      @default(0)
+  layout    String   @default("default")
+  data      Json     @default("{}")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, key])
+  @@index([eventId])
+}
+
+model ThemeCategory {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  themes    Theme[]
+}
+
+model Theme {
+  id          String         @id @default(cuid())
+  categoryId  String?
+  slug        String         @unique
+  name        String
+  description String
+  style       String
+  colors      String[]
+  isPremium   Boolean        @default(false)
+  isActive    Boolean        @default(true)
+  isFeatured  Boolean        @default(false)
+  previewUrl  String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  category    ThemeCategory? @relation(fields: [categoryId], references: [id])
+  versions    ThemeVersion[]
+  assets      ThemeAsset[]
+  events      Event[]
+
+  @@index([slug])
+  @@index([isActive, isPremium])
+}
+
+model ThemeVersion {
+  id        String   @id @default(cuid())
+  themeId   String
+  version   Int
+  manifest  Json
+  isCurrent Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  theme     Theme    @relation(fields: [themeId], references: [id], onDelete: Cascade)
+
+  @@unique([themeId, version])
+}
+
+model ThemeAsset {
+  id        String   @id @default(cuid())
+  themeId   String
+  key       String
+  path      String
+  source    String
+  license   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  theme     Theme    @relation(fields: [themeId], references: [id], onDelete: Cascade)
+
+  @@unique([themeId, key])
+}
+
+model MediaAsset {
+  id                  String               @id @default(cuid())
+  ownerId             String
+  eventId             String?
+  filename            String
+  mimeType            String
+  size                Int
+  url                 String
+  alt                 String?
+  width               Int?
+  height              Int?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  owner               User                 @relation(fields: [ownerId], references: [id])
+  event               Event?               @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  pageAssets          PageAsset[]
+  aiGenerationResults AIGenerationResult[]
+
+  @@index([ownerId])
+  @@index([eventId])
+}
+
+model Invitation {
+  id                String           @id @default(cuid())
+  eventId           String           @unique
+  scrollSnapEnabled Boolean          @default(true)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  event             Event            @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  pages             InvitationPage[]
+
+  @@index([eventId])
+}
+
+model InvitationPage {
+  id               String            @id @default(cuid())
+  invitationId     String
+  name             String
+  slug             String
+  pageType         String            @default("blank")
+  order            Int               @default(0)
+  heightMode       String            @default("viewport")
+  backgroundConfig Json              @default("{}")
+  layoutConfig     Json              @default("{}")
+  responsiveConfig Json              @default("{}")
+  animationConfig  Json              @default("{}")
+  isVisible        Boolean           @default(true)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  invitation       Invitation        @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  blocks           PageBlock[]
+  assets           PageAsset[]
+  versions         PageVersion[]
+  aiGenerationJobs AIGenerationJob[]
+
+  @@unique([invitationId, slug])
+  @@index([invitationId, order])
+}
+
+model PageBlock {
+  id               String         @id @default(cuid())
+  pageId           String
+  blockType        String
+  content          Json           @default("{}")
+  dataBinding      String?
+  positionConfig   Json           @default("{}")
+  styleConfig      Json           @default("{}")
+  responsiveConfig Json           @default("{}")
+  animationConfig  Json           @default("{}")
+  order            Int            @default(0)
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  page             InvitationPage @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@index([pageId, order])
+}
+
+model PageAsset {
+  id                  String               @id @default(cuid())
+  pageId              String
+  mediaAssetId        String?
+  name                String
+  purpose             String
+  metadata            Json                 @default("{}")
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  page                InvitationPage       @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  mediaAsset          MediaAsset?          @relation(fields: [mediaAssetId], references: [id], onDelete: SetNull)
+  aiGenerationResults AIGenerationResult[]
+
+  @@index([pageId])
+  @@index([mediaAssetId])
+}
+
+model PageVersion {
+  id          String         @id @default(cuid())
+  pageId      String
+  createdById String
+  label       String
+  source      String         @default("manual")
+  snapshot    Json
+  createdAt   DateTime       @default(now())
+  page        InvitationPage @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  createdBy   User           @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([pageId, createdAt])
+  @@index([createdById])
+}
+
+model AIGenerationJob {
+  id             String               @id @default(cuid())
+  userId         String
+  eventId        String
+  pageId         String?
+  provider       String
+  kind           String
+  status         String               @default("PENDING")
+  input          Json
+  creditCost     Int                  @default(0)
+  idempotencyKey String               @unique
+  errorMessage   String?
+  startedAt      DateTime?
+  completedAt    DateTime?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event          Event                @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  page           InvitationPage?      @relation(fields: [pageId], references: [id], onDelete: SetNull)
+  results        AIGenerationResult[]
+  usage          AIUsage?
+
+  @@index([userId, createdAt])
+  @@index([eventId, createdAt])
+  @@index([pageId])
+}
+
+model AIGenerationResult {
+  id           String          @id @default(cuid())
+  jobId        String
+  mediaAssetId String?
+  pageAssetId  String?
+  url          String
+  mimeType     String
+  width        Int?
+  height       Int?
+  metadata     Json            @default("{}")
+  createdAt    DateTime        @default(now())
+  job          AIGenerationJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  mediaAsset   MediaAsset?     @relation(fields: [mediaAssetId], references: [id], onDelete: SetNull)
+  pageAsset    PageAsset?      @relation(fields: [pageAssetId], references: [id], onDelete: SetNull)
+
+  @@index([jobId])
+  @@index([mediaAssetId])
+  @@index([pageAssetId])
+}
+
+model AIUsage {
+  id             String          @id @default(cuid())
+  userId         String
+  eventId        String
+  jobId          String          @unique
+  credits        Int
+  status         String          @default("DEBITED")
+  idempotencyKey String          @unique
+  metadata       Json            @default("{}")
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event          Event           @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  job            AIGenerationJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([eventId, createdAt])
+}
+
+model AIProviderConfiguration {
+  id            String   @id @default(cuid())
+  provider      String   @unique
+  displayName   String
+  isEnabled     Boolean  @default(false)
+  creditCost    Int      @default(1)
+  configuration Json     @default("{}")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model GuestGroup {
+  id        String   @id @default(cuid())
+  eventId   String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  guests    Guest[]
+
+  @@unique([eventId, name])
+}
+
+model Guest {
+  id        String      @id @default(cuid())
+  eventId   String
+  groupId   String?
+  name      String
+  email     String?
+  phone     String?
+  token     String      @unique
+  seats     Int         @default(1)
+  isVip     Boolean     @default(false)
+  notes     String?
+  deletedAt DateTime?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  event     Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  group     GuestGroup? @relation(fields: [groupId], references: [id], onDelete: SetNull)
+  rsvp      RSVP?
+  wishes    Wish[]
+  checkIn   CheckIn?
+
+  @@index([eventId])
+  @@index([token])
+}
+
+model RSVP {
+  id        String     @id @default(cuid())
+  eventId   String
+  guestId   String     @unique
+  status    RsvpStatus
+  attendees Int        @default(0)
+  note      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  event     Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  guest     Guest      @relation(fields: [guestId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model Wish {
+  id        String     @id @default(cuid())
+  eventId   String
+  guestId   String?
+  author    String
+  message   String
+  status    WishStatus @default(PENDING)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  event     Event      @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  guest     Guest?     @relation(fields: [guestId], references: [id], onDelete: SetNull)
+
+  @@index([eventId, status])
+}
+
+model GiftMethod {
+  id        String   @id @default(cuid())
+  eventId   String
+  type      String
+  label     String
+  account   String?
+  holder    String?
+  url       String?
+  enabled   Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model Package {
+  id               String      @id @default(cuid())
+  slug             String      @unique
+  name             String
+  description      String
+  price            Int
+  currency         String      @default("IDR")
+  guestLimit       Int
+  activeDays       Int
+  features         Json
+  aiMonthlyCredits Int         @default(10)
+  pageVersionLimit Int         @default(20)
+  isActive         Boolean     @default(true)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  events           Event[]
+  orderItems       OrderItem[]
+
+  @@index([isActive])
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  userId    String
+  eventId   String?
+  code      String      @unique
+  status    OrderStatus @default(DRAFT)
+  subtotal  Int
+  total     Int
+  currency  String      @default("IDR")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  user      User        @relation(fields: [userId], references: [id])
+  event     Event?      @relation(fields: [eventId], references: [id])
+  items     OrderItem[]
+  payments  Payment[]
+
+  @@index([userId])
+  @@index([eventId])
+  @@index([status])
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  packageId String
+  name      String
+  quantity  Int      @default(1)
+  unitPrice Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  package   Package  @relation(fields: [packageId], references: [id])
+
+  @@index([orderId])
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  orderId     String
+  provider    String
+  externalId  String        @unique
+  status      PaymentStatus @default(PENDING)
+  amount      Int
+  rawResponse Json?
+  paidAt      DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  order       Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@index([orderId])
+  @@index([status])
+}
+
+model PaymentWebhook {
+  id          String   @id @default(cuid())
+  provider    String
+  externalId  String
+  payload     Json
+  processedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([provider, externalId])
+}
+
+model InvitationVisit {
+  id        String   @id @default(cuid())
+  eventId   String
+  guestId   String?
+  day       DateTime @db.Date
+  referrer  String?
+  visitorId String?
+  createdAt DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId, day])
+}
+
+model CheckIn {
+  id        String        @id @default(cuid())
+  eventId   String
+  guestId   String        @unique
+  method    CheckInMethod
+  checkedAt DateTime      @default(now())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  event     Event         @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  guest     Guest         @relation(fields: [guestId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  eventId   String?
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  ip        String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  actor     User?    @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+  event     Event?   @relation(fields: [eventId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([eventId])
+  @@index([createdAt])
+}
+
+model SystemSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
