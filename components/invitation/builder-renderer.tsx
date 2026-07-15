@@ -133,6 +133,7 @@ export function BuilderPageCanvas({ page, event, guest, viewport, isEditor = fal
   return <section className={`invitation-page builder-page builder-height-${page.heightMode}`} data-snap={page.heightMode === "viewport" || page.heightMode === "minimum-viewport" ? "true" : "false"} data-page-type={page.pageType} style={pageStyle}>
     <div className="builder-page-background" aria-hidden="true" />
     <div className="builder-page-overlay" aria-hidden="true" />
+    {!isEditor && guest && page.pageType === "cover" && <div className="builder-personal-greeting"><span>Kepada Yth.</span><strong>{guest.name}</strong></div>}
     {isEditor && <div className="builder-safe-area" aria-hidden="true"><span>safe area</span></div>}
     <div className="builder-page-blocks" data-layout={String(layout.preset ?? "center")}>
       {page.blocks.filter((block) => block.isVisible).sort((left, right) => left.order - right.order).map((block) => {

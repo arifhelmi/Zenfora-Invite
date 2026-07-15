@@ -3,6 +3,7 @@ import { canAccessEvent } from "@/lib/access";
 import { canAddGuest } from "@/lib/package-limits";
 import { canActivateEntitlement, isTerminalPaymentStatus } from "@/lib/payment-status";
 import { createGuestToken } from "@/lib/tokens";
+import { normalizeGuestRecords } from "@/lib/guest-spreadsheet";
 import { slugify } from "@/lib/utils";
 import { rsvpSchema, themeManifestSchema } from "@/lib/validation";
 import { allowedPageConfigSchema, imageGenerationInputSchema, pagePatchSchema } from "@/features/builder/validation";
@@ -13,6 +14,14 @@ describe("permission", () => { it("allows owner and admin only", () => { expect(
 describe("slug generator", () => { it("creates safe Indonesian slugs", () => expect(slugify("  Acara Siti & Arif 2026! ")).toBe("acara-siti-arif-2026")); });
 describe("guest token", () => { it("is URL-safe, unique, and hard to guess", () => { const one = createGuestToken(); const two = createGuestToken(); expect(one).toMatch(/^[23456789A-HJ-NP-Za-km-z]{16}$/); expect(one).not.toBe(two); }); });
 describe("package limits", () => { it("prevents guests beyond the plan limit", () => { expect(canAddGuest(19, 20)).toBe(true); expect(canAddGuest(20, 20)).toBe(false); }); });
+describe("guest spreadsheet", () => {
+  it("accepts Indonesian headers and family invitation labels", () => {
+    expect(normalizeGuestRecords([{ "Nama Undangan": "Andi dan Keluarga", Grup: "Keluarga", "Telepon / WhatsApp": "+62 812-3456-789", "Jumlah Kursi": "4", VIP: "Ya" }])).toEqual([expect.objectContaining({ name: "Andi dan Keluarga", groupName: "Keluarga", phone: "+62 812-3456-789", seats: 4, isVip: true })]);
+  });
+  it("ignores blank rows and caps seats at twenty", () => {
+    expect(normalizeGuestRecords([{ name: "", seats: 2 }, { name: "Tamu Besar", seats: 40 }])).toEqual([expect.objectContaining({ name: "Tamu Besar", seats: 20 })]);
+  });
+});
 describe("payment status", () => { it("activates only validated paid status", () => { expect(canActivateEntitlement("PAID")).toBe(true); expect(canActivateEntitlement("PENDING")).toBe(false); expect(isTerminalPaymentStatus("EXPIRED")).toBe(true); }); });
 describe("RSVP validation", () => { it("only accepts known status and sensible counts", () => { expect(rsvpSchema.safeParse({ status: "ATTENDING", attendees: 2 }).success).toBe(true); expect(rsvpSchema.safeParse({ status: "YES", attendees: -1 }).success).toBe(false); }); });
 describe("theme manifest", () => { it("requires tokens and sections", () => { expect(themeManifestSchema.safeParse({ version: 1, renderer: "minimal", tokens: { colors: {}, typography: {}, radius: {}, spacing: {} }, sections: ["cover"] }).success).toBe(true); expect(themeManifestSchema.safeParse({ version: 1 }).success).toBe(false); }); });

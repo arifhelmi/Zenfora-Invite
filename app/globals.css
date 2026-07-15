@@ -14,6 +14,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .button.secondary { background: white; color: #312e81; border-color: #c7d2fe; }
 .button.danger { background: #b91c1c; border-color: #b91c1c; }
 .button:disabled { opacity: .55; cursor: not-allowed; }
+.guest-link-button { align-items: center; background: #fff; border: 1px solid #d8d3c8; border-radius: 999px; color: #173d38; display: inline-flex; font-size: .72rem; font-weight: 800; gap: .35rem; padding: .48rem .7rem; }
+.guest-link-button:hover { background: #f4efe6; border-color: #b9aa91; }
+.guest-link-button.whatsapp { background: #e9f7ef; border-color: #b8dec7; color: #17643b; }
 .input, .select, .textarea { width: 100%; border: 1px solid #cbd5e1; border-radius: .65rem; padding: .68rem .8rem; background: white; }
 .textarea { min-height: 7rem; resize: vertical; }
 .label { display: grid; gap: .38rem; font-weight: 650; font-size: .92rem; }
@@ -528,7 +531,7 @@ body:has(.dashboard-app) > footer { display: none; }
   .dashboard-stat-card { animation: none; }
 }
 
-/* Five-province Nusantara collection. Cultural motifs stay abstract until curator review. */
+/* Nusantara collection. Aceh and Minangkabau are the first full-artwork editions. */
 .invite.nusantara { font-family: Aptos, "Segoe UI Variable", "Trebuchet MS", sans-serif; }
 .invite.nusantara h1,
 .invite.nusantara h2,
@@ -546,152 +549,255 @@ body:has(.dashboard-app) > footer { display: none; }
 .invite.nusantara .nusantara-portrait-frame { background: var(--invite-surface); border: 2px solid var(--invite-accent); box-shadow: 0 14px 30px rgb(28 38 34 / .16); height: 15rem; padding: .5rem; width: 12rem; }
 .invite.nusantara .nusantara-gallery { padding: .65rem; }
 .invite.nusantara .nusantara-gallery > div { border: 1px solid color-mix(in srgb, var(--invite-accent), transparent 45%); }
+.invite.nusantara .eyebrow { color: currentColor; opacity: .68; }
 
-/* Aceh: symmetric arches, deep green, and quiet gold lines. */
+/* Aceh: an illustrated Rumoh Aceh, carved timber rhythm, and luminous garden. */
 .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover {
   align-items: end;
-  background:
-    radial-gradient(circle at 78% 25%, rgb(199 165 91 / .28), transparent 19%),
-    repeating-linear-gradient(135deg, transparent 0 30px, rgb(255 255 255 / .025) 30px 32px),
-    linear-gradient(145deg, #0c2922, #1b4b3d 68%, #0f3028);
+  background-image:
+    linear-gradient(180deg, rgb(8 28 23 / .03) 22%, rgb(8 30 24 / .12) 50%, rgb(7 27 22 / .9) 100%),
+    url("/themes/serambi-meukuta/rumoh-aceh-hero.webp");
+  background-position: 58% center;
+  background-size: cover;
   color: #fff7e5;
-  padding-bottom: clamp(4rem, 10vw, 7rem);
+  min-height: 100svh;
+  padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
 }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover::before { border-color: rgb(215 187 117 / .7); border-radius: 9rem 9rem 1rem 1rem; inset: 1.2rem 9%; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover .content { background: rgb(8 36 29 / .58); border: 1px solid rgb(229 205 146 / .45); border-radius: 8rem 8rem .75rem .75rem; box-shadow: 0 22px 50px rgb(0 0 0 / .2); padding: 4rem 2rem 2rem; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover-architecture { border: 1px solid rgb(231 204 139 / .45); border-bottom: 0; border-radius: 10rem 10rem 0 0; height: 24rem; right: -4rem; top: 17%; width: 18rem; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover-motif { background: repeating-linear-gradient(90deg, #d7b96f 0 1px, transparent 1px 18px); bottom: 2.25rem; height: 2px; left: 12%; opacity: .75; right: 12%; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-greeting { background: radial-gradient(circle at 50% 0, rgb(199 165 91 / .2), transparent 40%), #f6f0e2; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-people { background: linear-gradient(145deg, #d8c391, #f8f1e1 42%, #dbe5d9); }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-people::after { border: 1px solid rgb(21 61 50 / .16); border-bottom: 0; border-radius: 8rem 8rem 0 0; height: 18rem; left: calc(50% - 7rem); top: 12%; width: 14rem; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-portrait-frame { border-radius: 7rem 7rem .7rem .7rem; box-shadow: 0 0 0 .35rem #f4ead3, 0 0 0 .45rem #b7944e, 0 16px 30px rgb(29 62 51 / .18); }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-portrait-frame img { border-radius: 6.5rem 6.5rem .35rem .35rem; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-countdown { background: #193f35; color: #fff8e6; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-schedule { background: #f7f0e1; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid rgb(160 125 63 / .35); border-radius: 0; box-shadow: none; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-location { background: linear-gradient(120deg, #dce7da, #f7f0e1); }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-gallery { background: #153d32; border-radius: 7rem 7rem .8rem .8rem; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-gallery > div { border-radius: 5rem 5rem .45rem .45rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover::before { border-color: rgb(232 203 134 / .72); border-radius: 10rem 10rem .4rem .4rem; box-shadow: inset 0 0 0 .35rem rgb(11 48 39 / .18); inset: 1.1rem 7%; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover .content { background: none; border: 0; max-width: 44rem; padding: 1.5rem 2rem; text-shadow: 0 2px 18px rgb(0 0 0 / .62); }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover .content::before { background: url("/themes/serambi-meukuta/aceh-floral-border.svg") center / contain no-repeat; content: ""; display: block; height: 4.8rem; margin: 0 auto .5rem; max-width: 34rem; opacity: .86; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover a { background: rgb(9 43 34 / .7); border-color: rgb(236 210 151 / .8); }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover-architecture { background: url("/themes/serambi-meukuta/aceh-floral-border.svg") center / contain no-repeat; height: 6rem; left: 12%; opacity: .6; right: 12%; top: 1.1rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover-motif { background: linear-gradient(90deg, transparent, #e0c17a 18%, #e0c17a 82%, transparent); bottom: 1.5rem; height: 1px; left: 12%; opacity: .78; right: 12%; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-greeting { background-color: #f5eedf; background-image: url("/themes/serambi-meukuta/aceh-floral-border.svg"), radial-gradient(circle at 50% 0, rgb(201 165 86 / .22), transparent 42%); background-position: center calc(100% - 1rem), center; background-repeat: no-repeat; background-size: min(38rem, 88%) auto, cover; padding-bottom: 7rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-people { background-image: linear-gradient(135deg, rgb(9 43 35 / .94), rgb(19 69 55 / .86)), url("/themes/serambi-meukuta/rumoh-aceh-hero.webp"); background-position: center; background-size: cover; color: #fff4d7; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-people::after { background: url("/themes/serambi-meukuta/aceh-floral-border.svg") center / contain no-repeat; height: 7rem; left: 8%; opacity: .42; right: 8%; top: .75rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-portrait-frame { background: linear-gradient(145deg, #e5c77e, #5e3b20 48%, #f1d993); border: 1px solid #f2d891; border-radius: 8rem 8rem .35rem .35rem; box-shadow: 0 0 0 .32rem #173f35, 0 0 0 .48rem #cfaa5c, 0 22px 46px rgb(0 0 0 / .32); height: 16rem; padding: .55rem; position: relative; width: 12.25rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-portrait-frame img { border-radius: 7.5rem 7.5rem .15rem .15rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-countdown { background-color: #e6d5ad; background-image: url("/themes/serambi-meukuta/aceh-floral-border.svg"), radial-gradient(circle at 50% 48%, #fffaf0 0 22%, transparent 64%); background-position: center 1rem, center; background-repeat: no-repeat; background-size: min(42rem, 94%) auto, cover; color: #153d32; padding-top: 8rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-schedule { background: linear-gradient(120deg, #f8f3e7, #e8dcc0); }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid rgb(139 102 44 / .36); border-radius: 0; box-shadow: none; padding: 1.4rem .25rem 1.4rem 4rem; position: relative; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-schedule .invite-card::before { border: 1px solid #b8934d; border-radius: 50% 50% 0 0; color: #a6803e; content: "◆"; display: grid; height: 2.5rem; left: .25rem; place-items: center; position: absolute; top: 1.05rem; width: 2.5rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-location { background-image: linear-gradient(rgb(8 43 34 / .82), rgb(8 43 34 / .9)), url("/themes/serambi-meukuta/rumoh-aceh-hero.webp"); background-position: center 52%; background-size: cover; color: #fff4d8; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery { background: #f5eedf; border: 0; border-radius: 0; padding: clamp(3rem, 8vw, 6rem) 1.25rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery > .content { background: transparent; border: 0; padding: 0; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery { background: #0e392f; border: 1px solid #cba85c; border-radius: 8rem 8rem .35rem .35rem; gap: .55rem; padding: .55rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { background-image: linear-gradient(rgb(9 47 38 / .12), rgb(9 47 38 / .28)), url("/themes/serambi-meukuta/rumoh-aceh-hero.webp") !important; background-size: cover; border-radius: 7rem 7rem .15rem .15rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(1) { background-position: 66% 42%; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(2) { background-position: 14% 38%; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(3) { background-position: 50% 58%; border-radius: .15rem; }
 .invite[data-nusantara-template="serambi-meukuta"] .nusantara-rsvp,
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-wishes { background: #eee3ca; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-closing { background: #102f27; color: #fff3d6; }
-.invite[data-nusantara-template="serambi-meukuta"] .nusantara-closing::after { border: 1px solid rgb(216 185 111 / .55); border-radius: 50% 50% 0 0; bottom: -8rem; height: 14rem; left: calc(50% - 8rem); width: 16rem; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-wishes { background: #efe4ca; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-rsvp .invite-card,
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-wishes .invite-card { background: rgb(255 250 239 / .56); border: 0; border-bottom: 1px solid rgb(145 108 47 / .35); border-radius: 0; box-shadow: none; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-closing { background-image: linear-gradient(rgb(7 34 28 / .84), rgb(7 34 28 / .92)), url("/themes/serambi-meukuta/rumoh-aceh-hero.webp"); background-position: center 58%; background-size: cover; color: #fff3d6; min-height: 60vh; }
+.invite[data-nusantara-template="serambi-meukuta"] .nusantara-closing::after { background: url("/themes/serambi-meukuta/aceh-floral-border.svg") center / contain no-repeat; bottom: 1rem; height: 8rem; left: 8%; opacity: .56; right: 8%; }
 
-/* North Sumatra: woven rhythm and a strong roof silhouette. */
+/* North Sumatra: Rumah Bolon above Lake Toba, held by a quiet woven rhythm. */
 .invite[data-nusantara-template="ulos-toba"] .nusantara-cover {
   align-items: end;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 20px, rgb(220 176 106 / .12) 20px 22px, transparent 22px 40px),
-    linear-gradient(145deg, #251919, #742925 56%, #321c1b);
+  background-image: linear-gradient(180deg, rgb(30 20 18 / .02) 20%, rgb(38 24 22 / .12) 47%, rgb(28 18 17 / .94) 100%), url("/themes/ulos-toba/rumah-bolon-hero.webp");
+  background-position: 48% center;
+  background-size: cover;
   color: #fff4df;
-  padding-bottom: clamp(4rem, 10vw, 7rem);
+  min-height: 100svh;
+  padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
 }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-cover::before { border-color: rgb(226 190 123 / .55); border-radius: 0; inset: 1.1rem 6%; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-cover .content { background: rgb(37 23 22 / .72); border-left: 3px solid #d5aa61; padding-left: 2rem; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-cover-architecture { background: linear-gradient(135deg, transparent 0 28%, #c19a57 29% 31%, transparent 32% 68%, #c19a57 69% 71%, transparent 72%); clip-path: polygon(50% 0, 100% 29%, 87% 35%, 87% 100%, 13% 100%, 13% 35%, 0 29%); height: 19rem; opacity: .42; right: 4%; top: 18%; width: 21rem; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-cover-motif { background: repeating-linear-gradient(90deg, #d7ae66 0 2px, transparent 2px 7px, #9f352f 7px 12px); bottom: 2rem; height: .45rem; left: 6%; right: 6%; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-greeting { background: #f4eadc; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-people { background: linear-gradient(125deg, #281c1b, #85302c); color: #fff3df; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-portrait-frame { border-color: #d8b06a; border-radius: .45rem; box-shadow: 0 0 0 .28rem #8e302c, 0 0 0 .43rem #d8b06a, 0 16px 30px rgb(0 0 0 / .24); }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-portrait-frame img { border-radius: .2rem; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-countdown { background: repeating-linear-gradient(90deg, #f4eadc 0 2rem, #ead9c3 2rem 2.1rem); }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-schedule { background: #f9f1e5; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-schedule .invite-card { background: linear-gradient(90deg, #8e302c 0 .45rem, transparent .45rem); border: 0; border-bottom: 1px solid #d8c6ad; border-radius: 0; box-shadow: none; padding-left: 1.35rem; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-location { background: #2f2220; color: #fff2dc; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-gallery { background: repeating-linear-gradient(90deg, #7d2c29 0 7%, #2c1e1c 7% 14%); border-radius: .5rem; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-gallery > div { border-radius: .25rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover::before { border-color: rgb(226 190 123 / .64); border-radius: .1rem; box-shadow: inset 0 0 0 .32rem rgb(40 20 18 / .18); inset: 1.1rem 6%; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover .content { background: none; border: 0; max-width: 44rem; padding: 1.4rem 2rem; text-shadow: 0 2px 18px rgb(0 0 0 / .72); }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover .content::before { background: url("/themes/ulos-toba/ulos-woven-border.svg") center / contain no-repeat; content: ""; display: block; height: 4rem; margin: 0 auto 1rem; max-width: 38rem; opacity: .86; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover a { background: rgb(61 27 24 / .78); border-color: rgb(229 191 112 / .82); }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover-architecture,
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover-motif { background: url("/themes/ulos-toba/ulos-woven-border.svg") center / cover no-repeat; bottom: 0; height: 9rem; opacity: .24; width: 28rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover-architecture { left: -7rem; top: auto; transform: rotate(18deg); }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-cover-motif { right: -7rem; transform: rotate(-18deg); }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-greeting { background-color: #f4eadc; background-image: url("/themes/ulos-toba/ulos-woven-border.svg"); background-position: center calc(100% - 1rem); background-repeat: no-repeat; background-size: min(42rem, 94%) auto; padding-bottom: 7rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-people { background-color: #281c1b; background-image: linear-gradient(rgb(40 28 27 / .9), rgb(84 34 31 / .92)), url("/themes/ulos-toba/ulos-woven-border.svg"); background-position: center; background-size: cover, 38rem auto; color: #fff3df; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-people::after { background: url("/themes/ulos-toba/ulos-woven-border.svg") center / contain no-repeat; height: 7rem; left: 6%; opacity: .45; right: 6%; top: 0; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-portrait-frame { background: linear-gradient(145deg, #d8b06a, #9f352f 42%, #211817 76%); border: 1px solid #f0d199; border-radius: .2rem; box-shadow: 0 0 0 .28rem #8e302c, 0 0 0 .44rem #d8b06a, 0 20px 40px rgb(0 0 0 / .34); clip-path: polygon(50% 0, 100% 19%, 94% 100%, 6% 100%, 0 19%); height: 16rem; padding: 1.25rem .55rem .55rem; width: 12.4rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-portrait-frame img { border-radius: .1rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-countdown { background-color: #e8d8bd; background-image: url("/themes/ulos-toba/ulos-woven-border.svg"), radial-gradient(circle at 50% 52%, #fff9ef 0 18%, transparent 62%); background-position: center 1rem, center; background-repeat: no-repeat; background-size: min(42rem, 94%) auto, cover; color: #2c201e; padding-top: 8rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-countdown .invite-card { background: #342321; border: 1px solid #bc7a55; border-radius: .15rem; box-shadow: 7px 7px 0 rgb(159 53 47 / .2); color: #fff0d5; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-schedule { background: linear-gradient(125deg, #fbf4e8, #ead9c3); }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid #cbb89f; border-radius: 0; box-shadow: none; padding: 1.4rem .5rem 1.4rem 4rem; position: relative; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-schedule .invite-card::before { background: #8e302c; color: #f4d692; content: "◆"; display: grid; height: 2.6rem; left: .2rem; place-items: center; position: absolute; top: 1.05rem; transform: rotate(45deg); width: 2.6rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-location { background-image: linear-gradient(rgb(39 25 23 / .7), rgb(39 25 23 / .9)), url("/themes/ulos-toba/rumah-bolon-hero.webp"); background-position: center 48%; background-size: cover; color: #fff2dc; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery { background: #f3e8d7; border: 0; border-radius: 0; padding: clamp(3rem, 8vw, 6rem) 1.25rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery > .content { background: transparent; border: 0; padding: 0; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery .nusantara-gallery { background: #2c1e1d url("/themes/ulos-toba/ulos-woven-border.svg") center / 35rem auto; border: 1px solid #d1a45e; border-radius: .2rem; gap: .5rem; padding: .55rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { background-image: linear-gradient(rgb(51 27 24 / .08), rgb(51 27 24 / .28)), url("/themes/ulos-toba/rumah-bolon-hero.webp") !important; background-size: cover; border-radius: .1rem; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(1) { background-position: 28% 40%; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(2) { background-position: 78% 40%; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(3) { background-position: 50% 58%; }
 .invite[data-nusantara-template="ulos-toba"] .nusantara-rsvp,
 .invite[data-nusantara-template="ulos-toba"] .nusantara-wishes { background: #ead9c3; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-closing { background: #281b1a; color: #ffe9c9; }
-.invite[data-nusantara-template="ulos-toba"] .nusantara-closing::after { background: repeating-linear-gradient(90deg, #d7aa62 0 2px, transparent 2px 10px); bottom: 2rem; height: 2px; left: 12%; right: 12%; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-rsvp .invite-card,
+.invite[data-nusantara-template="ulos-toba"] .nusantara-wishes .invite-card { background: rgb(255 249 238 / .58); border: 0; border-bottom: 1px solid rgb(128 76 53 / .28); border-radius: 0; box-shadow: none; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-closing { background-image: linear-gradient(rgb(38 23 21 / .76), rgb(38 23 21 / .94)), url("/themes/ulos-toba/rumah-bolon-hero.webp"); background-position: center 54%; background-size: cover; color: #ffe9c9; min-height: 60vh; }
+.invite[data-nusantara-template="ulos-toba"] .nusantara-closing::after { background: url("/themes/ulos-toba/ulos-woven-border.svg") center / contain no-repeat; bottom: 1rem; height: 7rem; left: 6%; opacity: .55; right: 6%; }
 
-/* West Sumatra: quiet andesite, folded songket, and pointed roof lines. */
+/* West Sumatra: Rumah Gadang in the valley, framed by a restrained songket rhythm. */
 .invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover {
-  background:
-    radial-gradient(circle at 20% 15%, rgb(209 169 68 / .19), transparent 22%),
-    linear-gradient(160deg, transparent 0 65%, rgb(168 64 54 / .24) 65.2% 67%, transparent 67.2%),
-    #252626;
+  align-items: end;
+  background-image:
+    linear-gradient(180deg, rgb(23 21 20 / .02) 18%, rgb(25 22 20 / .12) 48%, rgb(21 18 17 / .93) 100%),
+    url("/themes/rangkiang-minang/rumah-gadang-hero.webp");
+  background-position: 43% center;
+  background-size: cover;
   color: #fff2d2;
+  min-height: 100svh;
+  padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
 }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover::before { border-color: rgb(209 169 68 / .52); border-radius: .15rem; inset: 1.25rem 8%; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover .content { background: rgb(20 21 21 / .58); border-bottom: 1px solid #d1a944; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover-architecture { background: #d1a944; clip-path: polygon(0 62%, 17% 22%, 33% 52%, 50% 5%, 67% 52%, 83% 22%, 100% 62%, 92% 59%, 78% 42%, 67% 65%, 50% 33%, 33% 65%, 22% 42%, 8% 59%); height: 12rem; opacity: .52; right: 5%; top: 18%; width: 25rem; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover-motif { border-bottom: 2px solid #a84036; border-top: 1px solid #d1a944; bottom: 2.1rem; height: .55rem; left: 10%; right: 10%; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-greeting { background: linear-gradient(135deg, #efe7d7, #faf4e9); }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-people { background: #30302f; color: #fff2d2; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-portrait-frame { border-radius: 50% 50% .4rem .4rem; clip-path: polygon(50% 0, 95% 19%, 100% 100%, 0 100%, 5% 19%); padding-top: 1.25rem; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-portrait-frame img { border-radius: 50% 50% .2rem .2rem; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-countdown { background: #d5ad4b; color: #282622; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-schedule { background: repeating-linear-gradient(135deg, #f6efe2 0 34px, #efe2cc 34px 36px); }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-schedule .invite-card { border-left: .35rem solid #a84036; box-shadow: 9px 9px 0 rgb(209 169 68 / .18); }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-location { background: #3a3937; color: #fff0cd; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-gallery { background: linear-gradient(135deg, #242525, #7d332d); clip-path: polygon(3% 0, 97% 0, 100% 8%, 100% 92%, 97% 100%, 3% 100%, 0 92%, 0 8%); }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover::before { border-color: rgb(222 183 84 / .62); border-radius: .15rem; box-shadow: inset 0 0 0 .35rem rgb(30 22 19 / .16); inset: 1.1rem 6%; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover .content { background: none; border: 0; max-width: 44rem; padding: 1.4rem 2rem; text-shadow: 0 2px 18px rgb(0 0 0 / .75); }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover .content::before { background: linear-gradient(90deg, transparent, #d7ae4e 18%, #d7ae4e 82%, transparent); content: ""; display: block; height: 1px; margin: 0 auto 2.1rem; max-width: 25rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover a { background: rgb(48 29 25 / .72); border-color: rgb(231 194 94 / .82); }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover-architecture { background-image: url("/themes/rangkiang-minang/songket-rhythm.svg"); background-size: 8rem 8rem; bottom: 0; height: 15rem; left: 0; opacity: .18; top: auto; width: 15rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover-motif { background-image: url("/themes/rangkiang-minang/songket-rhythm.svg"); background-size: 8rem 8rem; bottom: 0; height: 15rem; opacity: .18; right: 0; width: 15rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-greeting { background-color: #f5ecdb; background-image: linear-gradient(135deg, transparent 0 72%, rgb(167 62 53 / .08) 72.2% 73%, transparent 73.2%), radial-gradient(circle at 50% 0, rgb(211 170 67 / .22), transparent 42%); }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-people { background-color: #262220; background-image: linear-gradient(rgb(34 29 27 / .9), rgb(34 29 27 / .94)), url("/themes/rangkiang-minang/songket-rhythm.svg"); background-size: cover, 13rem 13rem; color: #fff0cd; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-people::after { background: linear-gradient(90deg, transparent, #d1a944, transparent); height: 1px; left: 12%; right: 12%; top: 3rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-portrait-frame { background: linear-gradient(145deg, #d7ad48, #8d322d 42%, #252221 72%); border: 1px solid #f0cc70; border-radius: 50% 50% .25rem .25rem; box-shadow: 0 0 0 .3rem #8d322d, 0 0 0 .46rem #d8b350, 0 22px 42px rgb(0 0 0 / .34); clip-path: polygon(50% 0, 63% 11%, 95% 20%, 100% 100%, 0 100%, 5% 20%, 37% 11%); height: 16rem; padding: 1.45rem .55rem .55rem; width: 12.4rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-portrait-frame img { border-radius: 46% 46% .1rem .1rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-countdown { background-color: #9f392f; background-image: linear-gradient(rgb(129 43 38 / .9), rgb(129 43 38 / .94)), url("/themes/rangkiang-minang/songket-rhythm.svg"); background-size: cover, 11rem 11rem; color: #fff1ca; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-countdown .invite-card { background: rgb(45 25 23 / .62); border: 1px solid rgb(232 196 100 / .62); border-radius: .2rem; box-shadow: 0 9px 0 rgb(52 24 22 / .18); color: #fff1ca; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-schedule { background: linear-gradient(130deg, #f9f2e5, #ead9b9); }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid rgb(124 73 43 / .28); border-radius: 0; box-shadow: none; padding: 1.5rem 1rem 1.5rem 3.75rem; position: relative; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-schedule .invite-card::before { background: #a84036; clip-path: polygon(50% 0, 100% 36%, 75% 100%, 25% 100%, 0 36%); color: #f4d777; content: "◆"; display: grid; height: 2.55rem; left: .15rem; place-items: center; position: absolute; top: 1.1rem; width: 2.75rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-location { background-image: linear-gradient(rgb(31 27 25 / .74), rgb(31 27 25 / .9)), url("/themes/rangkiang-minang/rumah-gadang-hero.webp"); background-position: center 45%; background-size: cover; color: #fff0cd; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery { background: #f4ead8; border: 0; border-radius: 0; clip-path: none; padding: clamp(3rem, 8vw, 6rem) 1.25rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery > .content { background: transparent; border: 0; padding: 0; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery .nusantara-gallery { background: #252220; border: 1px solid #d1a944; clip-path: polygon(3% 0, 97% 0, 100% 8%, 100% 92%, 97% 100%, 3% 100%, 0 92%, 0 8%); gap: .55rem; padding: .55rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { background-image: linear-gradient(rgb(31 24 22 / .08), rgb(31 24 22 / .3)), url("/themes/rangkiang-minang/rumah-gadang-hero.webp") !important; background-size: cover; border-radius: .15rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(1) { background-position: 25% 36%; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(2) { background-position: 79% 35%; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(3) { background-position: 48% 62%; }
 .invite[data-nusantara-template="rangkiang-minang"] .nusantara-rsvp,
 .invite[data-nusantara-template="rangkiang-minang"] .nusantara-wishes { background: #efe2cc; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-closing { background: #272727; color: #fff0ca; }
-.invite[data-nusantara-template="rangkiang-minang"] .nusantara-closing::after { background: linear-gradient(90deg, #a84036 0 33%, #d1a944 33% 66%, #202020 66%); bottom: 2.1rem; height: .3rem; left: calc(50% - 5rem); width: 10rem; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-rsvp .invite-card,
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-wishes .invite-card { background: rgb(255 249 237 / .58); border: 0; border-bottom: 1px solid rgb(150 86 46 / .28); border-radius: 0; box-shadow: none; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-closing { background-image: linear-gradient(rgb(28 23 21 / .76), rgb(28 23 21 / .94)), url("/themes/rangkiang-minang/rumah-gadang-hero.webp"); background-position: center 52%; background-size: cover; color: #fff0ca; min-height: 60vh; }
+.invite[data-nusantara-template="rangkiang-minang"] .nusantara-closing::after { background: url("/themes/rangkiang-minang/songket-rhythm.svg") center / 8rem 8rem; bottom: 0; height: 9rem; left: 0; opacity: .2; right: 0; }
 
-/* Riau: emerald space, brass plaques, and restrained botanical curves. */
+/* Riau: Rumah Melayu and Lancang Kuning on a river of emerald light. */
 .invite[data-nusantara-template="melayu-lancang"] .nusantara-cover {
   align-items: end;
-  background:
-    radial-gradient(circle at 85% 16%, rgb(228 208 139 / .25), transparent 25%),
-    linear-gradient(145deg, #0e342c, #17604d 62%, #103d34);
+  background-image: linear-gradient(180deg, rgb(12 49 40 / .02) 20%, rgb(12 49 40 / .12) 48%, rgb(8 42 34 / .92) 100%), url("/themes/melayu-lancang/rumah-melayu-hero.webp");
+  background-position: 58% center;
+  background-size: cover;
   color: #fff7d9;
-  padding-bottom: clamp(4rem, 10vw, 7rem);
+  min-height: 100svh;
+  padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
 }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover::before { border-color: rgb(225 201 128 / .62); border-radius: 0 7rem 0 7rem; inset: 1rem 5%; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover .content { background: rgb(12 53 44 / .5); border: 1px solid rgb(231 208 141 / .42); border-radius: 0 3rem 0 3rem; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover-architecture { border-bottom: 3px solid #d8bd72; border-radius: 0 0 70% 70%; height: 7rem; opacity: .52; right: 4%; top: 30%; transform: rotate(-5deg); width: 24rem; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover-motif { border: 1px solid rgb(228 208 139 / .5); border-left: 0; border-radius: 0 100% 100% 0; height: 20rem; left: 0; top: 10%; width: 9rem; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-greeting { background: radial-gradient(circle at 0 50%, rgb(201 163 67 / .2), transparent 32%), #f6f0df; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-people { background: linear-gradient(135deg, #e5d39e, #f9f3e4 50%, #dce8dc); }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-people::after { border: 1px solid rgb(22 72 61 / .15); border-radius: 50%; height: 22rem; right: -10rem; top: 10%; width: 22rem; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-portrait-frame { border-radius: 50% 50% 44% 56% / 52% 48% 52% 48%; box-shadow: 0 0 0 .4rem #f4ead1, 0 0 0 .5rem #c7a041, 0 18px 35px rgb(19 73 61 / .18); }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-countdown { background: #174b3f; color: #fff3ca; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-schedule { background: #f8f2e4; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-schedule .invite-card { background: #fffaf0; border: 1px solid #c6a34d; border-radius: .2rem 1.8rem .2rem 1.8rem; box-shadow: none; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-location { background: linear-gradient(130deg, #dce8dc, #f5ebd0); }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-gallery { background: #16483d; border-radius: 0 3rem 0 3rem; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-gallery > div { border-radius: 0 2rem 0 2rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover::before { border-color: rgb(226 200 125 / .68); border-radius: 0 7rem 0 7rem; box-shadow: inset 0 0 0 .32rem rgb(9 50 40 / .16); inset: 1rem 5%; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover .content { background: none; border: 0; max-width: 44rem; padding: 1.4rem 2rem; text-shadow: 0 2px 18px rgb(0 0 0 / .66); }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover .content::before { background: url("/themes/melayu-lancang/melayu-sulur-border.svg") center / contain no-repeat; content: ""; display: block; height: 4.5rem; margin: 0 auto .6rem; max-width: 37rem; opacity: .9; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover a { background: rgb(9 58 46 / .78); border-color: rgb(234 208 135 / .84); }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover-architecture { background: url("/themes/melayu-lancang/melayu-sulur-border.svg") center / contain no-repeat; height: 7rem; left: 4%; opacity: .54; right: 4%; top: .6rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-cover-motif { background: linear-gradient(90deg, transparent, #dfc16f 20%, #dfc16f 80%, transparent); bottom: 1.5rem; height: 1px; left: 12%; right: 12%; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-greeting { background-color: #f6f0df; background-image: url("/themes/melayu-lancang/melayu-sulur-border.svg"), radial-gradient(circle at 50% 0, rgb(201 163 67 / .2), transparent 42%); background-position: center calc(100% - 1rem), center; background-repeat: no-repeat; background-size: min(42rem, 94%) auto, cover; padding-bottom: 7rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-people { background-color: #174b3f; background-image: linear-gradient(rgb(18 72 59 / .9), rgb(13 57 47 / .94)), url("/themes/melayu-lancang/melayu-sulur-border.svg"); background-position: center; background-size: cover, 42rem auto; color: #fff3ca; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-people::after { background: url("/themes/melayu-lancang/melayu-sulur-border.svg") center / contain no-repeat; height: 8rem; left: 7%; opacity: .5; right: 7%; top: .3rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-portrait-frame { background: linear-gradient(145deg, #e1c26c, #17604d 48%, #fff0bd); border: 1px solid #f0d88f; border-radius: .2rem 4rem .2rem 4rem; box-shadow: 0 0 0 .34rem #f4ead1, 0 0 0 .5rem #c7a041, 0 20px 40px rgb(5 36 29 / .32); height: 16rem; padding: .55rem; width: 12.25rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-portrait-frame img { border-radius: .1rem 3.5rem .1rem 3.5rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-countdown { background-color: #d9bd6b; background-image: url("/themes/melayu-lancang/melayu-sulur-border.svg"), radial-gradient(circle at 50% 55%, #f9efcf 0 20%, transparent 65%); background-position: center 1rem, center; background-repeat: no-repeat; background-size: min(42rem, 94%) auto, cover; color: #143d33; padding-top: 8rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-countdown .invite-card { background: #174b3f; border: 1px solid #d9bd6b; border-radius: 0 1.5rem 0 1.5rem; box-shadow: none; color: #fff3ca; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-schedule { background: linear-gradient(125deg, #fbf5e5, #e7d7a9); }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid rgb(126 102 45 / .3); border-radius: 0; box-shadow: none; padding: 1.5rem .5rem 1.5rem 4rem; position: relative; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-schedule .invite-card::before { border: 1px solid #b4923c; border-radius: 0 1rem 0 1rem; color: #9a782d; content: "◆"; display: grid; height: 2.55rem; left: .2rem; place-items: center; position: absolute; top: 1.1rem; width: 2.55rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-location { background-image: linear-gradient(rgb(9 57 46 / .68), rgb(9 57 46 / .9)), url("/themes/melayu-lancang/rumah-melayu-hero.webp"); background-position: center 50%; background-size: cover; color: #fff4cf; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery { background: #f4ecd8; border: 0; border-radius: 0; padding: clamp(3rem, 8vw, 6rem) 1.25rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery > .content { background: transparent; border: 0; padding: 0; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery { background: #16483d; border: 1px solid #d0ae55; border-radius: 0 4rem 0 4rem; gap: .55rem; padding: .55rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { background-image: linear-gradient(rgb(13 67 54 / .08), rgb(13 67 54 / .28)), url("/themes/melayu-lancang/rumah-melayu-hero.webp") !important; background-size: cover; border-radius: 0 3.3rem 0 3.3rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(1) { background-position: 74% 40%; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(2) { background-position: 18% 43%; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(3) { background-position: 50% 60%; border-radius: 0 1.5rem 0 1.5rem; }
 .invite[data-nusantara-template="melayu-lancang"] .nusantara-rsvp,
 .invite[data-nusantara-template="melayu-lancang"] .nusantara-wishes { background: #eadcb4; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-closing { background: #123a31; color: #fff4cf; }
-.invite[data-nusantara-template="melayu-lancang"] .nusantara-closing::after { border: 1px solid rgb(223 199 126 / .5); border-radius: 50%; bottom: -8rem; height: 14rem; right: -3rem; width: 14rem; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-rsvp .invite-card,
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-wishes .invite-card { background: rgb(255 250 238 / .55); border: 0; border-bottom: 1px solid rgb(127 101 39 / .28); border-radius: 0; box-shadow: none; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-closing { background-image: linear-gradient(rgb(9 53 43 / .74), rgb(9 53 43 / .94)), url("/themes/melayu-lancang/rumah-melayu-hero.webp"); background-position: center 54%; background-size: cover; color: #fff4cf; min-height: 60vh; }
+.invite[data-nusantara-template="melayu-lancang"] .nusantara-closing::after { background: url("/themes/melayu-lancang/melayu-sulur-border.svg") center / contain no-repeat; bottom: 1rem; height: 8rem; left: 7%; opacity: .58; right: 7%; }
 
-/* Riau Islands: tidal lines, sand, and an airy sea-blue rhythm. */
+/* Riau Islands: a lancang under sail, tidal chart lines, and blue-hour water. */
 .invite[data-nusantara-template="selat-melayu"] .nusantara-cover {
-  background:
-    radial-gradient(ellipse at 50% 110%, transparent 0 38%, rgb(216 199 165 / .26) 38.5% 40%, transparent 40.5% 48%, rgb(216 199 165 / .15) 48.5% 50%, transparent 50.5%),
-    linear-gradient(155deg, #102d40, #285d6d 60%, #173f52);
+  align-items: end;
+  background-image: linear-gradient(180deg, rgb(12 35 49 / .02) 18%, rgb(12 35 49 / .12) 48%, rgb(8 29 43 / .9) 100%), url("/themes/selat-melayu/selat-lancang-hero.webp");
+  background-position: 48% center;
+  background-size: cover;
   color: #fff4dc;
+  min-height: 100svh;
+  padding-bottom: clamp(3.5rem, 8vw, 5.5rem);
 }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-cover::before { border-color: rgb(218 199 161 / .52); border-radius: 45% 45% 1rem 1rem; inset: 1.2rem 7%; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-cover .content { background: rgb(13 43 59 / .52); border-radius: 45% 45% .8rem .8rem; padding-top: 3.5rem; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-cover-architecture { background: rgb(221 203 165 / .55); clip-path: polygon(48% 0, 50% 72%, 100% 76%, 51% 81%, 50% 100%, 47% 81%, 0 78%, 47% 72%); height: 17rem; right: 8%; top: 16%; width: 17rem; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-cover-motif { border-bottom: 1px solid rgb(223 207 174 / .55); border-radius: 50%; bottom: 3rem; height: 4rem; left: 5%; right: 5%; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-greeting { background: linear-gradient(180deg, #ecede5, #faf5e9); }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-people { background: linear-gradient(145deg, #c9dadd, #f7f1e4 52%, #dccba9); }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-portrait-frame { border-radius: 48% 52% 43% 57% / 58% 43% 57% 42%; box-shadow: 0 0 0 .4rem #f5eddd, 0 0 0 .5rem #b69555, 0 16px 32px rgb(24 56 74 / .18); }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-countdown { background: #193b4d; color: #fff2d7; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-schedule { background: #f5f0e5; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid #b9aa8c; border-radius: 50%; box-shadow: none; padding-bottom: 1.6rem; text-align: center; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-location { background: radial-gradient(ellipse at 50% 100%, #d7c7a6, transparent 58%), #e4ebea; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-gallery { background: #17384a; border-radius: 4rem 4rem 1rem 1rem; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-gallery > div { border-radius: 3rem 3rem .65rem .65rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-cover::before { border-color: rgb(218 199 161 / .62); border-radius: 45% 45% .3rem .3rem; box-shadow: inset 0 0 0 .3rem rgb(8 36 52 / .16); inset: 1.1rem 7%; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-cover .content { background: none; border: 0; max-width: 44rem; padding: 1.4rem 2rem; text-shadow: 0 2px 18px rgb(0 0 0 / .7); }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-cover .content::before { background: url("/themes/selat-melayu/tidal-chart.svg") center / contain no-repeat; content: ""; display: block; height: 4.8rem; margin: 0 auto .4rem; max-width: 38rem; opacity: .88; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-cover a { background: rgb(12 49 67 / .8); border-color: rgb(221 201 158 / .84); }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-cover-architecture { background: url("/themes/selat-melayu/tidal-chart.svg") center / contain no-repeat; height: 7rem; left: 4%; opacity: .44; right: 4%; top: .7rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-cover-motif { background: linear-gradient(90deg, transparent, #c8ad72 20%, #c8ad72 80%, transparent); bottom: 1.5rem; height: 1px; left: 10%; right: 10%; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-greeting { background-color: #edf0eb; background-image: url("/themes/selat-melayu/tidal-chart.svg"), linear-gradient(180deg, #e3e9e8, #faf5e9); background-position: center calc(100% - 1rem), center; background-repeat: no-repeat; background-size: min(42rem, 94%) auto, cover; padding-bottom: 7rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-people { background-color: #17384a; background-image: linear-gradient(rgb(23 56 74 / .9), rgb(14 45 63 / .94)), url("/themes/selat-melayu/tidal-chart.svg"); background-position: center; background-size: cover, 42rem auto; color: #fff2d7; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-people::after { background: url("/themes/selat-melayu/tidal-chart.svg") center / contain no-repeat; height: 8rem; left: 6%; opacity: .45; right: 6%; top: .25rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-portrait-frame { background: linear-gradient(145deg, #d8c7a5, #285d6d 48%, #f5ead2); border: 1px solid #ead8af; border-radius: .3rem; box-shadow: 0 0 0 .35rem #153447, 0 0 0 .5rem #b69555, 0 20px 40px rgb(5 27 39 / .32); clip-path: polygon(50% 0, 92% 28%, 100% 100%, 0 100%, 8% 28%); height: 16rem; padding: 1.6rem .55rem .55rem; width: 12.25rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-portrait-frame img { border-radius: .15rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-countdown { background-color: #d9ceb7; background-image: url("/themes/selat-melayu/tidal-chart.svg"), radial-gradient(ellipse at 50% 55%, #fff8e9 0 20%, transparent 66%); background-position: center 1rem, center; background-repeat: no-repeat; background-size: min(42rem, 94%) auto, cover; color: #17384a; padding-top: 8rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-countdown .invite-card { background: #17384a; border: 1px solid #b69555; border-radius: 3rem 3rem .3rem .3rem; box-shadow: none; color: #fff2d7; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-schedule { background: linear-gradient(180deg, #faf6ed, #e3e8e5); }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid #b9aa8c; border-radius: 0; box-shadow: none; padding: 1.5rem .5rem 1.5rem 4rem; position: relative; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-schedule .invite-card::before { border: 1px solid #9b895f; border-radius: 50%; color: #8e7b50; content: "◇"; display: grid; height: 2.55rem; left: .2rem; place-items: center; position: absolute; top: 1.1rem; width: 2.55rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-location { background-image: linear-gradient(rgb(13 44 61 / .66), rgb(13 44 61 / .88)), url("/themes/selat-melayu/selat-lancang-hero.webp"); background-position: center 50%; background-size: cover; color: #fff1d3; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery { background: #edf0eb; border: 0; border-radius: 0; padding: clamp(3rem, 8vw, 6rem) 1.25rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery > .content { background: transparent; border: 0; padding: 0; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery { background: #17384a; border: 1px solid #b69555; border-radius: 5rem 5rem .4rem .4rem; gap: .55rem; padding: .55rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { background-image: linear-gradient(rgb(13 45 62 / .06), rgb(13 45 62 / .26)), url("/themes/selat-melayu/selat-lancang-hero.webp") !important; background-size: cover; border-radius: 4rem 4rem .2rem .2rem; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(1) { background-position: 35% 40%; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(2) { background-position: 78% 40%; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div:nth-child(3) { background-position: 50% 62%; border-radius: .2rem; }
 .invite[data-nusantara-template="selat-melayu"] .nusantara-rsvp,
 .invite[data-nusantara-template="selat-melayu"] .nusantara-wishes { background: #ded1b7; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-closing { background: #153447; color: #fff1d3; }
-.invite[data-nusantara-template="selat-melayu"] .nusantara-closing::after { border: 1px solid rgb(216 199 165 / .55); border-radius: 50%; bottom: -6rem; height: 10rem; left: 8%; right: 8%; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-rsvp .invite-card,
+.invite[data-nusantara-template="selat-melayu"] .nusantara-wishes .invite-card { background: rgb(255 250 238 / .55); border: 0; border-bottom: 1px solid rgb(103 90 63 / .28); border-radius: 0; box-shadow: none; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-closing { background-image: linear-gradient(rgb(13 45 62 / .72), rgb(13 45 62 / .94)), url("/themes/selat-melayu/selat-lancang-hero.webp"); background-position: center 55%; background-size: cover; color: #fff1d3; min-height: 60vh; }
+.invite[data-nusantara-template="selat-melayu"] .nusantara-closing::after { background: url("/themes/selat-melayu/tidal-chart.svg") center / contain no-repeat; bottom: 1rem; height: 8rem; left: 6%; opacity: .55; right: 6%; }
 
 @keyframes nusantara-float { 50% { transform: translateY(-6px); } }
 
 @media (max-width: 640px) {
   .invite.nusantara .nusantara-cover { min-height: 100svh; padding-bottom: 3rem; }
   .invite.nusantara .nusantara-cover .content { margin-inline: .15rem; padding: 1.25rem; }
-  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover .content { border-radius: 5rem 5rem .7rem .7rem; padding-top: 3rem; }
   .invite.nusantara .nusantara-cover-architecture { opacity: .22; right: -7rem; transform: scale(.78); }
   .invite.nusantara .nusantara-portrait-frame { height: 13rem; width: 10.5rem; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover { background-position: 60% center; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover .content { padding: 1rem .65rem; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover .content::before { height: 3.8rem; margin-bottom: .1rem; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover-architecture { left: 2%; opacity: .48; right: 2%; top: .55rem; transform: none; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-cover-motif { left: 14%; right: 14%; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery { border-radius: 4rem 4rem .3rem .3rem; }
+  .invite[data-nusantara-template="serambi-meukuta"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { border-radius: 3.5rem 3.5rem .1rem .1rem; }
+  .invite[data-nusantara-template="ulos-toba"] .nusantara-cover { background-position: 47% center; }
+  .invite[data-nusantara-template="ulos-toba"] .nusantara-cover .content { padding: 1rem .65rem; }
+  .invite[data-nusantara-template="ulos-toba"] .nusantara-cover .content::before { height: 3rem; margin-bottom: .4rem; }
+  .invite[data-nusantara-template="ulos-toba"] .nusantara-cover-architecture { bottom: 0; height: 6rem; left: -4rem; opacity: .18; right: auto; top: auto; transform: rotate(16deg); width: 18rem; }
+  .invite[data-nusantara-template="ulos-toba"] .nusantara-cover-motif { bottom: 0; height: 6rem; opacity: .18; right: -4rem; transform: rotate(-16deg); width: 18rem; }
+  .invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover { background-position: 39% center; }
+  .invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover .content { padding: 1rem .65rem; }
+  .invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover-architecture { bottom: 0; height: 10rem; left: 0; opacity: .14; right: auto; top: auto; transform: none; width: 10rem; }
+  .invite[data-nusantara-template="rangkiang-minang"] .nusantara-cover-motif { height: 10rem; opacity: .14; width: 10rem; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-cover { background-position: 64% center; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-cover .content { padding: 1rem .65rem; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-cover .content::before { height: 3.5rem; margin-bottom: .1rem; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-cover-architecture { left: 1%; opacity: .42; right: 1%; top: .4rem; transform: none; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-cover-motif { left: 14%; right: 14%; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery { border-radius: 0 3rem 0 3rem; }
+  .invite[data-nusantara-template="melayu-lancang"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { border-radius: 0 2.4rem 0 2.4rem; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-cover { background-position: 46% center; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-cover .content { padding: 1rem .65rem; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-cover .content::before { height: 3.8rem; margin-bottom: .1rem; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-cover-architecture { left: 1%; opacity: .4; right: 1%; top: .5rem; transform: none; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-cover-motif { left: 14%; right: 14%; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery { border-radius: 3.5rem 3.5rem .3rem .3rem; }
+  .invite[data-nusantara-template="selat-melayu"] .nusantara-panel.nusantara-gallery .nusantara-gallery > div { border-radius: 2.8rem 2.8rem .1rem .1rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -887,6 +993,8 @@ body:has(.dashboard-app) > footer { display: none; }
 .builder-height-minimum-viewport { min-height: 100svh; }
 .builder-page-background { background-image: var(--builder-background-image); background-position: var(--builder-background-x) var(--builder-background-y); background-size: var(--builder-background-size); filter: blur(var(--builder-background-blur, 0)); inset: 0; position: absolute; z-index: -3; }
 .builder-page-overlay { background: var(--builder-overlay-color); inset: 0; opacity: var(--builder-overlay-opacity); pointer-events: none; position: absolute; z-index: -2; }
+.builder-personal-greeting { align-items: center; backdrop-filter: blur(14px); background: rgb(255 250 238 / .78); border: 1px solid rgb(255 255 255 / .58); border-radius: 999px; box-shadow: 0 12px 32px rgb(28 35 31 / .16); color: #173d38; display: flex; flex-direction: column; font-size: .72rem; left: 50%; letter-spacing: .09em; max-width: min(88vw, 30rem); padding: .7rem 1.5rem; position: absolute; text-align: center; text-transform: uppercase; top: clamp(1.4rem, 5vw, 3.5rem); transform: translateX(-50%); z-index: 4; }
+.builder-personal-greeting strong { font-family: var(--builder-font-serif); font-size: clamp(1rem, 2.5vw, 1.35rem); letter-spacing: 0; margin-top: .18rem; text-transform: none; }
 .builder-page-blocks { align-content: center; display: grid; gap: var(--builder-page-gap); justify-items: center; min-height: inherit; padding: clamp(3rem, 8vw, 7rem) clamp(1rem, 6vw, 4rem); position: relative; width: 100%; }
 .builder-page-blocks[data-layout="airy"] { gap: calc(var(--builder-page-gap) * 1.55); padding-block: clamp(5rem, 12vw, 10rem); }
 .builder-page-blocks[data-layout="editorial"] { align-content: end; justify-items: start; padding-bottom: clamp(5rem, 12vw, 9rem); }

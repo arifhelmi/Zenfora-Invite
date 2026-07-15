@@ -5,11 +5,11 @@ export function ThemeCard({ theme }: { theme: Theme }) {
   const isSunda = theme.slug === "sunda-parahyangan";
   const isJawa = theme.slug === "jawa-wayang-heritage";
   const nusantaraPreviews: Record<string, { background: string; label: string; textClass: string }> = {
-    "serambi-meukuta": { background: "radial-gradient(circle at 50% 120%, #c7a55b 0 18%, transparent 18.5%), linear-gradient(145deg, #0e2d26, #245c4b)", label: "ACEH", textClass: "text-[#fff6dd]" },
-    "ulos-toba": { background: "repeating-linear-gradient(90deg, transparent 0 12px, rgba(216,176,106,.22) 12px 14px), linear-gradient(135deg, #2d1c1b, #8e2f2c)", label: "SUMATERA UTARA", textClass: "text-[#fff4e1]" },
-    "rangkiang-minang": { background: "linear-gradient(160deg, transparent 55%, rgba(209,169,68,.35) 55.5% 58%, transparent 58.5%), linear-gradient(135deg, #1e2020, #71302b)", label: "SUMATERA BARAT", textClass: "text-[#fff2cf]" },
-    "melayu-lancang": { background: "radial-gradient(circle at 100% 0, rgba(228,208,139,.35), transparent 38%), linear-gradient(135deg, #123b33, #20745c)", label: "RIAU", textClass: "text-[#fff7d6]" },
-    "selat-melayu": { background: "radial-gradient(ellipse at 50% 120%, transparent 0 37%, rgba(216,199,165,.35) 38% 40%, transparent 41%), linear-gradient(150deg, #102d40, #2f6676)", label: "KEPULAUAN RIAU", textClass: "text-[#fff4d9]" },
+    "serambi-meukuta": { background: "linear-gradient(180deg, rgba(8,30,24,.08), rgba(7,27,22,.72)), url('/themes/serambi-meukuta/rumoh-aceh-hero.webp')", label: "ACEH", textClass: "text-[#fff6dd]" },
+    "ulos-toba": { background: "linear-gradient(180deg, rgba(40,22,20,.05), rgba(35,21,19,.78)), url('/themes/ulos-toba/rumah-bolon-hero.webp')", label: "SUMATERA UTARA", textClass: "text-[#fff4e1]" },
+    "rangkiang-minang": { background: "linear-gradient(180deg, rgba(25,22,20,.06), rgba(21,18,17,.76)), url('/themes/rangkiang-minang/rumah-gadang-hero.webp')", label: "SUMATERA BARAT", textClass: "text-[#fff2cf]" },
+    "melayu-lancang": { background: "linear-gradient(180deg, rgba(10,49,40,.04), rgba(8,42,34,.78)), url('/themes/melayu-lancang/rumah-melayu-hero.webp')", label: "RIAU", textClass: "text-[#fff7d6]" },
+    "selat-melayu": { background: "linear-gradient(180deg, rgba(12,35,49,.04), rgba(8,29,43,.76)), url('/themes/selat-melayu/selat-lancang-hero.webp')", label: "KEPULAUAN RIAU", textClass: "text-[#fff4d9]" },
   };
   const nusantaraPreview = nusantaraPreviews[theme.slug];
   const backgroundImage = isSunda

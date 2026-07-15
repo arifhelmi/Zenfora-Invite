@@ -16,11 +16,11 @@ const themes = [
   ["khitan-celebration", "Khitan Celebration", "islamic", ["green", "blue"], false, false, "Nuansa ramah anak untuk syukuran khitan.", { background: "#f1fbf2", primary: "#1d4e42", accent: "#287c9c", text: "#1d4e42" }],
   ["corporate-elegant", "Corporate Elegant", "corporate", ["navy", "gray"], true, true, "Tegas dan profesional untuk agenda, pembicara, dan tamu korporat.", { background: "#f5f7fa", primary: "#102b50", accent: "#52677f", text: "#14233a" }],
   ["sunda-parahyangan", "Sunda Parahyangan", "sunda", ["indigo", "gold", "sage"], true, true, "Rumah Julang Ngapak, wayang golek, dan kujang dalam lanskap Parahyangan yang hangat.", { background: "#f6edda", primary: "#182742", accent: "#bd8a37", text: "#2d2115" }],
-  ["serambi-meukuta", "Serambi Meukuta", "nusantara", ["emerald", "cream", "gold"], true, true, "Komposisi lengkung yang tenang dalam hijau tua, gading, dan emas lembut.", { background: "#f4efe3", surface: "#fffaf0", primary: "#153d32", secondary: "#d8c392", accent: "#c7a55b", text: "#20332c" }],
-  ["ulos-toba", "Ulos Toba", "nusantara", ["red", "charcoal", "cream"], true, true, "Ritme tenun geometris dan siluet atap yang tegas dalam palet merah arang.", { background: "#efe7da", surface: "#fffaf1", primary: "#321f1d", secondary: "#9f352f", accent: "#d8b06a", text: "#2e2421" }],
-  ["rangkiang-minang", "Rangkiang Minang", "nusantara", ["red", "gold", "charcoal"], true, false, "Garis gonjong minimal dan lapisan songket yang ditenangkan oleh latar batu gelap.", { background: "#eee9df", surface: "#fffaf0", primary: "#272626", secondary: "#a84036", accent: "#d1a944", text: "#292723" }],
-  ["melayu-lancang", "Melayu Lancang", "nusantara", ["emerald", "gold", "ivory"], true, false, "Ruang hijau zamrud dengan sulur abstrak dan aksen kuningan yang ringan.", { background: "#f4f0e3", surface: "#fffcf3", primary: "#16483d", secondary: "#e4d08b", accent: "#c9a343", text: "#20352e" }],
-  ["selat-melayu", "Selat Melayu", "nusantara", ["navy", "sand", "gold"], true, false, "Ritme pasang-surut dalam biru laut, pasir, dan emas kusam.", { background: "#eef0ea", surface: "#fffaf0", primary: "#18384a", secondary: "#d8c7a5", accent: "#b69555", text: "#22333a" }]
+  ["serambi-meukuta", "Serambi Meukuta", "nusantara", ["emerald", "cream", "gold"], true, true, "Rumoh Aceh dalam taman tropis keemasan, dipadukan ritme ukiran kayu dan hijau zamrud yang teduh.", { background: "#f4efe3", surface: "#fffaf0", primary: "#153d32", secondary: "#d8c392", accent: "#c7a55b", text: "#20332c" }],
+  ["ulos-toba", "Ulos Toba", "nusantara", ["red", "charcoal", "cream"], true, true, "Rumah Bolon di atas lanskap Danau Toba, dibingkai merah ulos, arang, krem, dan kuningan hangat.", { background: "#efe7da", surface: "#fffaf1", primary: "#321f1d", secondary: "#9f352f", accent: "#d8b06a", text: "#2e2421" }],
+  ["rangkiang-minang", "Rangkiang Minang", "nusantara", ["red", "gold", "charcoal"], true, true, "Rumah Gadang dan rangkiang di lembah Minangkabau, dibingkai marun, arang, dan kilau songket yang elegan.", { background: "#eee9df", surface: "#fffaf0", primary: "#272626", secondary: "#a84036", accent: "#d1a944", text: "#292723" }],
+  ["melayu-lancang", "Melayu Lancang", "nusantara", ["emerald", "gold", "ivory"], true, true, "Rumah panggung Melayu dan Lancang Kuning di tepian sungai, berpadu dengan zamrud, gading, dan sulur emas.", { background: "#f4f0e3", surface: "#fffcf3", primary: "#16483d", secondary: "#e4d08b", accent: "#c9a343", text: "#20352e" }],
+  ["selat-melayu", "Selat Melayu", "nusantara", ["navy", "sand", "gold"], true, true, "Lancang berlayar di antara pulau dan balai pesisir, dibingkai biru selat, pasir, serta garis peta laut.", { background: "#eef0ea", surface: "#fffaf0", primary: "#18384a", secondary: "#d8c7a5", accent: "#b69555", text: "#22333a" }]
 ] as const;
 
 async function main() {
@@ -32,13 +32,25 @@ async function main() {
   await Promise.all(eventTypes.map(([slug, name]) => prisma.eventType.upsert({ where: { slug }, update: { name, isActive: true }, create: { slug, name, description: `Undangan digital untuk ${name.toLowerCase()}.` } })));
   const categories = await Promise.all([["heritage", "Heritage"], ["sunda", "Sunda"], ["nusantara", "Nusantara"], ["minimal", "Minimal"], ["romantic", "Romantic"], ["islamic", "Islamic"], ["playful", "Playful"], ["corporate", "Corporate"], ["formal", "Formal"]].map(([slug, name]) => prisma.themeCategory.upsert({ where: { slug }, update: { name }, create: { slug, name } })));
   const categoryBySlug = Object.fromEntries(categories.map(category => [category.slug, category]));
+  const nusantaraAssets: Record<string, { hero: string; motif: string }> = {
+    "serambi-meukuta": { hero: "/themes/serambi-meukuta/rumoh-aceh-hero.webp", motif: "/themes/serambi-meukuta/aceh-floral-border.svg" },
+    "ulos-toba": { hero: "/themes/ulos-toba/rumah-bolon-hero.webp", motif: "/themes/ulos-toba/ulos-woven-border.svg" },
+    "rangkiang-minang": { hero: "/themes/rangkiang-minang/rumah-gadang-hero.webp", motif: "/themes/rangkiang-minang/songket-rhythm.svg" },
+    "melayu-lancang": { hero: "/themes/melayu-lancang/rumah-melayu-hero.webp", motif: "/themes/melayu-lancang/melayu-sulur-border.svg" },
+    "selat-melayu": { hero: "/themes/selat-melayu/selat-lancang-hero.webp", motif: "/themes/selat-melayu/tidal-chart.svg" },
+  };
   for (const [slug, name, style, colors, isPremium, isFeatured, description, colorTokens] of themes) {
-    const theme = await prisma.theme.upsert({ where: { slug }, update: { name, style, colors: [...colors], isPremium, isFeatured, isActive: true, description, categoryId: categoryBySlug[style]?.id }, create: { slug, name, style, colors: [...colors], isPremium, isFeatured, description, categoryId: categoryBySlug[style]?.id } });
+    const previewUrl = nusantaraAssets[slug]?.hero;
+    const theme = await prisma.theme.upsert({ where: { slug }, update: { name, style, colors: [...colors], isPremium, isFeatured, isActive: true, description, previewUrl, categoryId: categoryBySlug[style]?.id }, create: { slug, name, style, colors: [...colors], isPremium, isFeatured, description, previewUrl, categoryId: categoryBySlug[style]?.id } });
     await prisma.themeVersion.upsert({ where: { themeId_version: { themeId: theme.id, version: 1 } }, update: { manifest: manifest(colorTokens, style), isCurrent: true }, create: { themeId: theme.id, version: 1, manifest: manifest(colorTokens, style), isCurrent: true } });
     const asset = slug === "sunda-parahyangan"
       ? { key: "hero", path: "/themes/sunda-parahyangan/hero.png", source: "Zenvora original AI-assisted illustration", license: "Proprietary original, internal use" }
-      : style !== "nusantara" ? { key: "ornament", path: `/themes/${slug}/ornament.svg`, source: "Zenvora original SVG", license: "Proprietary original, internal use" } : null;
+      : previewUrl
+        ? { key: "hero", path: previewUrl, source: "Zenvora original AI-assisted illustration", license: "Proprietary original, internal use" }
+        : style !== "nusantara" ? { key: "ornament", path: `/themes/${slug}/ornament.svg`, source: "Zenvora original SVG", license: "Proprietary original, internal use" } : null;
     if (asset) await prisma.themeAsset.upsert({ where: { themeId_key: { themeId: theme.id, key: asset.key } }, update: asset, create: { themeId: theme.id, ...asset } });
+    const motifPath = nusantaraAssets[slug]?.motif;
+    if (motifPath) await prisma.themeAsset.upsert({ where: { themeId_key: { themeId: theme.id, key: "motif" } }, update: { path: motifPath, source: "Zenvora original SVG", license: "Proprietary original, internal use" }, create: { themeId: theme.id, key: "motif", path: motifPath, source: "Zenvora original SVG", license: "Proprietary original, internal use" } });
     if (slug === "sunda-parahyangan") await prisma.themeAsset.upsert({ where: { themeId_key: { themeId: theme.id, key: "hero-portrait" } }, update: { path: "/themes/sunda-parahyangan/hero-portrait.png", source: "Zenvora original AI-assisted illustration", license: "Proprietary original, internal use" }, create: { themeId: theme.id, key: "hero-portrait", path: "/themes/sunda-parahyangan/hero-portrait.png", source: "Zenvora original AI-assisted illustration", license: "Proprietary original, internal use" } });
   }
   const packageSeeds: { slug: string; name: string; description: string; price: number; guestLimit: number; activeDays: number; features: string[]; aiMonthlyCredits: number; pageVersionLimit: number }[] = [

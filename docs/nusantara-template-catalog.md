@@ -38,11 +38,11 @@ Perbedaan tiap provinsi terjadi pada palet, ritme ruang, motif, framing foto, se
 
 | Status | Provinsi | Template / slug | Arah visual dan identitas | Signature UI |
 | --- | --- | --- | --- | --- |
-| [x] | Aceh | `serambi-meukuta` | Hijau tua, gading, emas lembut; lengkung Pintu Aceh, ukiran Gayo sebagai tekstur tipis. | Bingkai foto lengkung simetris; garis emas perlahan menyala pada cover. |
-| [x] | Sumatera Utara | `ulos-toba` | Merah ulos, hitam arang, krem; ritme tenun dan siluet Rumah Bolon. | Panel jadwal seperti pita tenun horizontal, tanpa kartu tebal. |
-| [x] | Sumatera Barat | `rangkiang-minang` | Marawa merah–kuning–hitam yang ditenangkan dengan latar batu andesit; atap gonjong sebagai garis hero. | Foto dalam frame gonjong minimal; transisi section seperti lipatan songket. |
-| [x] | Riau | `melayu-lancang` | Hijau zamrud, kuning diraja, putih tulang; sulur Melayu dan siluet Lancang Kuning. | Ornamen sulur bergerak perlahan dari sudut, CTA seperti plakat kuningan tipis. |
-| [x] | Kepulauan Riau | `selat-melayu` | Biru laut, pasir, emas kusam; gelombang Selat dan detail tanjak Melayu. | Timeline acara memakai garis pasang-surut, bukan kotak. |
+| [x] | Aceh | `serambi-meukuta` | Ilustrasi orisinal Rumoh Aceh di taman tropis; hijau tua, kayu hangat, gading, dan emas lembut. | Hero sinematik, bingkai foto berlengkung, galeri lanskap, dan garis ukiran floral yang tenang. |
+| [x] | Sumatera Utara | `ulos-toba` | Ilustrasi orisinal Rumah Bolon dan Danau Toba; merah ulos, arang, krem, dan kuningan hangat. | Hero sinematik, frame atap runcing, jadwal berpita tenun, dan galeri lanskap Toba. |
+| [x] | Sumatera Barat | `rangkiang-minang` | Ilustrasi orisinal Rumah Gadang dan rangkiang; marun, arang, emas songket, dan lanskap Bukit Barisan. | Hero sinematik, frame gonjong, galeri lanskap, dan lapisan geometri songket. |
+| [x] | Riau | `melayu-lancang` | Ilustrasi orisinal rumah panggung Melayu dan Lancang Kuning; hijau zamrud, kuning diraja, dan putih tulang. | Hero tepian sungai, frame sudut sulur, jadwal berplakat tipis, dan galeri zamrud. |
+| [x] | Kepulauan Riau | `selat-melayu` | Ilustrasi orisinal lancang berlayar, pulau granit, dan balai pesisir; biru selat, pasir, dan emas kusam. | Hero maritim, frame berbentuk layar, garis pasang-surut, dan galeri panorama selat. |
 | [ ] | Jambi | `angso-duo` | Cokelat tanah, emas, nila; batik Jambi dan siluet Angso Duo yang sangat kecil. | Frame foto oval berlapis motif batik; galeri seperti lembar kain. |
 | [ ] | Sumatera Selatan | `songket-limas` | Marun, hitam, emas; pola songket dan geometri Rumah Limas. | Border foto bertingkat seperti limas; counter tampil sebagai ukiran angka emas. |
 | [ ] | Kepulauan Bangka Belitung | `cual-timah` | Biru granit, putih pasir, tembaga; tenun cual dan tekstur batu pesisir. | Galeri berbingkai mineral; dekorasi titik timah beranimasi sangat pelan. |
