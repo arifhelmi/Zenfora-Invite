@@ -3,7 +3,8 @@ import type { Theme, ThemeVersion } from "@prisma/client";
 import { Countdown } from "@/components/invitation/countdown";
 import { RsvpForm, WishForm } from "@/components/invitation/guest-forms";
 import { InvitationMusicPlayer } from "@/components/invitation/music-player";
-import { InvitationScrollEffects } from "@/components/invitation/sunda-scroll-effects";
+import { InvitationScrollEffects } from "@/components/invitation/scroll-effects";
+import { getCulturalTheme } from "@/lib/cultural-themes";
 import { formatDate } from "@/lib/utils";
 import { resolveManifest, themeStyles } from "@/lib/theme-engine";
 
@@ -26,26 +27,26 @@ function getMusic(details: unknown) {
 
 const contentKeys = ["greeting", "people", "countdown", "schedule", "location", "gallery", "rsvp", "wishes", "closing"] as const;
 const defaultSections = ["cover", ...contentKeys];
-const nusantaraThemes = new Set(["serambi-meukuta", "ulos-toba", "rangkiang-minang", "melayu-lancang", "selat-melayu"]);
 
 export function InvitationRenderer({ theme, event, guest, isPreview = false }: { theme: Theme & { versions: ThemeVersion[] }; event: RenderEvent; guest?: { token: string; name: string; seats: number }; isPreview?: boolean }) {
   const manifest = resolveManifest(theme);
   const tokens = manifest.tokens.colors;
-  const isSunda = theme.slug === "sunda-parahyangan";
-  const isJawa = theme.slug === "jawa-wayang-heritage";
-  const isNusantara = nusantaraThemes.has(theme.slug);
-  const isCultural = isSunda || isJawa || isNusantara;
+  const culturalTheme = getCulturalTheme(theme.slug);
+  const isSunda = culturalTheme?.family === "sunda";
+  const isJawa = culturalTheme?.family === "jawa";
+  const isNusantara = culturalTheme?.family === "nusantara";
+  const isCultural = Boolean(culturalTheme);
   const music = getMusic(event.details);
   const panelClass = (name: string, className = "section") => `${className}${isSunda ? ` sunda-panel sunda-${name}` : ""}${isJawa ? ` jawa-panel jawa-${name}` : ""}${isNusantara ? ` nusantara-panel nusantara-${name}` : ""}`;
   const revealProps = isCultural ? { "data-invitation-reveal": "true", "data-sunda-reveal": isSunda ? "true" : undefined } : {};
-  const ornament = isJawa ? "✦ Jawa ✦" : null;
+  const ornament = culturalTheme?.ornament;
   const orderedSections = (event.sections.length ? event.sections : defaultSections.map((key, position) => ({ key, enabled: true, position })))
     .filter((section) => section.enabled && section.key !== "cover" && contentKeys.includes(section.key as typeof contentKeys[number]))
     .sort((left, right) => (left.position ?? 0) - (right.position ?? 0));
   const scheduleItems = event.schedules.length ? event.schedules : event.startsAt ? [{ title: "Acara utama", startsAt: event.startsAt, location: event.locationName }] : [];
 
   const renderSection = (key: string) => {
-    if (key === "greeting") return <section {...revealProps} className={panelClass("greeting", "section text-center")}><div className="content"><p className="eyebrow">Salam hangat</p>{isJawa && <p className="jawa-kawih">Sugeng rawuh. Mugi pitedah lan panuwun becik ndherek madhangi dina istimewa punika.</p>}<p className="mt-4 text-xl leading-8">{event.description || "Dengan penuh kebahagiaan, kami mengundang Anda untuk hadir dan berbagi doa baik."}</p></div></section>;
+    if (key === "greeting") return <section {...revealProps} className={panelClass("greeting", "section text-center")}><div className="content"><p className="eyebrow">Salam hangat</p>{culturalTheme?.greeting && <p className={isJawa ? "jawa-kawih" : "cultural-greeting"}>{culturalTheme.greeting}</p>}<p className="mt-4 text-xl leading-8">{event.description || "Dengan penuh kebahagiaan, kami mengundang Anda untuk hadir dan berbagi doa baik."}</p></div></section>;
     if (key === "people") return <section {...revealProps} className={panelClass("people")}><div className="content text-center"><p className="eyebrow">Penyelenggara</p><div className="mt-8 grid gap-10 sm:grid-cols-2">{event.people.length ? event.people.map((person) => <article className="invite-person" key={`${person.name}-${person.role}`}><div className={`portrait-frame${isSunda ? " sunda-portrait-frame" : isJawa ? " jawa-portrait-frame" : isNusantara ? " nusantara-portrait-frame" : ""}`}>{person.photoUrl ? <img src={person.photoUrl} alt={`Foto ${person.name}`} /> : <span aria-hidden="true">{person.name.trim().slice(0, 1).toUpperCase()}</span>}</div><p className="mt-5 font-serif text-2xl">{person.name}</p><p className="mt-2 text-sm opacity-75">{person.role}</p>{person.bio && <p className="mt-3 text-sm">{person.bio}</p>}</article>) : isPreview ? <div className="invite-card sm:col-span-2"><p className="font-semibold">Nama penyelenggara akan tampil di sini</p><p className="mt-2 text-sm opacity-75">Tambahkan pasangan, keluarga, atau panitia pada detail acara.</p></div> : null}</div></div></section>;
     if (key === "countdown") return <section {...revealProps} className={panelClass("countdown", "section text-center")}><div className="content"><p className="eyebrow">Menuju hari istimewa</p>{event.startsAt ? <Countdown date={event.startsAt} /> : isPreview ? <div className="invite-card mt-6"><p>Tentukan tanggal dan waktu acara agar hitung mundur aktif.</p></div> : null}</div></section>;
     if (key === "schedule") return <section {...revealProps} className={panelClass("schedule")}><div className="content"><p className="eyebrow text-center">Rangkaian acara</p><div className="mt-6 grid gap-3">{scheduleItems.length ? scheduleItems.map((schedule) => <div className="invite-card" key={`${schedule.title}-${schedule.startsAt.toISOString()}`}><strong>{schedule.title}</strong><p className="mt-1 text-sm opacity-75">{formatDate(schedule.startsAt)}{schedule.location ? ` · ${schedule.location}` : ""}</p></div>) : isPreview ? <div className="invite-card"><strong>Jadwal acara</strong><p className="mt-1 text-sm opacity-75">Tambahkan tanggal atau rangkaian acara untuk mengisi bagian ini.</p></div> : null}</div></div></section>;
@@ -57,10 +58,19 @@ export function InvitationRenderer({ theme, event, guest, isPreview = false }: {
     return null;
   };
 
-  return <div className={`invite ${themeStyles[theme.slug] ?? "minimal"}`} data-sunda-template={isSunda ? "true" : undefined} data-jawa-template={isJawa ? "true" : undefined} data-nusantara-template={isNusantara ? theme.slug : undefined} style={{ "--invite-background": tokens.background, "--invite-surface": tokens.surface, "--invite-primary": tokens.primary, "--invite-accent": tokens.accent, "--invite-text": tokens.text, "--invite-radius": manifest.tokens.radius.card } as React.CSSProperties}>
+  return <div
+    className={`invite ${themeStyles[theme.slug] ?? "minimal"}`}
+    data-cultural-family={culturalTheme?.family}
+    data-cultural-motion={culturalTheme?.motion}
+    data-cultural-theme={culturalTheme?.slug}
+    data-jawa-template={isJawa ? "true" : undefined}
+    data-nusantara-template={isNusantara ? theme.slug : undefined}
+    data-sunda-template={isSunda ? "true" : undefined}
+    style={{ "--invite-background": tokens.background, "--invite-surface": tokens.surface, "--invite-primary": tokens.primary, "--invite-accent": tokens.accent, "--invite-text": tokens.text, "--invite-radius": manifest.tokens.radius.card } as React.CSSProperties}
+  >
     {music && <InvitationMusicPlayer src={music.url} title={music.title} />}
     {isCultural && <InvitationScrollEffects />}
-    <section {...revealProps} className={panelClass("cover", "cover section")}>{isSunda && <><span aria-hidden="true" className="sunda-cover-wayang-motion sunda-cover-wayang-motion-left"><span className="sunda-cover-wayang sunda-cover-wayang-left" /></span><span aria-hidden="true" className="sunda-cover-wayang-motion sunda-cover-wayang-motion-right"><span className="sunda-cover-wayang sunda-cover-wayang-right" /></span></>}{isJawa && <><span aria-hidden="true" className="jawa-cover-wayang-motion jawa-cover-wayang-left"><span className="jawa-cover-wayang jawa-cover-wayang-inward-left" /></span><span aria-hidden="true" className="jawa-cover-wayang-motion jawa-cover-wayang-right"><span className="jawa-cover-wayang jawa-cover-wayang-inward-right" /></span></>}{isNusantara && <><span aria-hidden="true" className="nusantara-cover-motif" /><span aria-hidden="true" className="nusantara-cover-architecture" /></>}<div className="content">{ornament && <div className="ornament" aria-hidden="true">{ornament}</div>}<p className="text-sm uppercase tracking-[.22em]">{isSunda || isNusantara ? "Undangan Pernikahan" : `Undangan ${theme.style}`}</p><h1 className="mt-6 font-serif text-5xl leading-tight sm:text-6xl">{event.title}</h1>{guest && <p className="mt-6 text-lg">Kepada Yth. <strong>{guest.name}</strong></p>}<p className="mt-8 text-lg">{event.startsAt ? formatDate(event.startsAt) : "Tanggal akan diumumkan"}</p><a className="mt-8 inline-flex rounded-lg border border-current px-4 py-2 text-sm font-bold" href="#detail">Lihat detail acara</a></div></section>
+    <section {...revealProps} className={panelClass("cover", "cover section")}>{isSunda && <><span aria-hidden="true" className="sunda-cover-wayang-motion sunda-cover-wayang-motion-left"><span className="sunda-cover-wayang sunda-cover-wayang-left" /></span><span aria-hidden="true" className="sunda-cover-wayang-motion sunda-cover-wayang-motion-right"><span className="sunda-cover-wayang sunda-cover-wayang-right" /></span></>}{isJawa && <><span aria-hidden="true" className="jawa-cover-wayang-motion jawa-cover-wayang-left"><span className="jawa-cover-wayang jawa-cover-wayang-inward-left" /></span><span aria-hidden="true" className="jawa-cover-wayang-motion jawa-cover-wayang-right"><span className="jawa-cover-wayang jawa-cover-wayang-inward-right" /></span></>}{isNusantara && <><span aria-hidden="true" className="nusantara-cover-motif" /><span aria-hidden="true" className="nusantara-cover-architecture" /></>}<div className="content">{ornament && <div className="ornament" aria-hidden="true">{ornament}</div>}<p className="text-sm uppercase tracking-[.22em]">{culturalTheme?.coverLabel ?? `Undangan ${theme.style}`}</p><h1 className="mt-6 font-serif text-5xl leading-tight sm:text-6xl">{event.title}</h1>{guest && <p className="mt-6 text-lg">Kepada Yth. <strong>{guest.name}</strong></p>}<p className="mt-8 text-lg">{event.startsAt ? formatDate(event.startsAt) : "Tanggal akan diumumkan"}</p><a className="mt-8 inline-flex rounded-lg border border-current px-4 py-2 text-sm font-bold" href="#detail">Lihat detail acara</a></div></section>
     <div id="detail">{orderedSections.map((section) => <Fragment key={section.key}>{renderSection(section.key)}</Fragment>)}</div>
   </div>;
 }

@@ -6,6 +6,25 @@ Dokumen ini adalah arahan desain untuk koleksi undangan digital bertema Nusantar
 
 > Catatan cakupan: permintaan awal menyebut 34 provinsi. Administrasi Indonesia saat ini terdiri dari 38 provinsi; katalog ini mencakup 34 provinsi terdahulu beserta empat provinsi baru di Tanah Papua agar roadmap tidak perlu diulang. Rujukan jumlah provinsi: [Indonesia.go.id](https://indonesia.go.id/kategori/editorial/9053/ajang-menguatkan-sinergi-pusat-dan-daerah-di-lembah-tidar?lang=1).
 
+## Fase aktif: tepat 10 provinsi
+
+Implementasi produk saat ini dibatasi pada sepuluh provinsi agar setiap tema sempat melalui evaluasi visual, performa, responsivitas, dan aksesibilitas sebelum koleksi diperluas. Semua tema memakai satu registry, tetapi memiliki komposisi section, bingkai foto, palet, dan motion signature yang berbeda.
+
+| Provinsi | Slug | Identitas utama | Motion signature |
+| --- | --- | --- | --- |
+| Jawa Barat | `sunda-parahyangan` | Parahyangan, Julang Ngapak, wayang golek | Wayang masuk dari kedua sisi lalu bergoyang ringan saat idle. |
+| Jawa Tengah | `jawa-wayang-heritage` | Batik parang, kelir, wayang Jawa | Dua wayang saling menghadap, masuk seperti membuka panggung, lalu sway pelan. |
+| Aceh | `serambi-meukuta` | Rumoh Aceh dan ukiran floral | Ukiran bernapas dua piksel dan garis emas terbuka satu kali. |
+| Sumatera Utara | `ulos-toba` | Rumah Bolon, Danau Toba, ritme ulos | Dua pita tenun menegang berlawanan tanpa mengubah rotasinya. |
+| Sumatera Barat | `rangkiang-minang` | Rumah Gadang, rangkiang, songket | Sudut songket terangkat halus secara bergantian. |
+| Riau | `melayu-lancang` | Rumah panggung, Lancang Kuning, sulur | Sulur membuka dari tengah lalu mengalun horizontal. |
+| Kepulauan Riau | `selat-melayu` | Lancang, pulau pesisir, garis pasang | Garis pasang-surut bergerak pelan seperti arus. |
+| Bali | `bali-candi-bentar` | Candi Bentar, meru, batu vulkanik | Dua siluet gerbang membuka sekali dan kemudian diam. |
+| Kalimantan Selatan | `sasirangan-banjar` | Bubungan Tinggi, sungai, sasirangan | Ritme titik sasirangan mengalir kecil seperti riak. |
+| Sulawesi Selatan | `pinisi-tongkonan` | Pinisi, lengkung Tongkonan, kayu jati | Garis layar berayun kurang dari setengah derajat. |
+
+Semua animasi dekoratif berhenti ketika elemen keluar viewport dan menjadi statis pada `prefers-reduced-motion`. Informasi tidak pernah bergantung pada animasi.
+
 ## Prinsip UI/UX lintas template
 
 1. Mobile-first, portrait, dan setiap section menjadi satu bab cerita saat pengguna scroll.
