@@ -61,7 +61,7 @@ export function InvitationRenderer({ theme, event, guest, isPreview = false }: {
   return <div
     className={`invite ${themeStyles[theme.slug] ?? "minimal"}`}
     data-cultural-cadence={culturalTheme?.visual?.cadence}
-    data-cultural-edition={culturalTheme && !culturalTheme.preview.src ? "regional" : culturalTheme ? "flagship" : undefined}
+    data-cultural-edition={culturalTheme?.visual ? culturalTheme.preview.src ? "signature" : "regional" : culturalTheme ? "flagship" : undefined}
     data-cultural-family={culturalTheme?.family}
     data-cultural-frame={culturalTheme?.visual?.frame}
     data-cultural-motion={culturalTheme?.motion}

@@ -310,9 +310,10 @@ type RegionalThemeSeed = {
   description: string;
   tokens: Record<string, string>;
   visual: NonNullable<CulturalThemeDefinition["visual"]>;
+  hero?: string;
 };
 
-const regionalThemeSeeds = [
+const regionalThemeSeeds: readonly RegionalThemeSeed[] = [
   {
     slug: "angso-duo",
     name: "Angso Duo Jambi",
@@ -324,6 +325,7 @@ const regionalThemeSeeds = [
     description: "Batik Jambi, lengkung Angso Duo, dan warna tanah yang hangat dalam komposisi modern.",
     tokens: { background: "#f4eddf", surface: "#fffaf1", primary: "#342b43", secondary: "#9a673c", accent: "#c7a35b", text: "#302924" },
     visual: { region: "sumatra", pattern: "waves", frame: "oval", cadence: "drift" },
+    hero: "/themes/angso-duo/hero.webp",
   },
   {
     slug: "songket-limas",
@@ -336,6 +338,7 @@ const regionalThemeSeeds = [
     description: "Geometri Rumah Limas dan ritme songket Palembang dalam marun, hitam, dan emas tua.",
     tokens: { background: "#f2e9dc", surface: "#fff8ec", primary: "#351b22", secondary: "#7e2f37", accent: "#d0a650", text: "#2b2020" },
     visual: { region: "sumatra", pattern: "steps", frame: "arch", cadence: "rise" },
+    hero: "/themes/songket-limas/hero.webp",
   },
   {
     slug: "cual-timah",
@@ -348,6 +351,7 @@ const regionalThemeSeeds = [
     description: "Tenun cual, granit pesisir, dan kilau tembaga dalam palet laut yang jernih.",
     tokens: { background: "#edf0ec", surface: "#fffaf2", primary: "#21465a", secondary: "#c3a57d", accent: "#b97745", text: "#27343a" },
     visual: { region: "sumatra", pattern: "islands", frame: "diamond", cadence: "glint" },
+    hero: "/themes/cual-timah/hero.webp",
   },
   {
     slug: "besurek-rafflesia",
@@ -360,6 +364,7 @@ const regionalThemeSeeds = [
     description: "Kain besurek abstrak dan satu aksen Rafflesia yang tenang, tanpa memenuhi seluruh bidang.",
     tokens: { background: "#f1e8dd", surface: "#fff9ef", primary: "#29283f", secondary: "#9b4d3e", accent: "#c58b5d", text: "#2c2830" },
     visual: { region: "sumatra", pattern: "petals", frame: "round", cadence: "breathe" },
+    hero: "/themes/besurek-rafflesia/hero.webp",
   },
   {
     slug: "siger-saibatin",
@@ -372,6 +377,7 @@ const regionalThemeSeeds = [
     description: "Siluet Siger dan garis tapis dibawa ke tampilan merah bata, emas, dan arang yang berkelas.",
     tokens: { background: "#f2e8dc", surface: "#fff8ed", primary: "#322522", secondary: "#9b4236", accent: "#d0a64e", text: "#302521" },
     visual: { region: "sumatra", pattern: "peaks", frame: "shield", cadence: "rise" },
+    hero: "/themes/siger-saibatin/hero.webp",
   },
   {
     slug: "betawi-gigi-balang",
@@ -384,6 +390,7 @@ const regionalThemeSeeds = [
     description: "Rumah Betawi dan ritme gigi balang dalam hijau tua, jingga bata, dan krem hangat.",
     tokens: { background: "#f4eddd", surface: "#fffaf0", primary: "#164638", secondary: "#c35d36", accent: "#d4a756", text: "#26342d" },
     visual: { region: "jawa", pattern: "steps", frame: "soft-square", cadence: "sway" },
+    hero: "/themes/betawi-gigi-balang/hero.webp",
   },
   {
     slug: "jogja-kawung",
@@ -396,6 +403,7 @@ const regionalThemeSeeds = [
     description: "Kawung, Tugu Jogja, dan ritme keraton dalam ruang lapang berwarna nila dan putih kapur.",
     tokens: { background: "#f2eee4", surface: "#fffaf1", primary: "#282d45", secondary: "#d7cfbb", accent: "#a98345", text: "#292b36" },
     visual: { region: "jawa", pattern: "petals", frame: "round", cadence: "breathe" },
+    hero: "/themes/jogja-kawung/hero.webp",
   },
   {
     slug: "majapahit-terra",
@@ -408,6 +416,7 @@ const regionalThemeSeeds = [
     description: "Bata merah, relief bertingkat, dan siluet gapura Majapahit dalam suasana terakota yang teduh.",
     tokens: { background: "#eee5d8", surface: "#fff8ed", primary: "#26382f", secondary: "#a95039", accent: "#c58c53", text: "#302722" },
     visual: { region: "jawa", pattern: "steps", frame: "arch", cadence: "rise" },
+    hero: "/themes/majapahit-terra/hero.webp",
   },
   {
     slug: "baduy-sederhana",
@@ -420,6 +429,7 @@ const regionalThemeSeeds = [
     description: "Tenun Baduy diterjemahkan secara sederhana melalui garis nila, hitam, dan ruang putih gading.",
     tokens: { background: "#f1eee5", surface: "#fffdf6", primary: "#202426", secondary: "#293e54", accent: "#b39b70", text: "#292b2b" },
     visual: { region: "jawa", pattern: "weave", frame: "soft-square", cadence: "drift" },
+    hero: "/themes/baduy-sederhana/hero.webp",
   },
   {
     slug: "sasak-lumbung",
@@ -432,6 +442,7 @@ const regionalThemeSeeds = [
     description: "Lengkung lumbung Sasak dan jalur songket dalam cokelat jerami, merah tenun, dan hitam.",
     tokens: { background: "#f1e8d8", surface: "#fff9ed", primary: "#342d27", secondary: "#973e36", accent: "#c79b55", text: "#302923" },
     visual: { region: "nusa-tenggara", pattern: "weave", frame: "arch", cadence: "breathe" },
+    hero: "/themes/sasak-lumbung/hero.webp",
   },
   {
     slug: "tenun-flobamora",
@@ -444,6 +455,7 @@ const regionalThemeSeeds = [
     description: "Tenun ikat dan kontur kepulauan dipadukan dalam tanah liat, nila, dan gading.",
     tokens: { background: "#f0e6d9", surface: "#fff8ec", primary: "#28364d", secondary: "#a84f3d", accent: "#c99a5a", text: "#302a29" },
     visual: { region: "nusa-tenggara", pattern: "islands", frame: "diamond", cadence: "drift" },
+    hero: "/themes/tenun-flobamora/hero.webp",
   },
   {
     slug: "kapuas-rumah-panjang",
@@ -456,6 +468,7 @@ const regionalThemeSeeds = [
     description: "Aliran Kapuas, Rumah Panjang, dan aksen rotan dalam hijau hutan yang dalam.",
     tokens: { background: "#e9ece2", surface: "#fbf8ed", primary: "#173b32", secondary: "#3f5b4c", accent: "#c49b58", text: "#25332d" },
     visual: { region: "kalimantan", pattern: "waves", frame: "oval", cadence: "ripple" },
+    hero: "/themes/kapuas-rumah-panjang/hero.webp",
   },
   {
     slug: "betang-borneo",
@@ -468,6 +481,7 @@ const regionalThemeSeeds = [
     description: "Rumah Betang dan struktur kayu diolah menjadi garis vertikal hijau lumut dan tanah merah.",
     tokens: { background: "#ece9dc", surface: "#fff9ef", primary: "#2c4032", secondary: "#914b3a", accent: "#bd9455", text: "#2c3029" },
     visual: { region: "kalimantan", pattern: "wood", frame: "soft-square", cadence: "rise" },
+    hero: "/themes/betang-borneo/hero.webp",
   },
   {
     slug: "lamin-mahakam",
@@ -480,6 +494,7 @@ const regionalThemeSeeds = [
     description: "Rumah Lamin dan arus Mahakam dalam biru sungai, hitam kayu, dan madu hangat.",
     tokens: { background: "#e8ece8", surface: "#fff9ee", primary: "#193d4a", secondary: "#564238", accent: "#c8994e", text: "#26343a" },
     visual: { region: "kalimantan", pattern: "waves", frame: "shield", cadence: "ripple" },
+    hero: "/themes/lamin-mahakam/hero.webp",
   },
   {
     slug: "tidung-perbatasan",
@@ -492,6 +507,7 @@ const regionalThemeSeeds = [
     description: "Lanskap pesisir dan jalinan serat Tidung dalam biru malam, hijau rimba, dan pasir.",
     tokens: { background: "#e9ede7", surface: "#fff9ee", primary: "#162f3d", secondary: "#275142", accent: "#c7a46b", text: "#26343a" },
     visual: { region: "kalimantan", pattern: "petals", frame: "sail", cadence: "sway" },
+    hero: "/themes/tidung-perbatasan/hero.webp",
   },
   {
     slug: "minahasa-wale",
@@ -504,6 +520,7 @@ const regionalThemeSeeds = [
     description: "Rumah Walewangko dan kontur danau dalam biru segar, putih, dan aksen emas.",
     tokens: { background: "#eaf0ed", surface: "#fffdf6", primary: "#205068", secondary: "#8eb4b6", accent: "#c4a25e", text: "#29373d" },
     visual: { region: "sulawesi", pattern: "waves", frame: "arch", cadence: "ripple" },
+    hero: "/themes/minahasa-wale/hero.webp",
   },
   {
     slug: "karawo-hulondalo",
@@ -516,6 +533,7 @@ const regionalThemeSeeds = [
     description: "Sulaman Karawo yang ringan menjadi aksen sudut pada palet biru langit, emas, dan putih.",
     tokens: { background: "#edf2ee", surface: "#fffdf7", primary: "#28536b", secondary: "#9dc1c6", accent: "#c9a451", text: "#2d3940" },
     visual: { region: "sulawesi", pattern: "weave", frame: "diamond", cadence: "glint" },
+    hero: "/themes/karawo-hulondalo/hero.webp",
   },
   {
     slug: "tambi-donggala",
@@ -528,6 +546,7 @@ const regionalThemeSeeds = [
     description: "Atap Rumah Tambi dan jalur tenun Donggala dalam cokelat kopi, nila, dan gading.",
     tokens: { background: "#eee7dc", surface: "#fff9ef", primary: "#302c3f", secondary: "#654536", accent: "#c49a5e", text: "#2e2928" },
     visual: { region: "sulawesi", pattern: "peaks", frame: "shield", cadence: "rise" },
+    hero: "/themes/tambi-donggala/hero.webp",
   },
   {
     slug: "mandar-sandeq",
@@ -540,6 +559,7 @@ const regionalThemeSeeds = [
     description: "Perahu Sandeq dan garis layar dalam biru laut, putih, dan merah tenun Mandar.",
     tokens: { background: "#e9efec", surface: "#fffdf5", primary: "#183f55", secondary: "#9a463d", accent: "#c49a5d", text: "#27363d" },
     visual: { region: "sulawesi", pattern: "waves", frame: "sail", cadence: "sway" },
+    hero: "/themes/mandar-sandeq/hero.webp",
   },
   {
     slug: "buton-malige",
@@ -552,6 +572,7 @@ const regionalThemeSeeds = [
     description: "Rumah Malige dan tenun Buton hadir lewat lapisan kunyit, nila, dan abu batu.",
     tokens: { background: "#f0eadc", surface: "#fffaf0", primary: "#29344a", secondary: "#aa7336", accent: "#c99d4d", text: "#2d302f" },
     visual: { region: "sulawesi", pattern: "steps", frame: "arch", cadence: "rise" },
+    hero: "/themes/buton-malige/hero.webp",
   },
   {
     slug: "baileo-rempah",
@@ -564,6 +585,7 @@ const regionalThemeSeeds = [
     description: "Rumah Baileo dan aksen daun pala dalam biru laut, cokelat rempah, dan krem.",
     tokens: { background: "#ebeee8", surface: "#fffaf0", primary: "#1b4755", secondary: "#7c543d", accent: "#c39a60", text: "#29363a" },
     visual: { region: "maluku", pattern: "petals", frame: "oval", cadence: "drift" },
+    hero: "/themes/baileo-rempah/hero.webp",
   },
   {
     slug: "kie-hibualamo",
@@ -576,6 +598,7 @@ const regionalThemeSeeds = [
     description: "Gunung Kie dan rumah Hibualamo dibingkai oranye senja, arang, dan garis horizon emas.",
     tokens: { background: "#f0e7dc", surface: "#fff9ee", primary: "#303034", secondary: "#b45b3e", accent: "#c99b50", text: "#312c2b" },
     visual: { region: "maluku", pattern: "peaks", frame: "round", cadence: "breathe" },
+    hero: "/themes/kie-hibualamo/hero.webp",
   },
   {
     slug: "cenderawasih-pesisir",
@@ -588,6 +611,7 @@ const regionalThemeSeeds = [
     description: "Laguna, hutan, dan siluet pesisir yang organik tanpa menyalin motif sakral.",
     tokens: { background: "#e7eee7", surface: "#fffaf0", primary: "#174a54", secondary: "#2f604d", accent: "#c5a56d", text: "#273936" },
     visual: { region: "papua", pattern: "petals", frame: "oval", cadence: "sway" },
+    hero: "/themes/cenderawasih-pesisir/hero.webp",
   },
   {
     slug: "sentani-danau",
@@ -600,6 +624,7 @@ const regionalThemeSeeds = [
     description: "Ritme air Danau Sentani dan panorama terbuka dalam biru, abu batu, dan kuning tanah.",
     tokens: { background: "#e8eeeb", surface: "#fffaf1", primary: "#1c4b5c", secondary: "#747a73", accent: "#c49a4e", text: "#29383d" },
     visual: { region: "papua", pattern: "waves", frame: "round", cadence: "ripple" },
+    hero: "/themes/sentani-danau/hero.webp",
   },
   {
     slug: "asmat-selatan",
@@ -609,9 +634,10 @@ const regionalThemeSeeds = [
     coverLabel: "Pernikahan Papua Selatan",
     ornament: "Papua Selatan · Asmat",
     colors: ["red-earth", "black-wood", "ivory"],
-    description: "Tekstur kayu dan garis ukir abstrak yang terukur, tanpa memakai objek ritual sebagai dekorasi.",
+    description: "Tekstur kayu abstrak dan ritme tiang rumah Jew yang tenang, tanpa memakai objek ritual sebagai dekorasi.",
     tokens: { background: "#efe6d9", surface: "#fff9ef", primary: "#2d2926", secondary: "#94483a", accent: "#be8d5a", text: "#302a25" },
     visual: { region: "papua", pattern: "wood", frame: "shield", cadence: "rise" },
+    hero: "/themes/asmat-selatan/hero.webp",
   },
   {
     slug: "kamoro-pegunungan",
@@ -649,7 +675,7 @@ const regionalThemeSeeds = [
     tokens: { background: "#e6eeeb", surface: "#fffdf5", primary: "#16475e", secondary: "#2e685c", accent: "#c8a86c", text: "#26383e" },
     visual: { region: "papua", pattern: "islands", frame: "sail", cadence: "ripple" },
   },
-] as const satisfies readonly RegionalThemeSeed[];
+];
 
 const regionalCulturalThemes: CulturalThemeDefinition[] = regionalThemeSeeds.map((theme) => ({
   ...theme,
@@ -660,10 +686,12 @@ const regionalCulturalThemes: CulturalThemeDefinition[] = regionalThemeSeeds.map
   isPremium: true,
   isFeatured: false,
   preview: {
+    src: theme.hero,
     gradient: `linear-gradient(145deg, ${theme.tokens.primary}, ${theme.tokens.secondary} 58%, ${theme.tokens.background})`,
     textClass: "text-white",
+    objectPosition: "center",
   },
-  assets: {},
+  assets: (theme.hero ? { hero: theme.hero } : {}) as Readonly<Record<string, string>>,
 }));
 
 export const culturalThemes: readonly CulturalThemeDefinition[] = [
