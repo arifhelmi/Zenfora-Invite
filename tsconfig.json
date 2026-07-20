@@ -17,5 +17,5 @@
     "paths": { "@/*": ["./*"] }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", ".openai", ".wrangler", "dist", "worker", "db", "drizzle.config.ts"]
+  "exclude": ["node_modules", ".openai", ".wrangler", "dist", "worker", "db", "examples", "drizzle.config.ts"]
 }
