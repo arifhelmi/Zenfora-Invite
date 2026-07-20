@@ -60,13 +60,18 @@ export function InvitationRenderer({ theme, event, guest, isPreview = false }: {
 
   return <div
     className={`invite ${themeStyles[theme.slug] ?? "minimal"}`}
+    data-cultural-cadence={culturalTheme?.visual?.cadence}
+    data-cultural-edition={culturalTheme && !culturalTheme.preview.src ? "regional" : culturalTheme ? "flagship" : undefined}
     data-cultural-family={culturalTheme?.family}
+    data-cultural-frame={culturalTheme?.visual?.frame}
     data-cultural-motion={culturalTheme?.motion}
+    data-cultural-pattern={culturalTheme?.visual?.pattern}
+    data-cultural-region={culturalTheme?.visual?.region}
     data-cultural-theme={culturalTheme?.slug}
     data-jawa-template={isJawa ? "true" : undefined}
     data-nusantara-template={isNusantara ? theme.slug : undefined}
     data-sunda-template={isSunda ? "true" : undefined}
-    style={{ "--invite-background": tokens.background, "--invite-surface": tokens.surface, "--invite-primary": tokens.primary, "--invite-accent": tokens.accent, "--invite-text": tokens.text, "--invite-radius": manifest.tokens.radius.card } as React.CSSProperties}
+    style={{ "--invite-background": tokens.background, "--invite-surface": tokens.surface, "--invite-primary": tokens.primary, "--invite-secondary": tokens.secondary ?? tokens.accent, "--invite-accent": tokens.accent, "--invite-text": tokens.text, "--invite-radius": manifest.tokens.radius.card } as React.CSSProperties}
   >
     {music && <InvitationMusicPlayer src={music.url} title={music.title} />}
     {isCultural && <InvitationScrollEffects />}

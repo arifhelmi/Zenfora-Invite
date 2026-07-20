@@ -26,8 +26,18 @@ export function ThemeCard({ theme }: { theme: Theme }) {
     ?? "◌ ◈ ◌";
 
   return <article className="card overflow-hidden">
-    <div className={`relative h-44 overflow-hidden p-5 ${previewClass}`}>
-      {culturalTheme && <>
+    <div
+      className={`cultural-theme-card-preview relative h-44 overflow-hidden p-5 ${previewClass}`}
+      data-cultural-frame={culturalTheme?.visual?.frame}
+      data-cultural-pattern={culturalTheme?.visual?.pattern}
+      style={culturalTheme ? {
+        "--preview-primary": culturalTheme.tokens.primary,
+        "--preview-secondary": culturalTheme.tokens.secondary ?? culturalTheme.tokens.accent,
+        "--preview-accent": culturalTheme.tokens.accent,
+        background: culturalTheme.preview.gradient,
+      } as React.CSSProperties : undefined}
+    >
+      {culturalTheme?.preview.src && <>
         <img
           alt={`Pratinjau template ${culturalTheme.name} dari ${culturalTheme.province}`}
           className="absolute inset-0 h-full w-full object-cover"
@@ -42,8 +52,9 @@ export function ThemeCard({ theme }: { theme: Theme }) {
           style={{ background: culturalTheme.preview.gradient }}
         />
       </>}
+      {culturalTheme?.visual && <span aria-hidden="true" className="cultural-preview-landmark" />}
       <div className="relative z-10">
-        <p className="text-xs font-bold uppercase tracking-[.18em] opacity-75">{theme.style}</p>
+        <p className="text-xs font-bold uppercase tracking-[.18em] opacity-75">{culturalTheme?.province ?? theme.style}</p>
         <div className="mt-8 text-2xl font-semibold tracking-[.08em]">{ornament}</div>
       </div>
     </div>

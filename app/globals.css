@@ -992,6 +992,168 @@ body:has(.dashboard-app) > footer { display: none; }
   .invite[data-cultural-theme] [data-invitation-reveal] > .content { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
+/* Attractive motion pass: first five cultural templates. */
+.invite[data-cultural-theme] .portrait-frame {
+  transform-origin: 50% 82%;
+  transition: filter .45s ease, transform .65s cubic-bezier(.2,.7,.2,1);
+}
+.invite[data-cultural-theme] .is-visible .portrait-frame {
+  filter: saturate(1.04);
+  transform: translateY(-4px);
+}
+.invite[data-cultural-theme] .nusantara-gallery > div,
+.invite[data-cultural-theme] .sunda-gallery > div,
+.invite[data-cultural-theme] .jawa-gallery > div {
+  overflow: hidden;
+  position: relative;
+}
+.invite[data-cultural-theme] .nusantara-gallery > div::after,
+.invite[data-cultural-theme] .sunda-gallery > div::after,
+.invite[data-cultural-theme] .jawa-gallery > div::after {
+  background: linear-gradient(110deg, transparent 15%, rgb(255 244 210 / .28) 45%, transparent 72%);
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-120%);
+}
+.invite[data-cultural-theme] .is-motion-active .nusantara-gallery > div::after,
+.invite[data-cultural-theme] .is-motion-active .sunda-gallery > div::after,
+.invite[data-cultural-theme] .is-motion-active .jawa-gallery > div::after {
+  animation: cultural-gallery-sheen 4.8s ease-in-out .35s infinite;
+  opacity: 1;
+}
+.invite[data-cultural-theme] .is-motion-active .portrait-frame {
+  animation: cultural-frame-breathe 5.8s ease-in-out infinite;
+}
+.invite[data-cultural-motion="golek-sway"] .sunda-panel.is-motion-active:not(.cover)::before {
+  animation: sunda-side-idle-left 6.8s ease-in-out infinite;
+}
+.invite[data-cultural-motion="golek-sway"] .sunda-panel.is-motion-active:not(.cover)::after {
+  animation: sunda-side-idle-right 6.8s ease-in-out .35s infinite;
+}
+.invite[data-cultural-motion="kulit-sway"] .jawa-panel.is-motion-active:not(.cover)::before {
+  animation: jawa-side-idle-left 7.4s ease-in-out infinite;
+}
+.invite[data-cultural-motion="kulit-sway"] .jawa-panel.is-motion-active:not(.cover)::after {
+  animation: jawa-side-idle-right 7.4s ease-in-out .3s infinite;
+}
+.invite[data-cultural-motion="aceh-carving"] .nusantara-cover-architecture,
+.invite[data-cultural-motion="aceh-carving"] .nusantara-people::after,
+.invite[data-cultural-motion="aceh-carving"] .nusantara-closing::after {
+  transform-origin: center;
+}
+.invite[data-cultural-motion="aceh-carving"] .is-motion-active .nusantara-cover-architecture,
+.invite[data-cultural-motion="aceh-carving"] .nusantara-people.is-motion-active::after,
+.invite[data-cultural-motion="aceh-carving"] .nusantara-closing.is-motion-active::after {
+  animation: aceh-carving-breathe 6.2s ease-in-out infinite;
+}
+.invite[data-cultural-motion="aceh-carving"] .nusantara-cover.is-motion-active .nusantara-cover-motif {
+  animation: aceh-gold-line-open 3.8s ease-in-out infinite;
+  transform-origin: center;
+}
+.invite[data-cultural-motion="ulos-weave"] .nusantara-cover.is-motion-active .nusantara-cover-architecture {
+  animation: ulos-ribbon-left 6.5s ease-in-out infinite;
+}
+.invite[data-cultural-motion="ulos-weave"] .nusantara-cover.is-motion-active .nusantara-cover-motif {
+  animation: ulos-ribbon-right 6.5s ease-in-out .24s infinite;
+}
+.invite[data-cultural-motion="ulos-weave"] .nusantara-schedule.is-motion-active .invite-card::before {
+  animation: ulos-pulse 3.6s ease-in-out infinite;
+}
+.invite[data-cultural-motion="songket-glint"] .nusantara-cover.is-motion-active .nusantara-cover-architecture {
+  animation: minang-gonjong-left 5.8s ease-in-out infinite;
+}
+.invite[data-cultural-motion="songket-glint"] .nusantara-cover.is-motion-active .nusantara-cover-motif {
+  animation: minang-gonjong-right 5.8s ease-in-out .24s infinite;
+}
+.invite[data-cultural-motion="songket-glint"] .nusantara-gallery > div::after {
+  background: linear-gradient(120deg, transparent 18%, rgb(255 222 116 / .38) 46%, transparent 72%);
+}
+.invite[data-cultural-motion="songket-glint"] .is-motion-active .nusantara-gallery > div::after {
+  animation-duration: 3.8s;
+}
+@keyframes cultural-gallery-sheen {
+  0%, 32% { transform: translateX(-120%); }
+  62%, 100% { transform: translateX(120%); }
+}
+@keyframes cultural-frame-breathe {
+  0%, 100% { transform: translateY(-4px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(.7deg); }
+}
+@keyframes sunda-side-idle-left {
+  0%, 100% { transform: translate(-18%, -45%) scaleX(-1) rotate(0deg); }
+  50% { transform: translate(-20%, -46%) scaleX(-1) rotate(-1.5deg); }
+}
+@keyframes sunda-side-idle-right {
+  0%, 100% { transform: translate(18%, -45%) rotate(0deg); }
+  50% { transform: translate(20%, -46%) rotate(1.5deg); }
+}
+@keyframes jawa-side-idle-left {
+  0%, 100% { transform: translate(-22%, -45%) rotate(0deg); }
+  50% { transform: translate(-24%, -46%) rotate(-1.2deg); }
+}
+@keyframes jawa-side-idle-right {
+  0%, 100% { transform: translate(22%, -45%) scaleX(-1) rotate(0deg); }
+  50% { transform: translate(24%, -46%) scaleX(-1) rotate(1.2deg); }
+}
+@keyframes aceh-carving-breathe {
+  0%, 100% { opacity: .42; transform: scale(1); }
+  50% { opacity: .72; transform: scale(1.018); }
+}
+@keyframes aceh-gold-line-open {
+  0%, 100% { opacity: .52; transform: scaleX(.72); }
+  45%, 70% { opacity: .9; transform: scaleX(1); }
+}
+@keyframes ulos-ribbon-left {
+  0%, 100% { transform: rotate(18deg) translateX(0); }
+  50% { transform: rotate(18deg) translateX(1.1rem); }
+}
+@keyframes ulos-ribbon-right {
+  0%, 100% { transform: rotate(-18deg) translateX(0); }
+  50% { transform: rotate(-18deg) translateX(-1.1rem); }
+}
+@keyframes ulos-pulse {
+  0%, 100% { box-shadow: inset 0 0 0 0 rgb(216 176 106 / .1); transform: scale(1); }
+  50% { box-shadow: inset 0 0 0 .32rem rgb(216 176 106 / .2); transform: scale(1.04); }
+}
+@keyframes minang-gonjong-left {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(-5.6deg) translateY(-7px); }
+}
+@keyframes minang-gonjong-right {
+  0%, 100% { transform: rotate(4deg) translateY(0); }
+  50% { transform: rotate(5.6deg) translateY(-7px); }
+}
+@media (max-width: 640px) {
+  .invite[data-cultural-motion="ulos-weave"] .nusantara-cover.is-motion-active .nusantara-cover-architecture {
+    animation-name: ulos-ribbon-left-mobile;
+  }
+  .invite[data-cultural-motion="ulos-weave"] .nusantara-cover.is-motion-active .nusantara-cover-motif {
+    animation-name: ulos-ribbon-right-mobile;
+  }
+}
+@keyframes ulos-ribbon-left-mobile {
+  0%, 100% { transform: rotate(16deg) translateX(0); }
+  50% { transform: rotate(16deg) translateX(.65rem); }
+}
+@keyframes ulos-ribbon-right-mobile {
+  0%, 100% { transform: rotate(-16deg) translateX(0); }
+  50% { transform: rotate(-16deg) translateX(-.65rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invite[data-cultural-theme] .portrait-frame,
+  .invite[data-cultural-theme] .portrait-frame::before,
+  .invite[data-cultural-theme] .portrait-frame::after,
+  .invite[data-cultural-theme] .nusantara-gallery > div::after,
+  .invite[data-cultural-theme] .sunda-gallery > div::after,
+  .invite[data-cultural-theme] .jawa-gallery > div::after,
+  .invite[data-cultural-theme] .nusantara-people::after,
+  .invite[data-cultural-theme] .nusantara-closing::after,
+  .invite[data-cultural-theme] .nusantara-schedule .invite-card::before { animation: none !important; transition: none !important; }
+}
+
 /* AI Invitation Page Builder */
 .builder-shell {
   --builder-ink: #20241f;
@@ -1257,4 +1419,166 @@ body:has(.builder-public-invitation) > footer { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .builder-device-frame, .builder-page-list article { transition: none; }
   .builder-block { animation: none !important; }
+}
+/* Regional Nusantara system: 28 additional provincial editions. */
+.cultural-theme-card-preview[data-cultural-pattern] { isolation: isolate; }
+.cultural-theme-card-preview[data-cultural-pattern]::before {
+  background: repeating-linear-gradient(135deg, transparent 0 18px, rgb(255 255 255 / .12) 18px 20px);
+  content: "";
+  inset: 0;
+  opacity: .74;
+  position: absolute;
+  z-index: 0;
+}
+.cultural-theme-card-preview[data-cultural-pattern="waves"]::before { background: radial-gradient(ellipse at 10% 110%, transparent 0 42%, rgb(255 255 255 / .2) 43% 45%, transparent 46% 54%, rgb(255 255 255 / .13) 55% 57%, transparent 58%); }
+.cultural-theme-card-preview[data-cultural-pattern="petals"]::before { background: radial-gradient(ellipse at 25% 50%, transparent 0 22%, rgb(255 255 255 / .2) 23% 25%, transparent 26%), radial-gradient(ellipse at 75% 50%, transparent 0 22%, rgb(255 255 255 / .13) 23% 25%, transparent 26%); background-size: 5rem 5rem; }
+.cultural-theme-card-preview[data-cultural-pattern="steps"]::before { background: repeating-linear-gradient(135deg, transparent 0 18px, rgb(255 255 255 / .18) 18px 20px, transparent 20px 36px); }
+.cultural-theme-card-preview[data-cultural-pattern="peaks"]::before { background: linear-gradient(135deg, transparent 50%, rgb(255 255 255 / .15) 51% 53%, transparent 54%) 0 100% / 5rem 5rem repeat-x; }
+.cultural-theme-card-preview[data-cultural-pattern="islands"]::before { background: radial-gradient(ellipse at 18% 75%, rgb(255 255 255 / .18) 0 7%, transparent 8%), radial-gradient(ellipse at 72% 28%, rgb(255 255 255 / .13) 0 11%, transparent 12%), radial-gradient(ellipse at 84% 88%, rgb(255 255 255 / .12) 0 8%, transparent 9%); }
+.cultural-theme-card-preview[data-cultural-pattern="wood"]::before { background: repeating-linear-gradient(90deg, transparent 0 28px, rgb(255 255 255 / .14) 29px 30px); }
+.cultural-preview-landmark { border: 1px solid rgb(255 255 255 / .46); bottom: -3.5rem; height: 9rem; opacity: .65; position: absolute; right: 1.25rem; transform: rotate(-8deg); width: 8rem; z-index: 1; }
+.cultural-theme-card-preview[data-cultural-frame="oval"] .cultural-preview-landmark { border-radius: 50% 50% 12% 12%; }
+.cultural-theme-card-preview[data-cultural-frame="arch"] .cultural-preview-landmark { border-radius: 6rem 6rem .2rem .2rem; }
+.cultural-theme-card-preview[data-cultural-frame="diamond"] .cultural-preview-landmark { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+.cultural-theme-card-preview[data-cultural-frame="soft-square"] .cultural-preview-landmark { border-radius: 1.8rem .35rem 1.8rem .35rem; }
+.cultural-theme-card-preview[data-cultural-frame="shield"] .cultural-preview-landmark { clip-path: polygon(50% 0, 100% 22%, 90% 78%, 50% 100%, 10% 78%, 0 22%); }
+.cultural-theme-card-preview[data-cultural-frame="sail"] .cultural-preview-landmark { border-radius: 100% 0 0; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.cultural-theme-card-preview[data-cultural-frame="round"] .cultural-preview-landmark { border-radius: 50%; }
+
+.invite[data-cultural-edition="regional"] {
+  --regional-line: color-mix(in srgb, var(--invite-accent), transparent 48%);
+  background: var(--invite-background);
+  color: var(--invite-text);
+}
+.invite[data-cultural-edition="regional"] .nusantara-cover {
+  align-items: end;
+  background-color: var(--invite-primary);
+  background-image: radial-gradient(circle at 76% 18%, color-mix(in srgb, var(--invite-accent), transparent 58%) 0 2%, transparent 18%), linear-gradient(155deg, var(--invite-primary), color-mix(in srgb, var(--invite-secondary), var(--invite-primary) 48%) 58%, var(--invite-secondary));
+  color: var(--invite-surface);
+  min-height: 100svh;
+  padding-bottom: clamp(3.5rem, 8vw, 6rem);
+}
+.invite[data-cultural-edition="regional"] .nusantara-cover::before {
+  border: 1px solid var(--regional-line);
+  border-radius: 0;
+  box-shadow: inset 0 0 0 .3rem rgb(255 255 255 / .035);
+  inset: 1rem 5%;
+}
+.invite[data-cultural-edition="regional"] .nusantara-cover .content {
+  background: transparent;
+  border: 0;
+  max-width: 46rem;
+  padding: 1.4rem 2rem;
+  text-shadow: 0 2px 22px rgb(0 0 0 / .4);
+}
+.invite[data-cultural-edition="regional"] .nusantara-cover .ornament { color: color-mix(in srgb, var(--invite-accent), white 32%); font-size: .82rem; letter-spacing: .2em; text-transform: uppercase; }
+.invite[data-cultural-edition="regional"] .nusantara-cover a { background: color-mix(in srgb, var(--invite-primary), transparent 25%); border-color: color-mix(in srgb, var(--invite-accent), white 18%); backdrop-filter: blur(8px); }
+.invite[data-cultural-edition="regional"] .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"] .nusantara-cover-motif {
+  background: linear-gradient(135deg, transparent 0 48%, color-mix(in srgb, var(--invite-accent), transparent 26%) 49% 51%, transparent 52%), linear-gradient(45deg, transparent 0 48%, rgb(255 255 255 / .18) 49% 51%, transparent 52%);
+  bottom: 8%;
+  height: clamp(12rem, 34vw, 25rem);
+  opacity: .42;
+  top: auto;
+  transform-origin: 50% 100%;
+  width: clamp(8rem, 23vw, 18rem);
+}
+.invite[data-cultural-edition="regional"] .nusantara-cover-architecture { clip-path: polygon(0 100%, 50% 0, 100% 100%); left: 0; }
+.invite[data-cultural-edition="regional"] .nusantara-cover-motif { clip-path: polygon(0 100%, 50% 8%, 100% 100%); right: 0; }
+
+.invite[data-cultural-edition="regional"][data-cultural-pattern="weave"] .nusantara-cover { background-image: repeating-linear-gradient(135deg, transparent 0 30px, rgb(255 255 255 / .055) 30px 32px), repeating-linear-gradient(45deg, transparent 0 30px, rgb(255 255 255 / .04) 30px 32px), linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+.invite[data-cultural-edition="regional"][data-cultural-pattern="waves"] .nusantara-cover { background-image: radial-gradient(ellipse at 15% 110%, transparent 0 42%, rgb(255 255 255 / .13) 43% 44%, transparent 45% 54%, rgb(255 255 255 / .08) 55% 56%, transparent 57%), linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+.invite[data-cultural-edition="regional"][data-cultural-pattern="petals"] .nusantara-cover { background-image: radial-gradient(ellipse at 20% 32%, transparent 0 12%, rgb(255 255 255 / .11) 13% 14%, transparent 15%), radial-gradient(ellipse at 82% 18%, transparent 0 13%, color-mix(in srgb, var(--invite-accent), transparent 73%) 14% 15%, transparent 16%), linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+.invite[data-cultural-edition="regional"][data-cultural-pattern="steps"] .nusantara-cover { background-image: repeating-linear-gradient(135deg, transparent 0 48px, rgb(255 255 255 / .08) 48px 50px, transparent 50px 96px), linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+.invite[data-cultural-edition="regional"][data-cultural-pattern="peaks"] .nusantara-cover { background-image: linear-gradient(135deg, transparent 49%, rgb(255 255 255 / .1) 50% 51%, transparent 52%) 0 100% / 8rem 8rem repeat-x, linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+.invite[data-cultural-edition="regional"][data-cultural-pattern="islands"] .nusantara-cover { background-image: radial-gradient(ellipse at 12% 70%, rgb(255 255 255 / .12) 0 6%, transparent 7%), radial-gradient(ellipse at 75% 25%, color-mix(in srgb, var(--invite-accent), transparent 68%) 0 8%, transparent 9%), radial-gradient(ellipse at 88% 84%, rgb(255 255 255 / .09) 0 7%, transparent 8%), linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+.invite[data-cultural-edition="regional"][data-cultural-pattern="wood"] .nusantara-cover { background-image: repeating-linear-gradient(90deg, transparent 0 68px, rgb(255 255 255 / .055) 69px 71px), linear-gradient(155deg, var(--invite-primary), var(--invite-secondary)); }
+
+.invite[data-cultural-edition="regional"][data-cultural-region="jawa"] .nusantara-cover-architecture { clip-path: polygon(0 100%, 18% 40%, 36% 58%, 50% 0, 64% 58%, 82% 40%, 100% 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-region="nusa-tenggara"] .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-region="nusa-tenggara"] .nusantara-cover-motif { clip-path: polygon(0 100%, 12% 45%, 50% 8%, 88% 45%, 100% 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-region="kalimantan"] .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-region="kalimantan"] .nusantara-cover-motif { clip-path: polygon(8% 100%, 8% 20%, 25% 20%, 50% 0, 75% 20%, 92% 20%, 92% 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-region="sulawesi"] .nusantara-cover-architecture { clip-path: polygon(0 100%, 78% 0, 100% 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-region="sulawesi"] .nusantara-cover-motif { clip-path: polygon(0 100%, 22% 0, 100% 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-region="maluku"] .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-region="maluku"] .nusantara-cover-motif { border-radius: 50% 50% 0 0; clip-path: ellipse(64% 48% at 50% 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-region="papua"] .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-region="papua"] .nusantara-cover-motif { border-radius: 48% 52% 0 0; clip-path: polygon(0 100%, 10% 52%, 32% 36%, 54% 8%, 72% 30%, 100% 100%); }
+
+.invite[data-cultural-edition="regional"] .nusantara-greeting { background: radial-gradient(circle at 50% 0, color-mix(in srgb, var(--invite-accent), transparent 82%), transparent 52%), var(--invite-background); }
+.invite[data-cultural-edition="regional"] .nusantara-greeting .cultural-greeting { color: var(--invite-secondary); }
+.invite[data-cultural-edition="regional"] .nusantara-people { background: linear-gradient(145deg, var(--invite-primary), color-mix(in srgb, var(--invite-secondary), var(--invite-primary) 58%)); color: var(--invite-surface); }
+.invite[data-cultural-edition="regional"] .nusantara-people::after { background: linear-gradient(90deg, transparent, var(--regional-line), transparent); content: ""; height: 1px; left: 12%; position: absolute; right: 12%; top: 3.2rem; }
+.invite[data-cultural-edition="regional"] .nusantara-portrait-frame { background: linear-gradient(145deg, color-mix(in srgb, var(--invite-accent), white 12%), var(--invite-primary) 52%, var(--invite-secondary)); border: 1px solid color-mix(in srgb, var(--invite-accent), white 20%); box-shadow: 0 0 0 .28rem color-mix(in srgb, var(--invite-primary), transparent 10%), 0 0 0 .42rem color-mix(in srgb, var(--invite-accent), transparent 20%), 0 24px 48px rgb(0 0 0 / .25); height: 16rem; padding: .65rem; width: 12.25rem; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="oval"] .nusantara-portrait-frame { border-radius: 50% 50% 18% 18%; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="oval"] .nusantara-portrait-frame img { border-radius: inherit; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="arch"] .nusantara-portrait-frame { border-radius: 7rem 7rem .2rem .2rem; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="arch"] .nusantara-portrait-frame img { border-radius: 6.5rem 6.5rem .1rem .1rem; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="diamond"] .nusantara-portrait-frame { clip-path: polygon(50% 0, 100% 27%, 88% 100%, 12% 100%, 0 27%); }
+.invite[data-cultural-edition="regional"][data-cultural-frame="soft-square"] .nusantara-portrait-frame { border-radius: 2.8rem .45rem 2.8rem .45rem; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="soft-square"] .nusantara-portrait-frame img { border-radius: 2.35rem .2rem 2.35rem .2rem; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="shield"] .nusantara-portrait-frame { clip-path: polygon(50% 0, 100% 18%, 90% 78%, 50% 100%, 10% 78%, 0 18%); }
+.invite[data-cultural-edition="regional"][data-cultural-frame="sail"] .nusantara-portrait-frame { border-radius: 100% 0 1rem 0; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+.invite[data-cultural-edition="regional"][data-cultural-frame="round"] .nusantara-portrait-frame { border-radius: 50%; height: 13.5rem; width: 13.5rem; }
+.invite[data-cultural-edition="regional"][data-cultural-frame="round"] .nusantara-portrait-frame img { border-radius: 50%; }
+
+.invite[data-cultural-edition="regional"] .nusantara-countdown { background: radial-gradient(circle at 50% 48%, var(--invite-surface) 0 18%, transparent 54%), color-mix(in srgb, var(--invite-background), var(--invite-accent) 12%); color: var(--invite-primary); }
+.invite[data-cultural-edition="regional"] .nusantara-countdown .invite-card { background: transparent; border: 0; border-bottom: 1px solid var(--regional-line); border-radius: 0; box-shadow: none; }
+.invite[data-cultural-edition="regional"] .nusantara-schedule { background: linear-gradient(125deg, var(--invite-surface), var(--invite-background)); }
+.invite[data-cultural-edition="regional"] .nusantara-schedule .invite-card { background: transparent; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--invite-secondary), transparent 68%); border-radius: 0; box-shadow: none; padding: 1.5rem .5rem 1.5rem 4rem; position: relative; }
+.invite[data-cultural-edition="regional"] .nusantara-schedule .invite-card::before { border: 1px solid var(--invite-accent); color: var(--invite-secondary); content: "◇"; display: grid; height: 2.55rem; left: .25rem; place-items: center; position: absolute; top: 1.05rem; transform: rotate(45deg); width: 2.55rem; }
+.invite[data-cultural-edition="regional"] .nusantara-location { background: linear-gradient(145deg, color-mix(in srgb, var(--invite-primary), black 6%), color-mix(in srgb, var(--invite-secondary), var(--invite-primary) 58%)); color: var(--invite-surface); }
+.invite[data-cultural-edition="regional"] .nusantara-location .content { max-width: 46rem; }
+.invite[data-cultural-edition="regional"] .nusantara-panel.nusantara-gallery { background: color-mix(in srgb, var(--invite-background), var(--invite-secondary) 7%); border: 0; border-radius: 0; padding: clamp(3.5rem, 8vw, 6.5rem) 1.25rem; }
+.invite[data-cultural-edition="regional"] .nusantara-panel.nusantara-gallery > .content { background: transparent; border: 0; padding: 0; }
+.invite[data-cultural-edition="regional"] .nusantara-gallery { gap: .65rem; }
+.invite[data-cultural-edition="regional"] .nusantara-gallery > div { background-color: var(--invite-secondary) !important; background-image: radial-gradient(circle at 72% 24%, color-mix(in srgb, var(--invite-accent), white 12%), transparent 30%), linear-gradient(145deg, var(--invite-secondary), var(--invite-primary)) !important; border: 1px solid var(--regional-line); border-radius: 0; }
+.invite[data-cultural-edition="regional"] .nusantara-gallery > div:nth-child(1) { border-radius: 5rem 0 0; }
+.invite[data-cultural-edition="regional"] .nusantara-gallery > div:nth-child(2) { border-radius: 0 5rem 0 0; }
+.invite[data-cultural-edition="regional"] .nusantara-gallery > div:nth-child(3) { background-image: linear-gradient(90deg, var(--invite-primary), var(--invite-secondary), var(--invite-primary)) !important; }
+.invite[data-cultural-edition="regional"] .nusantara-rsvp,
+.invite[data-cultural-edition="regional"] .nusantara-wishes { background: color-mix(in srgb, var(--invite-background), var(--invite-accent) 6%); }
+.invite[data-cultural-edition="regional"] .nusantara-rsvp .invite-card,
+.invite[data-cultural-edition="regional"] .nusantara-wishes .invite-card { background: transparent; border: 0; border-bottom: 1px solid var(--regional-line); border-radius: 0; box-shadow: none; }
+.invite[data-cultural-edition="regional"] .nusantara-closing { background: linear-gradient(145deg, var(--invite-primary), color-mix(in srgb, var(--invite-secondary), var(--invite-primary) 52%)); color: var(--invite-surface); min-height: 62vh; }
+.invite[data-cultural-edition="regional"] .nusantara-closing::after { background: linear-gradient(90deg, transparent, var(--invite-accent), transparent); bottom: 3rem; content: ""; height: 1px; left: 12%; opacity: .75; position: absolute; right: 12%; }
+
+.invite[data-cultural-edition="regional"][data-cultural-cadence="breathe"] .nusantara-cover.is-motion-active .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-cadence="breathe"] .nusantara-cover.is-motion-active .nusantara-cover-motif { animation: regional-breathe 7.5s ease-in-out infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="drift"] .nusantara-cover.is-motion-active .nusantara-cover-architecture { animation: regional-drift-left 8s ease-in-out infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="drift"] .nusantara-cover.is-motion-active .nusantara-cover-motif { animation: regional-drift-right 8s ease-in-out .35s infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="rise"] .nusantara-cover.is-motion-active .nusantara-cover-architecture { animation: regional-rise 7s ease-in-out infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="rise"] .nusantara-cover.is-motion-active .nusantara-cover-motif { animation: regional-rise 7s ease-in-out .45s infinite reverse; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="ripple"] .nusantara-cover.is-motion-active .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-cadence="ripple"] .nusantara-cover.is-motion-active .nusantara-cover-motif { animation: regional-ripple 8.5s ease-in-out infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="glint"] .nusantara-cover.is-motion-active .nusantara-cover-architecture,
+.invite[data-cultural-edition="regional"][data-cultural-cadence="glint"] .nusantara-cover.is-motion-active .nusantara-cover-motif { animation: regional-glint 6.5s ease-in-out infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="sway"] .nusantara-cover.is-motion-active .nusantara-cover-architecture { animation: regional-sway-left 8s ease-in-out infinite; }
+.invite[data-cultural-edition="regional"][data-cultural-cadence="sway"] .nusantara-cover.is-motion-active .nusantara-cover-motif { animation: regional-sway-right 8s ease-in-out .4s infinite; }
+.invite[data-cultural-edition="regional"] .nusantara-schedule.is-motion-active .invite-card::before { animation: regional-marker 4.8s ease-in-out infinite; }
+
+@keyframes regional-breathe { 0%, 100% { opacity: .34; transform: scale(.98); } 50% { opacity: .48; transform: scale(1.025); } }
+@keyframes regional-drift-left { 0%, 100% { transform: translateX(-.5rem); } 50% { transform: translateX(.55rem); } }
+@keyframes regional-drift-right { 0%, 100% { transform: translateX(.5rem); } 50% { transform: translateX(-.55rem); } }
+@keyframes regional-rise { 0%, 100% { transform: translateY(.65rem); } 50% { transform: translateY(-.35rem); } }
+@keyframes regional-ripple { 0%, 100% { filter: saturate(.92); opacity: .34; transform: scale(.97); } 50% { filter: saturate(1.08); opacity: .48; transform: scale(1.02); } }
+@keyframes regional-glint { 0%, 72%, 100% { filter: brightness(.92); opacity: .32; } 84% { filter: brightness(1.28); opacity: .54; } }
+@keyframes regional-sway-left { 0%, 100% { transform: rotate(-1.1deg); } 50% { transform: rotate(1.2deg); } }
+@keyframes regional-sway-right { 0%, 100% { transform: rotate(1.1deg); } 50% { transform: rotate(-1.2deg); } }
+@keyframes regional-marker { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--invite-accent), transparent 65%); } 50% { box-shadow: 0 0 0 .4rem transparent; } }
+
+@media (max-width: 640px) {
+  .invite[data-cultural-edition="regional"] .nusantara-cover { background-position: center; }
+  .invite[data-cultural-edition="regional"] .nusantara-cover .content { padding: 1.1rem .75rem; }
+  .invite[data-cultural-edition="regional"] .nusantara-cover-architecture,
+  .invite[data-cultural-edition="regional"] .nusantara-cover-motif { bottom: 12%; height: 13rem; opacity: .27; width: 6.5rem; }
+  .invite[data-cultural-edition="regional"] .nusantara-portrait-frame { height: 13rem; width: 10.4rem; }
+  .invite[data-cultural-edition="regional"][data-cultural-frame="round"] .nusantara-portrait-frame { height: 11.5rem; width: 11.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invite[data-cultural-edition="regional"] .nusantara-cover-architecture,
+  .invite[data-cultural-edition="regional"] .nusantara-cover-motif,
+  .invite[data-cultural-edition="regional"] .nusantara-schedule .invite-card::before { animation: none !important; transition: none !important; }
 }

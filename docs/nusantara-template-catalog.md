@@ -6,9 +6,25 @@ Dokumen ini adalah arahan desain untuk koleksi undangan digital bertema Nusantar
 
 > Catatan cakupan: permintaan awal menyebut 34 provinsi. Administrasi Indonesia saat ini terdiri dari 38 provinsi; katalog ini mencakup 34 provinsi terdahulu beserta empat provinsi baru di Tanah Papua agar roadmap tidak perlu diulang. Rujukan jumlah provinsi: [Indonesia.go.id](https://indonesia.go.id/kategori/editorial/9053/ajang-menguatkan-sinergi-pusat-dan-daerah-di-lembah-tidar?lang=1).
 
-## Fase aktif: tepat 10 provinsi
+## Fase aktif: tepat 38 provinsi
 
-Implementasi produk saat ini dibatasi pada sepuluh provinsi agar setiap tema sempat melalui evaluasi visual, performa, responsivitas, dan aksesibilitas sebelum koleksi diperluas. Semua tema memakai satu registry, tetapi memiliki komposisi section, bingkai foto, palet, dan motion signature yang berbeda.
+Implementasi produk kini mencakup seluruh 38 provinsi Indonesia dalam satu registry. Sepuluh edisi flagship memakai ilustrasi orisinal, sementara 28 edisi regional baru memakai artwork CSS yang ringan, palet khas, bentuk bingkai foto, pola, dan motion signature masing-masing. Pendekatan CSS-first menghindari pemakaian simbol adat yang belum dikurasi sekaligus menjaga semua URL template siap digunakan.
+
+### Context tambahan: motion pass pertama
+
+Motion pass pertama difokuskan pada lima template agar kualitasnya bisa terasa matang sebelum disalin ke template lain. Gerak dibuat seperti ambience panggung, bukan efek ramai: muncul saat section masuk viewport, idle sangat pelan saat pengguna berhenti scroll, dan hilang dari perhatian ketika konten utama dibaca.
+
+| Template | Fokus animasi baru | Batas elegansi |
+| --- | --- | --- |
+| `sunda-parahyangan` | Wayang samping ikut idle pada tiap section, frame foto bernapas tipis, dan galeri punya kilau lembut. | Wayang tetap transparan pada section isi agar tidak mengganggu teks. |
+| `jawa-wayang-heritage` | Wayang kulit di sisi section sway pelan, galeri kelir diberi sheen hangat, dan frame foto bergerak sangat ringan. | Ritme panggung tetap soga-tenang, tanpa efek lampu berlebihan. |
+| `serambi-meukuta` | Ukiran floral bernapas, garis emas cover membuka-menutup halus, dan ornamen penutup hidup saat terlihat. | Ukiran dipakai sebagai border/nafas visual, bukan memenuhi seluruh layar. |
+| `ulos-toba` | Pita ulos bawah cover menegang berlawanan, penanda jadwal pulse halus, dan frame foto terasa seperti kain yang hidup. | Gerak pita tidak mengubah rotasi besar agar tidak terasa norak. |
+| `rangkiang-minang` | Sudut gonjong/songket terangkat bergantian, galeri diberi glint emas, dan frame foto naik ringan saat section masuk. | Kilau emas dipakai sesekali, bukan shimmer terus-menerus di semua elemen. |
+
+Implementasi teknis memakai atribut `data-cultural-motion`, `is-visible`, dan `is-motion-active` dari renderer bersama. Dengan begitu, template berikutnya cukup menambahkan motion signature baru tanpa mengubah struktur undangan atau data pengguna.
+
+### Sepuluh edisi flagship dengan aset ilustrasi
 
 | Provinsi | Slug | Identitas utama | Motion signature |
 | --- | --- | --- | --- |
@@ -62,11 +78,11 @@ Perbedaan tiap provinsi terjadi pada palet, ritme ruang, motif, framing foto, se
 | [x] | Sumatera Barat | `rangkiang-minang` | Ilustrasi orisinal Rumah Gadang dan rangkiang; marun, arang, emas songket, dan lanskap Bukit Barisan. | Hero sinematik, frame gonjong, galeri lanskap, dan lapisan geometri songket. |
 | [x] | Riau | `melayu-lancang` | Ilustrasi orisinal rumah panggung Melayu dan Lancang Kuning; hijau zamrud, kuning diraja, dan putih tulang. | Hero tepian sungai, frame sudut sulur, jadwal berplakat tipis, dan galeri zamrud. |
 | [x] | Kepulauan Riau | `selat-melayu` | Ilustrasi orisinal lancang berlayar, pulau granit, dan balai pesisir; biru selat, pasir, dan emas kusam. | Hero maritim, frame berbentuk layar, garis pasang-surut, dan galeri panorama selat. |
-| [ ] | Jambi | `angso-duo` | Cokelat tanah, emas, nila; batik Jambi dan siluet Angso Duo yang sangat kecil. | Frame foto oval berlapis motif batik; galeri seperti lembar kain. |
-| [ ] | Sumatera Selatan | `songket-limas` | Marun, hitam, emas; pola songket dan geometri Rumah Limas. | Border foto bertingkat seperti limas; counter tampil sebagai ukiran angka emas. |
-| [ ] | Kepulauan Bangka Belitung | `cual-timah` | Biru granit, putih pasir, tembaga; tenun cual dan tekstur batu pesisir. | Galeri berbingkai mineral; dekorasi titik timah beranimasi sangat pelan. |
-| [ ] | Bengkulu | `besurek-rafflesia` | Indigo gelap, krem, terakota; tekstur kain besurek abstrak dan Rafflesia sebagai aksen tunggal. | Bunga hanya muncul sebagai emboss di pembuka/penutup, tidak di setiap section. |
-| [ ] | Lampung | `siger-saibatin` | Merah bata, emas, hitam; bentuk mahkota Siger dan garis tapis. | Bingkai foto menyerupai lengkung Siger sederhana; RSVP memakai label tapis. |
+| [x] | Jambi | `angso-duo` | Cokelat tanah, emas, nila; batik Jambi dan siluet Angso Duo yang sangat kecil. | Frame foto oval berlapis motif batik; galeri seperti lembar kain. |
+| [x] | Sumatera Selatan | `songket-limas` | Marun, hitam, emas; pola songket dan geometri Rumah Limas. | Border foto bertingkat seperti limas; counter tampil sebagai ukiran angka emas. |
+| [x] | Kepulauan Bangka Belitung | `cual-timah` | Biru granit, putih pasir, tembaga; tenun cual dan tekstur batu pesisir. | Galeri berbingkai mineral; dekorasi titik timah beranimasi sangat pelan. |
+| [x] | Bengkulu | `besurek-rafflesia` | Indigo gelap, krem, terakota; tekstur kain besurek abstrak dan Rafflesia sebagai aksen tunggal. | Bunga hanya muncul sebagai emboss di pembuka/penutup, tidak di setiap section. |
+| [x] | Lampung | `siger-saibatin` | Merah bata, emas, hitam; bentuk mahkota Siger dan garis tapis. | Bingkai foto menyerupai lengkung Siger sederhana; RSVP memakai label tapis. |
 
 ## Jawa, Bali, dan Nusa Tenggara
 
@@ -116,7 +132,7 @@ Perbedaan tiap provinsi terjadi pada palet, ritme ruang, motif, framing foto, se
 | Papua Pegunungan | `lembah-honai` | Batu hangat, kabut, cokelat rumput; siluet honai dan lereng. | Frame foto bundar rendah dengan tekstur batu lembut; motion kabut sangat pelan. |
 | Papua Barat Daya | `raja-ampat` | Biru safir, karst, pasir putih; kontur pulau Raja Ampat. | Cover menggunakan siluet karst minimal dan transisi seperti arus laut. |
 
-## Aturan produksi aset
+## Aturan produksi aset ilustratif
 
 - Buat satu `theme manifest` per template, tetapi pakai registry section yang sama.
 - Siapkan paling sedikit: `cover-desktop`, `cover-mobile`, `portrait-frame`, `motif-tile`, dan `ornament-cutout` bila diperlukan.
@@ -124,12 +140,12 @@ Perbedaan tiap provinsi terjadi pada palet, ritme ruang, motif, framing foto, se
 - Ornamen bergerak hanya boleh memakai aset transparan; tidak boleh membawa background persegi.
 - Gunakan gambar buatan sendiri, aset berlisensi, atau aset dengan persetujuan pemegang hak/kontak budaya lokal.
 
-## Urutan implementasi yang disarankan
+## Status implementasi
 
-1. Selesaikan Jawa Barat dan Jawa Tengah sebagai standar perilaku template budaya.
-2. Bangun enam template prioritas dengan variasi visual kuat: Aceh, Sumatera Barat, Bali, Kalimantan Selatan, Sulawesi Selatan, dan Papua Barat Daya.
-3. Lakukan review accessibility dan kurasi budaya sebelum memperluas ke seluruh katalog.
-4. Tambahkan sisanya per pulau, selalu melalui checklist lisensi, mobile QA, dan review pemangku budaya.
+1. Registry, route demo, seed database, palet, frame foto, pola, serta motion signature sudah tersedia untuk 38 provinsi.
+2. Sepuluh edisi flagship tetap menjadi standar kualitas untuk artwork raster dan ilustrasi orisinal.
+3. Dua puluh delapan edisi tambahan menggunakan visual CSS-first agar ringan dan aman dari penggunaan simbol sakral yang belum dikurasi.
+4. Penambahan artwork raster berikutnya dilakukan per pulau setelah review aksesibilitas, lisensi, dan kurasi budaya.
 
 ## Definition of done untuk setiap template
 
